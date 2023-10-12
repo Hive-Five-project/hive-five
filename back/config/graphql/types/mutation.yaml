@@ -1,8 +1,0 @@
-Mutation:
-  type: object
-  config:
-    fields:
-
-      User:
-        type: UserMutations!
-        resolve: "@=mutation('NamespacedMutation')"

@@ -1,9 +1,0 @@
-schema: ./schema.graphql
-extensions:
-  endpoints:
-    HIVEFIVE GraphQL API:
-      url: '${GRAPHQL_HOST}/graphql/'
-      # Create a .env file at the root with your preferred value for more convenience.
-      headers:
-        user-agent: JS GraphQL
-      introspect: true

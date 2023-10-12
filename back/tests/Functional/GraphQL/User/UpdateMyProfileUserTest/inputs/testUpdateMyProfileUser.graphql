@@ -1,9 +1,0 @@
-mutation($payload: MyProfilePayload!) {
-  User {
-    updateMyProfile(payload: $payload) {
-      email
-      firstname
-      lastname
-    }
-  }
-}
