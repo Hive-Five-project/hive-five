@@ -14,7 +14,7 @@ The project can run locally using Node.js and Symfony CLI + Docker.
 
 ### Model
 
-TODO
+![](./back/docs/model.png)
 
 ### Flows
 
