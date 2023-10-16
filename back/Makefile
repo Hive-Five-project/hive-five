@@ -10,11 +10,14 @@
 ###########
 
 ## Install dependencies
-install: install.composer
+install: install.composer install.jwt
 
 install.composer:
 	symfony composer install
 	symfony composer --working-dir=tools/php-cs-fixer install
+
+install.jwt:
+	php bin/console lexik:jwt:generate-keypair --skip-if-exists
 
 ## Update dependencies
 update: update.composer
