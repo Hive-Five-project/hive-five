@@ -1,0 +1,14 @@
+version: "3"
+
+services:
+  symfony:
+      command: "make serve.php@test"
+      build:
+          context: ./back
+          dockerfile: Dockerfile
+      working_dir: /app/backend
+      volumes:
+          - ./back:/app/backend
+      ports:
+          - 63280:63280
+          - 63290:63290
