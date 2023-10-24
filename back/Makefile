@@ -52,7 +52,7 @@ db.fixtures:
 	symfony console doctrine:fixtures:load --no-interaction
 
 # Database - Force update the database schema
-db.update-force: db.create
+db.update-force: db.create db.fixtures
 	symfony console doctrine:schema:update --force --complete
 
 # Generate hash-password
