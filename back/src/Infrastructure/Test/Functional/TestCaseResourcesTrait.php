@@ -97,7 +97,9 @@ trait TestCaseResourcesTrait
      */
     protected function getTestCaseFixturesPath(string $ext = null, bool $withDataSetName = true): string
     {
-        return "{$this->getFixturesDir()}/{$this->getName($withDataSetName)}." . ($ext ?? static::getDefaultFixturesFormat());
+        $testCaseName = strtr($this->getName($withDataSetName), ['"' => '(']);
+
+        return "{$this->getFixturesDir()}/{$testCaseName}." . ($ext ?? static::getDefaultFixturesFormat());
     }
 
     /**
@@ -234,7 +236,8 @@ trait TestCaseResourcesTrait
     ): string {
         $ext = $ext ?? static::getDefaultExpectationsFormat();
         $suffix = $suffix ?? '';
+        $testCaseName = strtr($this->getName($withDataSetName), ['"' => '#']);
 
-        return "{$this->getExpectationsDir()}/{$this->getName($withDataSetName)}$suffix.$ext";
+        return "{$this->getExpectationsDir()}/{$testCaseName}$suffix.$ext";
     }
 }
