@@ -2,8 +2,9 @@
 # "make" command
 # --------------------------------#
 
--include ./make/text.mk
--include ./make/help.mk
+-include ../make/text.mk
+-include ../make/help.mk
+-include ../make/url.mk
 
 ###########
 # Install #

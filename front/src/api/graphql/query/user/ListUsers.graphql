@@ -1,0 +1,13 @@
+#import "@graphql/fragments/user/_User.graphql"
+
+query ListUsers {
+  User {
+    list {
+      roles
+      isActive
+      isAdmin
+      createdAt
+      ..._User
+    }
+  }
+}

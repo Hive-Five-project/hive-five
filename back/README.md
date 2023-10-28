@@ -15,13 +15,15 @@ HIVE FIVE back is a Symfony app containing:
 
 When using Symfony CLI locally, you're done!
 
-## UML
-![Capture d’écran 2023-10-12 à 15.33.17.png](..%2F..%2F..%2F..%2Fvar%2Ffolders%2F6d%2F6m0dtsyx56x4_52jfjd5_vh80000gn%2FT%2FTemporaryItems%2FNSIRD_screencaptureui_s5WYIo%2FCapture%20d%E2%80%99%C3%A9cran%202023-10-12%20%C3%A0%2015.33.17.png)
+## How to connect with DBeaver to database
+
+![dbeaver config](./docs/dbeaverconf.png)
 
 ## List all commands for Makefile
 
 ```shell
 make
+make help
 ```
 ## Installation
 
@@ -37,6 +39,8 @@ make lint
 
 ## Tests
 
+Read for debug and understanding : [How to do testing here](./docs/tests.md)
+
 ```shell
 make test
 ```
@@ -49,7 +53,6 @@ symfony php bin/phpunit --filter='test-name'
 UP=1 symfony php bin/phpunit --filter='test-name'
 ```
 >/!\ Carefull with updates snapshots before commit push. Look at diff.
-
 
 ## App specific commands
 

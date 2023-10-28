@@ -1,0 +1,6 @@
+fragment _User on User {
+  uid
+  email
+  firstname
+  lastname
+}

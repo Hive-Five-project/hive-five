@@ -1,0 +1,9 @@
+#import "@graphql/fragments/user/_User.graphql"
+
+query Me {
+  User {
+    me {
+      ..._User
+    }
+  }
+}
