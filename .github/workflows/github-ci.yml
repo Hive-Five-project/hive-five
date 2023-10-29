@@ -1,0 +1,55 @@
+name: Continuous Integration
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Install Symfony CLI
+      run: |
+        wget https://get.symfony.com/cli/installer -O - | bash
+        mv /home/runner/.symfony5/bin/symfony /usr/local/bin/symfony
+
+    - name: Set up PHP
+      uses: shivammathur/setup-php@v2
+      with:
+        php-version: '8.2'
+        tools: composer:v2
+
+    - name: composer
+      run: | 
+        cd back
+        composer update
+
+    - name: make
+      run: | 
+        cd back
+        make install
+
+    - name: Update database schema
+      run: |
+        cd back
+        symfony console doctrine:schema:update --force --complete
+
+    - name: lint back
+      run: |
+        cd back
+        make lint 
+
+    - name: test back
+      run: |
+        cd back
+        make test 
+
+    - name: test front
+      run: |
+        cd back
+        make test 
