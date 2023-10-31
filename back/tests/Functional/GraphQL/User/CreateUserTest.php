@@ -50,7 +50,6 @@ class CreateUserTest extends GraphQLTestCase
             'password' => 'p@55w04d-cliopioxb0000n322j023u1wd',
             'firstname' => 'John',
             'lastname' => 'Doe',
-            'active' => true,
             'admin' => true,
         ]];
 
@@ -59,7 +58,6 @@ class CreateUserTest extends GraphQLTestCase
             'password' => 'p@55w04d-cliopioxf0001n322rny5r5nt',
             'firstname' => 'Jane',
             'lastname' => 'Doe',
-            'active' => true,
             'admin' => false,
         ]];
     }
@@ -90,7 +88,6 @@ class CreateUserTest extends GraphQLTestCase
             'password' => null,
             'firstname' => null,
             'lastname' => null,
-            'active' => false,
             'admin' => true,
         ]];
 

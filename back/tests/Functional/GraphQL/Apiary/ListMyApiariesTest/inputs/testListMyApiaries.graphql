@@ -1,0 +1,9 @@
+query {
+  Apiary{
+    listMyApiaries {
+      uid
+      name
+      address
+    }
+  }
+}

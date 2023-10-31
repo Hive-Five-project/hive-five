@@ -1,0 +1,10 @@
+{
+  "data": {
+    "Apiary": {
+      "create": {
+        "name": "new apiary",
+        "address": "some new address"
+      }
+    }
+  }
+}

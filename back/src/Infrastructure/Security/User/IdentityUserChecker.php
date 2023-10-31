@@ -16,7 +16,7 @@ class IdentityUserChecker implements UserCheckerInterface
             return;
         }
 
-        if (!$user->getUser()->isActive()) {
+        if ($user->getUser()->isDeleted()) {
             throw new DisabledException();
         }
     }

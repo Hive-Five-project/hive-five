@@ -27,7 +27,6 @@ class UpdateUserCommandHandler
             $payload->email,
             $payload->firstname,
             $payload->lastname,
-            $payload->active,
             $payload->admin,
         );
 

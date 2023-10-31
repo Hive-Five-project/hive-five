@@ -1,0 +1,9 @@
+query($uid: ULID!) {
+  Apiary {
+    find(uid: $uid) {
+      uid
+      name
+      address
+    }
+  }
+}

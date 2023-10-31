@@ -1,0 +1,18 @@
+{
+  "data": {
+    "Apiary": {
+      "listMyApiaries": [
+        {
+          "uid": "01H5KQW6EBYNGSWRE09ANVREXX",
+          "name": "Custom apiary 1 for User",
+          "address": "Custom address"
+        },
+        {
+          "uid": "01H82DFYZMANTX4N4FES76RDF0",
+          "name": "Custom apiary 2 for User",
+          "address": "Custom address"
+        }
+      ]
+    }
+  }
+}

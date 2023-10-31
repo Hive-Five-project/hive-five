@@ -11,6 +11,7 @@ trait TimestampableTrait
 {
     private \DateTime $createdAt;
     private \DateTime $updatedAt;
+    private ?\DateTime $deletedAt = null;
 
     public function setCreatedAt(\DateTime $createdAt): void
     {
@@ -27,6 +28,36 @@ trait TimestampableTrait
         $this->updatedAt = $updatedAt;
     }
 
+    public function getUpdatedAt(): \DateTime
+    {
+        return $this->updatedAt;
+    }
+
+    public function setDeletedAt(\DateTime $deletedAt): void
+    {
+        $this->deletedAt = $deletedAt;
+    }
+
+    public function getDeletedAt(): \DateTime
+    {
+        return $this->deletedAt;
+    }
+
+    public function isDeleted(): bool
+    {
+        return null !== $this->deletedAt;
+    }
+
+    public function delete(\DateTime $deletedAt = new \DateTime('now')): void
+    {
+        $this->deletedAt = $deletedAt;
+    }
+
+    public function undelete(): void
+    {
+        $this->deletedAt = null;
+    }
+
     /**
      * @interal Unit tests only, where Doctrine does not populate this field.
      */
@@ -38,10 +69,5 @@ trait TimestampableTrait
     public function markAsUpdated(\DateTime $at = null): void
     {
         $this->updatedAt = $at ?? new \DateTime();
-    }
-
-    public function getUpdatedAt(): \DateTime
-    {
-        return $this->updatedAt;
     }
 }

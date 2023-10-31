@@ -1,0 +1,28 @@
+Apiary:
+  type: object
+  config:
+    description: 'A apiary'
+
+    fields:
+
+      uid:
+        type: ULID!
+
+      name:
+        type: String!
+        description: 'Acts as their username'
+
+      address:
+        type: String!
+
+      createdAt:
+        type: DateTime!
+        description: Date de création
+
+      updatedAt:
+        type: DateTime!
+        description: Date d'update
+
+      deleteAt:
+        type: DateTime!
+        description: Date de suppression

@@ -31,14 +31,5 @@ final class UserPayload
         new Assert\NotNull(),
         new Assert\Type('bool'),
     ])]
-    public $active = false;
-
-    /** @var bool */
-    #[GQL\Field(type: BooleanInputType::NAME)]
-    #[GQL\Description('Mandatory')]
-    #[Assert\Sequentially([
-        new Assert\NotNull(),
-        new Assert\Type('bool'),
-    ])]
     public $admin = false;
 }

@@ -4,7 +4,6 @@ query ListUsers {
   User {
     list {
       roles
-      isActive
       isAdmin
       createdAt
       ..._User

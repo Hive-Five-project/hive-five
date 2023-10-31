@@ -1,0 +1,48 @@
+{
+  "errors": [
+    {
+      "message": "Invalid payload",
+      "locations": [
+        {
+          "line": 3,
+          "column": 5
+        }
+      ],
+      "path": [
+        "Apiary",
+        "create"
+      ],
+      "code": "INVALID_PAYLOAD",
+      "api_problem": {
+        "type": "https:\/\/symfony.com\/errors\/validation",
+        "title": "Validation Failed",
+        "detail": "payload.name: Cette valeur ne doit pas être vide.\npayload.address: Cette valeur ne doit pas être nulle.",
+        "violations": [
+          {
+            "propertyPath": "payload.name",
+            "title": "Cette valeur ne doit pas être vide.",
+            "template": "This value should not be blank.",
+            "parameters": {
+              "{{ value }}": "null"
+            },
+            "type": "urn:uuid:c1051bb4-d103-4f74-8988-acbcafc7fdc3"
+          },
+          {
+            "propertyPath": "payload.address",
+            "title": "Cette valeur ne doit pas être nulle.",
+            "template": "This value should not be null.",
+            "parameters": {
+              "{{ value }}": "null"
+            },
+            "type": "urn:uuid:ad32d13f-c3d4-423b-909a-857b961eb720"
+          }
+        ]
+      }
+    }
+  ],
+  "data": {
+    "Apiary": {
+      "create": null
+    }
+  }
+}

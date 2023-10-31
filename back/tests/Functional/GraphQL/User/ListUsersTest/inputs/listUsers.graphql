@@ -6,7 +6,6 @@ query ListUsers {
       firstname
       lastname
       roles
-      isActive
       isAdmin
       createdAt
     }

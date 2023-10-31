@@ -23,5 +23,7 @@ interface UserRepositoryInterface
      */
     public function getOneByUid(Ulid $uid): User;
 
+    public function delete(User $user): void;
+
     public function save(User $user): void;
 }
