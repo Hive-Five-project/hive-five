@@ -14,7 +14,7 @@
             <lifecycle-callback type="prePersist" method="computeDebugUid32"/>
         </lifecycle-callbacks>
 
-        <field name="name" />
+        <field name="name" unique="true" />
         <field name="address" />
 
         <many-to-one field="user" target-entity="App\Domain\User\User" inversed-by="apiaries">

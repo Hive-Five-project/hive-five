@@ -4,10 +4,9 @@ declare(strict_types=1);
 
 namespace App\Infrastructure\Apiary\Repository;
 
-use App\Domain\Apiary\Apiary;
-use App\Domain\Apiary\Repository\ApiaryRepositoryInterface;
 use App\Domain\Common\Exception\NotFoundException;
-use App\Domain\User\User;
+use App\Domain\Apiary\Repository\ApiaryRepositoryInterface;
+use App\Domain\Apiary\Apiary;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\Uid\Ulid;
@@ -33,9 +32,19 @@ class ApiaryRepository extends ServiceEntityRepository implements ApiaryReposito
         return $apiary;
     }
 
-    public function listMyApiaries(User $user): array
+    public function findByUid(Ulid $userUid): array
     {
-        return $this->findBy(['user' => $user]);
+        $qb = $this->createQueryBuilder('apiaries')
+            ->where('apiaries.user = (:uid)')
+            ->setParameter('uid', $userUid)
+        ;
+
+        /**
+         * @var Apiary[] $results
+         */
+        $results = $qb->getQuery()->getResult();
+
+        return $results;
     }
 
     public function save(Apiary $apiary): void

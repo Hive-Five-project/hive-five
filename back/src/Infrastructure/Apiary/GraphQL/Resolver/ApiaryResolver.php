@@ -4,9 +4,8 @@ declare(strict_types=1);
 
 namespace App\Infrastructure\Apiary\GraphQL\Resolver;
 
-use App\Domain\Apiary\Apiary;
 use App\Domain\Apiary\Repository\ApiaryRepositoryInterface;
-use App\Domain\Common\Exception\ForbiddenException;
+use App\Domain\Apiary\Apiary;
 use App\Infrastructure\Bridge\GraphQL\Resolver\AbstractResolver;
 use Overblog\GraphQLBundle\Definition\Resolver\AliasedInterface;
 use Symfony\Component\Uid\Ulid;
@@ -21,29 +20,20 @@ class ApiaryResolver extends AbstractResolver implements AliasedInterface
     /**
      * @return array<Apiary>
      */
-    public function listMyApiaries(): array
+    public function listAllByUser(Ulid $user): array
     {
-        return $this->apiaryRepository->listMyApiaries($this->getDomainUser());
+        return $this->apiaryRepository->findByUid($user);
     }
 
     public function find(Ulid $uid): Apiary
     {
-        return $this->withGraphQLErrorHandler(
-            function () use ($uid) {
-                $apiary = $this->apiaryRepository->getOneByUid($uid);
-                if ($apiary->getUser() !== $this->getDomainUser()) {
-                    throw new ForbiddenException(sprintf('User %s cannot access apiary with %s', $this->getDomainUser()->getEmail(), $apiary->getUidAsString()));
-                }
-
-                return $apiary;
-            }
-        );
+        return $this->withGraphQLErrorHandler(fn () => $this->apiaryRepository->getOneByUid($uid));
     }
 
     public static function getAliases(): array
     {
         return [
-            'listMyApiaries' => 'Apiary.list',
+            'listAllByUser' => 'Apiary.list',
             'find' => 'Apiary.find',
         ];
     }

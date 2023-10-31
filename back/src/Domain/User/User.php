@@ -23,6 +23,7 @@ class User
     private string $firstname;
     private string $lastname;
 
+    private bool $active;
     private bool $admin;
 
     /** @var Collection<int, Apiary> */
@@ -33,6 +34,7 @@ class User
         string $password,
         string $firstname,
         string $lastname,
+        bool $active = true,
         bool $admin = false,
     ) {
         $this->initIdentity();
@@ -41,6 +43,7 @@ class User
         $this->password = $password;
         $this->firstname = $firstname;
         $this->lastname = $lastname;
+        $this->active = $active;
         $this->admin = $admin;
         $this->apiaries = new ArrayCollection();
     }
@@ -52,11 +55,13 @@ class User
         string $email,
         string $firstname,
         string $lastname,
+        bool $active,
         bool $admin,
     ): void {
         $this->email = $email;
         $this->firstname = $firstname;
         $this->lastname = $lastname;
+        $this->active = $active;
         $this->admin = $admin;
     }
 
@@ -104,6 +109,11 @@ class User
     public function getApiaries(): Collection
     {
         return $this->apiaries;
+    }
+
+    public function isActive(): bool
+    {
+        return $this->active;
     }
 
     public function isAdmin(): bool
