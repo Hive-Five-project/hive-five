@@ -4,9 +4,8 @@ declare(strict_types=1);
 
 namespace App\Domain\Apiary\Repository;
 
-use App\Domain\Apiary\Apiary;
 use App\Domain\Common\Exception\NotFoundException;
-use App\Domain\User\User;
+use App\Domain\Apiary\Apiary;
 use Symfony\Component\Uid\Ulid;
 
 /**
