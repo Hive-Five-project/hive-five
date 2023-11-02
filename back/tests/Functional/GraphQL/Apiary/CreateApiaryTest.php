@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Tests\Functional\GraphQL\Apiary;
 
+use App\Infrastructure\Fixtures\Factory\UserFactory;
 use App\Infrastructure\Fixtures\Factory\ApiaryFactory;
 use App\Infrastructure\Test\Functional\Controller\GraphQLTestCase;
 use Zenstruck\Foundry\Test\Factories;
