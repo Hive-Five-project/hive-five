@@ -67,30 +67,30 @@ final class ApiaryFactory extends ModelFactory
     {
         self::new()->create([
             'uid' => new Ulid(self::ULID_APIARY),
-            'name' => 'Custom apiary',
-            'address' => self::faker()->address(),
+            'name' => 'Custom apiary 1 for User',
+            'address' => 'Custom address',
             'user' => UserFactory::find(['uid' => UserFactory::ULID_USER]),
         ]);
 
         self::new()->create([
             'uid' => new Ulid(self::ULID_APIARY_2),
-            'name' => 'Custom apiary 2',
-            'address' => self::faker()->address(),
+            'name' => 'Custom apiary 2 for User',
+            'address' => 'Custom address',
             'user' => UserFactory::find(['uid' => UserFactory::ULID_USER]),
         ]);
 
         self::new()->create([
             'uid' => new Ulid(self::ULID_APIARY_ADMIN),
-            'name' => 'Custom apiary 2',
-            'adress' => self::faker()->address(),
-            'category' => UserFactory::find(['uid' => UserFactory::ULID_ADMIN]),
+            'name' => 'Custom apiary 1 for Admin',
+            'address' => 'Custom address',
+            'user' => UserFactory::find(['uid' => UserFactory::ULID_ADMIN]),
         ]);
 
         self::new()->create([
             'uid' => new Ulid(self::ULID_APIARY_ADMIN_2),
-            'name' => 'Custom apiary 2',
-            'adress' => self::faker()->address(),
-            'category' => UserFactory::find(['uid' => UserFactory::ULID_ADMIN]),
+            'name' => 'Custom apiary 2 for Admin',
+            'address' => 'Custom address',
+            'user' => UserFactory::find(['uid' => UserFactory::ULID_ADMIN]),
         ]);
     }
 }

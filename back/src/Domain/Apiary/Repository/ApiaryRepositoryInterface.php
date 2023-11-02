@@ -6,6 +6,7 @@ namespace App\Domain\Apiary\Repository;
 
 use App\Domain\Common\Exception\NotFoundException;
 use App\Domain\Apiary\Apiary;
+use App\Domain\User\User;
 use Symfony\Component\Uid\Ulid;
 
 /**
@@ -19,10 +20,10 @@ interface ApiaryRepositoryInterface
     public function getOneByUid(Ulid $uid): Apiary;
 
     /**
-     * @param Ulid $userUid Find all apiaries by User UID
+     * @param User $user Find all apiaries by User
      * @return Apiary[]
      */
-    public function findByUid(Ulid $userUid): array;
+    public function listMyApiaries(User $user): array;
 
     public function save(Apiary $apiary): void;
 }

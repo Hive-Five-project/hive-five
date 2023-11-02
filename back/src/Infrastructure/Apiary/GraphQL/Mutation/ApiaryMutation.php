@@ -21,7 +21,7 @@ class ApiaryMutation extends AbstractMutation implements AliasedInterface
         $payload = $this->getPayload($args, ApiaryPayload::class);
 
         /** @var Apiary $apiary */
-        $apiary = $this->handle(new CreateApiaryCommand($payload));
+        $apiary = $this->handle(new CreateApiaryCommand($payload, $this->getDomainUser()));
 
         return $apiary;
     }
@@ -32,8 +32,10 @@ class ApiaryMutation extends AbstractMutation implements AliasedInterface
             ObjectNormalizer::OBJECT_TO_POPULATE => new ApiaryPayload($uid),
         ]);
 
+        $currentUser = $this->getDomainUser();
+
         /** @var Apiary $apiary */
-        $apiary = $this->handle(new UpdateApiaryCommand($uid, $payload));
+        $apiary = $this->handle(new UpdateApiaryCommand($uid, $payload, $currentUser));
 
         return $apiary;
     }

@@ -6,6 +6,7 @@ namespace App\Infrastructure\Test\Fixtures\Story;
 
 use App\Infrastructure\Fixtures\Factory\ApiaryFactory;
 use App\Infrastructure\Fixtures\Factory\UserFactory;
+use PHPUnit\Framework\MockObject\Api;
 use Zenstruck\Foundry\Story;
 
 /**
