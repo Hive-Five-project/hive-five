@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Tests\Functional\GraphQL\Apiary;
 
 use App\Infrastructure\Test\Functional\Controller\GraphQLTestCase;
+use App\Tests\Functional\GraphQL\Apiary\FindApiaryTest\fixtures\FindApiaryStory;
 use Zenstruck\Foundry\Test\Factories;
 use Zenstruck\Foundry\Test\ResetDatabase;
 

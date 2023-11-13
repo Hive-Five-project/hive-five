@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Infrastructure\Apiary\GraphQL\Mutation;
 
 use App\Application\Apiary\Command\CreateApiaryCommand;
+use App\Application\Apiary\Command\DeleteApiaryCommand;
 use App\Application\Apiary\Command\UpdateApiaryCommand;
 use App\Application\Apiary\Payload\ApiaryPayload;
 use App\Domain\Apiary\Apiary;

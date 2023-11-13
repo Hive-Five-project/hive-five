@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace App\Domain\Apiary\Repository;
 
-use App\Domain\Common\Exception\NotFoundException;
 use App\Domain\Apiary\Apiary;
+use App\Domain\Common\Exception\NotFoundException;
 use App\Domain\User\User;
 use Symfony\Component\Uid\Ulid;
 
@@ -21,6 +21,7 @@ interface ApiaryRepositoryInterface
 
     /**
      * @param User $user Find all apiaries by User
+     *
      * @return Apiary[]
      */
     public function listMyApiaries(User $user): array;

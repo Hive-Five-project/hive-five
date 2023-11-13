@@ -8,6 +8,8 @@ use App\Application\Apiary\Command\UpdateApiaryCommand;
 use App\Domain\Common\Exception\ForbiddenException;
 use App\Domain\Apiary\Repository\ApiaryRepositoryInterface;
 use App\Domain\Apiary\Apiary;
+use App\Domain\Apiary\Repository\ApiaryRepositoryInterface;
+use App\Domain\Common\Exception\ForbiddenException;
 
 class UpdateApiaryCommandHandler
 {
