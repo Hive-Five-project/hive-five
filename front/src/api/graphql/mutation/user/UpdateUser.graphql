@@ -1,0 +1,13 @@
+#import "@graphql/fragments/user/_User.graphql"
+
+mutation($uid: ULID!, $payload: UserPayload!) {
+  User {
+    update(uid: $uid, payload: $payload) {
+      roles
+      isActive
+      isAdmin
+      createdAt
+      ..._User
+    }
+  }
+}

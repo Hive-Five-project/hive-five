@@ -55,7 +55,6 @@ class UserResolver extends AbstractResolver implements AliasedInterface
             'find' => 'User.find',
             'listAll' => 'User.list',
             'roles' => 'User.roles',
-            'listMemberForExchanges' => 'User.listMemberForExchanges',
         ];
     }
 }

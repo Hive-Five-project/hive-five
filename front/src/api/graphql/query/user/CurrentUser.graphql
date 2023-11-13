@@ -1,0 +1,13 @@
+#import "@graphql/fragments/user/_User.graphql"
+
+query CurrentUser {
+  User {
+    me {
+      roles
+      isActive
+      isAdmin
+      createdAt
+      ..._User
+    }
+  }
+}
