@@ -4,9 +4,12 @@ declare(strict_types=1);
 
 namespace App\Domain\Apiary;
 
-use App\Domain\User\User;
+use App\Domain\Beehive\Beehive;
 use App\Domain\Common\Behavior\TimestampableTrait;
 use App\Domain\Common\Behavior\UlidTrait;
+use App\Domain\User\User;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Symfony\Component\DependencyInjection\Attribute\Exclude;
 
 #[Exclude]
@@ -19,16 +22,22 @@ class Apiary
     private string $address;
     private User $user;
 
+    /** @var Collection<int, Beehive> */
+    private Collection $beehives;
+
     public function __construct(
         string $name,
         string $address,
         User $user,
     ) {
         $this->initIdentity();
+
         $this->name = $name;
         $this->address = $address;
         $this->user = $user;
         $user->addApiary($this);
+
+        $this->beehives = new ArrayCollection();
     }
 
     /**
@@ -41,7 +50,7 @@ class Apiary
     ): void {
         $this->name = $name;
         $this->address = $address;
-        $this->user->getApiaries()->removeElement($this);
+        $this->user->deleteApiary($this);
         $this->user = $user;
         $user->addApiary($this);
     }
@@ -59,5 +68,23 @@ class Apiary
     public function getUser(): User
     {
         return $this->user;
+    }
+
+    /**
+     * @return Collection<int, Beehive>
+     */
+    public function getBeehives(): Collection
+    {
+        return $this->beehives;
+    }
+
+    public function addBeehive(Beehive $beehive): void
+    {
+        $this->beehives->add($beehive);
+    }
+
+    public function deleteBeehive(Beehive $beehive): bool
+    {
+        return $this->beehives->removeElement($beehive);
     }
 }

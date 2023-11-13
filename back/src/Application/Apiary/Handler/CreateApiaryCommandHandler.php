@@ -5,10 +5,8 @@ declare(strict_types=1);
 namespace App\Application\Apiary\Handler;
 
 use App\Application\Apiary\Command\CreateApiaryCommand;
-use App\Domain\User\Repository\UserRepositoryInterface;
-use App\Domain\Apiary\Repository\ApiaryRepositoryInterface;
 use App\Domain\Apiary\Apiary;
-use App\Domain\User\User;
+use App\Domain\Apiary\Repository\ApiaryRepositoryInterface;
 
 class CreateApiaryCommandHandler
 {

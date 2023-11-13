@@ -1,0 +1,5 @@
+mutation($uid: ULID!) {
+  Apiary {
+    delete(uid: $uid)
+  }
+}

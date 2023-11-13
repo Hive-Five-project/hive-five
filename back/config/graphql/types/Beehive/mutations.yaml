@@ -1,0 +1,25 @@
+BeehiveMutations:
+  type: object
+  config:
+    fields:
+
+      create:
+        type: Beehive
+        resolve: "@=mutation('Beehive.create', args)"
+        access: "@=isAuthenticated()"
+        description: Ajouter une nouvelle ruche au rucher
+        args:
+          payload:
+            type: BeehivePayload!
+
+      update:
+        type: Beehive
+        resolve: "@=mutation('Beehive.update', args['uid'], args)"
+        access: "@=isAuthenticated()"
+        description: Modifier une ruche
+        args:
+          uid:
+            type: ULID!
+            description: 'A beehive uid'
+          payload:
+            type: BeehivePayload!

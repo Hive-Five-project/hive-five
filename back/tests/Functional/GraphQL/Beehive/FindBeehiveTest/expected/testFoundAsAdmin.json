@@ -1,0 +1,16 @@
+{
+  "data": {
+    "Beehive": {
+      "find": {
+        "uid": "01HF7XBCB9Q9T8DZN9F48SFPE2",
+        "name": "Beehive for Admin",
+        "bee": "Black",
+        "age": "1",
+        "apiary": {
+          "uid": "01HE39KXBWVS6N93ZB9WEXJ3RF",
+          "name": "Custom apiary for Admin"
+        }
+      }
+    }
+  }
+}

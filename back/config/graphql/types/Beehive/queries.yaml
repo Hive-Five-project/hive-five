@@ -1,0 +1,28 @@
+BeehiveQueries:
+  type: object
+  config:
+    fields:
+
+      find:
+        type: 'Beehive!'
+        access: "@=isAuthenticated()"
+        resolve: '@=query("Beehive.find", args["uid"])'
+        description: Récupération d'une ruche à partir d'un uid
+        args:
+          uid:
+            type: ULID!
+
+      listBeehivesFromApiary:
+        type: '[Beehive!]!'
+        access: "@=isAuthenticated()"
+        resolve: '@=query("Beehive.list", args["apiaryUid"])'
+        description: Liste des ruches d'un rucher donné
+        args:
+          apiaryUid:
+            type: ULID!
+
+      listBeeType:
+        type: '[BeeTypeEnum!]!'
+        resolve: '@=query("Beehive.listBeeType")'
+        access: "@=isAuthenticated()"
+        description: Liste des types d'abeilles qui existent en base

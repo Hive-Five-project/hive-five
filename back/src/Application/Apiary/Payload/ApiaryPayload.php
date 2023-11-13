@@ -4,10 +4,8 @@ declare(strict_types=1);
 
 namespace App\Application\Apiary\Payload;
 
-use App\Domain\User\User;
 use App\Domain\Apiary\Apiary;
 use App\Infrastructure\Bridge\GraphQL\Type\Input\StringInputType;
-use App\Infrastructure\Bridge\Symfony\Validator\Constraint\EntityReferenceExists;
 use Overblog\GraphQLBundle\Annotation as GQL;
 use Symfony\Component\Uid\Ulid;
 use Symfony\Component\Validator\Constraints as Assert;

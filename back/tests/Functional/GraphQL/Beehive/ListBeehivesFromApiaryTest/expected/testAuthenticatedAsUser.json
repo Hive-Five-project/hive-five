@@ -1,0 +1,17 @@
+{
+  "data": {
+    "Beehive": {
+      "listBeehivesFromApiary": [
+        {
+          "uid": "01HF7X9YVA5GHKGDEPSPQG7187",
+          "name": "Beehive for User",
+          "bee": "Buckfast",
+          "age": "2",
+          "apiary": {
+            "uid": "01H5KQW6EBYNGSWRE09ANVREXX"
+          }
+        }
+      ]
+    }
+  }
+}
