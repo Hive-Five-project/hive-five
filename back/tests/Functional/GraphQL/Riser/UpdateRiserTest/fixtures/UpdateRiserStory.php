@@ -15,13 +15,13 @@ use Zenstruck\Foundry\Story;
 
 class UpdateRiserStory extends Story
 {
-    public const ULID_APIARY = '01H5KQW6EBYNGSWRE09ANVREXX';
-    public const ULID_APIARY_OTHER = '01HF9FR25AJ6W71ZC627CR0PH8';
-    public const ULID_BEEHIVE = '01HF7X9YVA5GHKGDEPSPQG7187';
-    public const ULID_BEEHIVE_OTHER = '01HF9HT8104EDAEHHNRD99Y53R';
-    public const NEW_ULID_BEEHIVE = '01HFHFN0YPSWQRF30ZJDNA0SAM';
-    public const ULID_RISER = '01HFHFN5QYNSW6NWHKDNY3ADDT';
-    public const ULID_RISER_OTHER = '01HFHFSQ7Z5NTV5F23HJZCGR9D';
+    public const ULID_APIARY = '01HFHMTTQ8GMG8VQF8RS9KRCMV';
+    public const ULID_APIARY_OTHER = '01HFHMV0E0QHNN47ASVX6V16M9';
+    public const ULID_BEEHIVE = '01HFHMV5S77FWWEHCB0941J453';
+    public const ULID_BEEHIVE_OTHER = '01HFHMVC7VAXWV38B00Q03EXFE';
+    public const NEW_ULID_BEEHIVE = '01HFHMVJ1RC69F49VNNEWTGKCJ';
+    public const ULID_RISER = '01HFHMVQTZ1REEMJ0PK69P6YBT';
+    public const ULID_RISER_OTHER = '01HFHMVWRC9N2TDWH8F69X5XSC';
 
     public function build(): void
     {
@@ -69,9 +69,13 @@ class UpdateRiserStory extends Story
             'apiary' => ApiaryFactory::find(['uid' => self::ULID_APIARY]),
         ])->forceSet('uid', new Ulid(self::NEW_ULID_BEEHIVE))->save();
 
+        /** @var User $user */
+        $currentUser = UserFactory::find(['uid' => UserFactory::ULID_USER])->object();
+
         RiserFactory::new()->create([
             'name' => 'Riser for User',
             'beehive' => BeehiveFactory::find(['uid' => self::ULID_BEEHIVE]),
-        ])->forceSet('uid', new Ulid(self::ULID_RISER))->save();
+        ])->forceSet('uid', new Ulid(self::ULID_RISER))->save()
+            ->forceSet('user', $currentUser)->save();
     }
 }

@@ -22,7 +22,7 @@ interface RiserRepositoryInterface
     /**
      * @return Riser[]
      */
-    public function listRiserByBeehive(Beehive $beehive): array;
+    public function listRisersFromBeehive(Beehive $beehive): array;
 
     public function save(Riser $riser): void;
 }

@@ -1,7 +1,7 @@
 {
   "errors": [
     {
-      "message": "User user@example.com cannot update riser isn't his own : 01HFHFSQ7Z5NTV5F23HJZCGR9D not updated.",
+      "message": "User user@example.com cannot update riser isn't his own : 01HFHMVWRC9N2TDWH8F69X5XSC not UPDATED.",
       "locations": [
         {
           "line": 3,

@@ -13,3 +13,7 @@ Query:
       Beehive:
         type: BeehiveQueries!
         resolve: "@=query('NamespacedQuery')"
+
+      Riser:
+        type: RiserQueries!
+        resolve: "@=query('NamespacedQuery')"

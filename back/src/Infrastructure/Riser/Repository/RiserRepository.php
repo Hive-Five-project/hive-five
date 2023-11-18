@@ -33,7 +33,7 @@ class RiserRepository extends ServiceEntityRepository implements RiserRepository
         return $riser;
     }
 
-    public function listRiserByBeehive(Beehive $beehive): array
+    public function listRisersFromBeehive(Beehive $beehive): array
     {
         return $this->findBy(['beehive' => $beehive]);
     }

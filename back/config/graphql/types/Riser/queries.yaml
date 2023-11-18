@@ -1,0 +1,22 @@
+RiserQueries:
+  type: object
+  config:
+    fields:
+
+      find:
+        type: 'Riser!'
+        access: "@=isAuthenticated()"
+        resolve: '@=query("Riser.find", args["uid"])'
+        description: Récupération d'une hausse à partir d'un uid
+        args:
+          uid:
+            type: ULID!
+
+      listRisersFromBeehive:
+        type: '[Riser!]!'
+        access: "@=isAuthenticated()"
+        resolve: '@=query("Riser.list", args["beehiveUid"])'
+        description: Liste des hausse d'une ruche
+        args:
+          beehiveUid:
+            type: ULID!

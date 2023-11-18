@@ -25,7 +25,7 @@ class UpdateRiserCommandHandler
         $beehive = null;
 
         if ($riser->getUser() !== $command->currentUser) {
-            throw new ForbiddenException(sprintf('User %s cannot update riser isn\'t his own : %s not updated.', $command->currentUser->getEmail(), $riser->getUidAsString()));
+            throw new ForbiddenException(sprintf('User %s cannot update riser isn\'t his own : %s not UPDATED.', $command->currentUser->getEmail(), $riser->getUidAsString()));
         }
 
         if (isset($payload->beehive)) {
