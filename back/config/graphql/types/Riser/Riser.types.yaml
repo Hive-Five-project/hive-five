@@ -1,0 +1,26 @@
+Riser:
+  type: object
+  config:
+    description: 'A riser'
+    fields:
+      uid:
+        type: ULID!
+
+      name:
+        type: String!
+
+      beehive:
+        type: Beehive
+        description: 'La Ruche sur laquelle la hausse est installée.'
+
+      createdAt:
+        type: DateTime!
+        description: 'Date de création'
+
+      updatedAt:
+        type: DateTime!
+        description: 'Date de modification'
+
+      deleteAt:
+        type: DateTime!
+        description: 'Date de suppression'

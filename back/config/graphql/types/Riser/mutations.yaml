@@ -1,0 +1,25 @@
+RiserMutations:
+  type: object
+  config:
+    fields:
+
+      create:
+        type: Riser
+        resolve: "@=mutation('Riser.create', args)"
+        access: "@=isAuthenticated()"
+        description: Ajouter une hausse pour l'utilisateur courant
+        args:
+          payload:
+            type: RiserPayload!
+
+      update:
+        type: Riser
+        resolve: "@=mutation('Riser.update', args['uid'], args)"
+        access: "@=isAuthenticated()"
+        description: Modifier une hausse pour l'utilisateur courant
+        args:
+          uid:
+            type: ULID!
+            description: 'Riser uid'
+          payload:
+            type: RiserPayload!

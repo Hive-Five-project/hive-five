@@ -1,0 +1,23 @@
+{
+  "errors": [
+    {
+      "message": "User user@example.com cannot create a Riser and associate it in a unknown beehive 01HF7X9YVA5GHKGDEPSPQG7187",
+      "locations": [
+        {
+          "line": 3,
+          "column": 5
+        }
+      ],
+      "path": [
+        "Riser",
+        "create"
+      ],
+      "code": "FORBIDDEN"
+    }
+  ],
+  "data": {
+    "Riser": {
+      "create": null
+    }
+  }
+}

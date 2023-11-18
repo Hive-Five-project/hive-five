@@ -3,7 +3,7 @@
                   xmlns:gedmo="http://gediminasm.org/schemas/orm/doctrine-extensions-mapping"
                   xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
                    https://raw.github.com/doctrine/doctrine2/master/doctrine-mapping.xsd">
-    <entity name="App\Domain\Beehive\Beehive" repository-class="App\Infrastructure\Beehive\Repository\BeehiveRepository"  table="beehive">
+    <entity name="App\Domain\Riser\Riser" repository-class="App\Infrastructure\Riser\Repository\RiserRepository"  table="riser">
         <id name="id" type="integer">
             <generator />
         </id>
@@ -15,14 +15,14 @@
         </lifecycle-callbacks>
 
         <field name="name" />
-        <field name="bee" enum-type="App\Domain\Beehive\BeeType" />
-        <field name="age" />
 
-        <many-to-one field="apiary" target-entity="App\Domain\Apiary\Apiary" inversed-by="beehives">
-            <join-column nullable="false" on-delete="CASCADE" />
+        <many-to-one field="beehive" target-entity="App\Domain\Beehive\Beehive" inversed-by="risers">
+            <join-column on-delete="CASCADE" />
         </many-to-one>
 
-        <one-to-many field="risers" target-entity="App\Domain\Riser\Riser" mapped-by="beehive" />
+        <many-to-one field="user" target-entity="App\Domain\User\User" >
+            <join-column nullable="false" on-delete="CASCADE" />
+        </many-to-one>
 
         <field name="createdAt" type="datetime">
             <gedmo:timestampable on="create" />

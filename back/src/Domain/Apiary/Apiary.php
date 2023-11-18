@@ -40,9 +40,6 @@ class Apiary
         $this->beehives = new ArrayCollection();
     }
 
-    /**
-     * As an admin, update service from the service administration page.
-     */
     public function update(
         string $name,
         string $address,

@@ -2,15 +2,14 @@
 
 declare(strict_types=1);
 
-namespace App\Tests\Functional\GraphQL\Beehive;
+namespace App\Tests\Functional\GraphQL\Riser;
 
-use App\Domain\Beehive\BeeType;
 use App\Infrastructure\Test\Functional\Controller\GraphQLTestCase;
-use App\Tests\Functional\GraphQL\Beehive\CreateBeehiveTest\fixtures\CreateBeehiveStory;
+use App\Tests\Functional\GraphQL\Riser\CreateRiserTest\fixtures\CreateRiserStory;
 use Zenstruck\Foundry\Test\Factories;
 use Zenstruck\Foundry\Test\ResetDatabase;
 
-class CreateBeehiveTest extends GraphQLTestCase
+class CreateRiserTest extends GraphQLTestCase
 {
     use ResetDatabase;
     use Factories;
@@ -20,11 +19,11 @@ class CreateBeehiveTest extends GraphQLTestCase
      */
     public function testValid(array $payload): void
     {
-        CreateBeehiveStory::load();
+        CreateRiserStory::load();
 
         $this->loginAsUser();
 
-        $this->executeGraphQL(compact('payload'), $this->getInputContent('testCreateBeehive'));
+        $this->executeGraphQL(compact('payload'), $this->getInputContent('testCreateRiser'));
 
         $this->assertValidGraphQLResponse();
         $this->assertJsonResponseMatchesExpectations();
@@ -32,11 +31,14 @@ class CreateBeehiveTest extends GraphQLTestCase
 
     public function provide testValid(): iterable
     {
-        yield 'new beehive' => [[
-            'name' => 'new beehive',
-            'bee' => BeeType::Buckfast,
-            'age' => 2,
-            'apiary' => CreateBeehiveStory::ULID_APIARY,
+        yield 'new riser' => [[
+            'name' => 'new riser',
+            'beehive' => CreateRiserStory::ULID_BEEHIVE_USER,
+        ]];
+
+        yield 'new riser without beehive' => [[
+            'name' => 'new riser',
+            'beehive' => null,
         ]];
     }
 
@@ -47,11 +49,11 @@ class CreateBeehiveTest extends GraphQLTestCase
     {
         $this->loginAsUser();
 
-        CreateBeehiveStory::load();
+        CreateRiserStory::load();
 
         $this->executeGraphQL([
             'payload' => $payload,
-        ], $this->getInputContent('testCreateBeehive'));
+        ], $this->getInputContent('testCreateRiser'));
 
         $this->assertGraphQLInvalidPayloadResponse();
         $this->assertJsonResponseMatchesExpectations();
@@ -61,9 +63,6 @@ class CreateBeehiveTest extends GraphQLTestCase
     {
         yield 'empty fields' => [[
             'name' => null,
-            'bee' => null,
-            'age' => null,
-            'apiary' => null,
         ]];
 
         $o = str_repeat('o', 256);
@@ -71,16 +70,31 @@ class CreateBeehiveTest extends GraphQLTestCase
 
         yield 'too long' => [[
             'name' => $wayTooLongValue,
-            'bee' => BeeType::Buckfast,
-            'age' => 2,
-            'apiary' => CreateBeehiveStory::ULID_APIARY,
         ]];
+    }
 
-        yield 'wrong age type' => [[
+    /**
+     * @dataProvider provide testForbidden
+     */
+    public function testForbidden(array $payload): void
+    {
+        $this->loginAsUser();
+
+        CreateRiserStory::load();
+
+        $this->executeGraphQL([
+            'payload' => $payload,
+        ], $this->getInputContent('testCreateRiser'));
+
+        $this->assertGraphQLForbiddenResponse();
+        $this->assertJsonResponseMatchesExpectations();
+    }
+
+    public function provide testForbidden(): iterable
+    {
+        yield 'not owner beehive' => [[
             'name' => 'new name',
-            'bee' => BeeType::Buckfast,
-            'age' => '2',
-            'apiary' => CreateBeehiveStory::ULID_APIARY,
+            'beehive' => CreateRiserStory::ULID_BEEHIVE,
         ]];
     }
 }
