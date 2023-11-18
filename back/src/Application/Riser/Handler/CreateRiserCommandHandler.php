@@ -27,6 +27,7 @@ class CreateRiserCommandHandler
         if (isset($payload->beehive)) {
             $beehive = $this->beehiveRepository->getOneByUid($payload->beehive);
         }
+
         if (isset($beehive) && $beehive->getApiary()->getUser() !== $command->currentUser) {
             throw new ForbiddenException(sprintf('User %s cannot create a Riser and associate it in a unknown beehive %s', $command->currentUser->getEmail(), $beehive->getUidAsString()));
         }
