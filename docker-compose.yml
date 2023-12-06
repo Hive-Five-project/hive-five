@@ -2,7 +2,7 @@ version: "3"
 
 services:
   symfony:
-      command: "make serve.php@test"
+      command: "make serve.php"
       environment:
             DATABASE_URL: postgresql://${POSTGRES_USER:-app}:${POSTGRES_PASSWORD:-password}@database:5432/${POSTGRES_DB:-app}
       build:

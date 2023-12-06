@@ -1,6 +1,10 @@
 #!/bin/sh
 set -e
 
+if [ -z "$(ls -A 'vendor/' 2>/dev/null)" ]; then
+		composer install --prefer-dist --no-progress --no-interaction
+fi
+
 if grep -q ^DATABASE_URL= .env; then
     echo "Waiting for database to be ready..."
     ATTEMPTS_LEFT_TO_REACH_DATABASE=60
@@ -28,7 +32,10 @@ if grep -q ^DATABASE_URL= .env; then
     fi
 fi
 
+mkdir -p var
 setfacl -R -m u:www-data:rwX -m u:"$(whoami)":rwX var
 setfacl -dR -m u:www-data:rwX -m u:"$(whoami)":rwX var
+
+make db.install
 
 exec docker-php-entrypoint "$@"
