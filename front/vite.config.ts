@@ -17,6 +17,7 @@ export default defineConfig({
     },
   },
   server: {
+    host: '0.0.0.0',
     port: 63281,
     strictPort: true,
   },

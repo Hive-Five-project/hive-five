@@ -1,6 +1,16 @@
 version: "3"
 
 services:
+  react:
+      command: "npm run dev"
+      build:
+          context: ./front
+          dockerfile: Dockerfile
+      working_dir: /app/frontend
+      volumes:
+          - ./front:/app/frontend
+      ports:
+          - 63281:63281
   symfony:
       command: "make serve.php"
       environment:
