@@ -23,6 +23,8 @@ RUN apt-get update && apt-get install -y \
     libonig-dev \
     libxslt1-dev \
     acl \
+    libpq-dev \
+    postgresql \
     && echo 'alias sf="php bin/console"' >> ~/.bashrc
 
 # install symfony cli
@@ -38,7 +40,8 @@ RUN curl -1sLf 'https://dl.cloudsmith.io/public/symfony/stable/setup.deb.sh' | b
 RUN docker-php-ext-configure gd --with-jpeg --with-freetype 
 
 RUN docker-php-ext-install \
-    pdo pdo_mysql zip xsl gd intl opcache exif mbstring
+    pdo pdo_mysql pdo_pgsql pgsql zip xsl gd intl opcache exif mbstring && \
+    docker-php-ext-enable pdo pdo_mysql pdo_pgsql pgsql zip xsl gd intl opcache exif mbstring
 
 
 # https://getcomposer.org/doc/03-cli.md#composer-allow-superuser
@@ -46,6 +49,9 @@ ENV COMPOSER_ALLOW_SUPERUSER=1
 ENV PATH="${PATH}:/root/.composer/vendor/bin"
 
 COPY --from=composer_upstream --link /usr/bin/composer /usr/bin/composer
+COPY --link --chmod=755 docker-entrypoint.sh /usr/local/bin/docker-entrypoint
+
+ENTRYPOINT ["docker-entrypoint"]
 
 # Packages
 
