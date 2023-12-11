@@ -20,7 +20,7 @@ update:
 ## Serve - Serve the whole app
 serve: export APP_RUNTIME_ENV ?= development
 serve:
-	npx vite
+	npx vite --host=127.0.0.1 --port=63281
 
 ## Build - Build
 build: export APP_RUNTIME_ENV ?= development

@@ -2,6 +2,7 @@ version: "3"
 
 services:
   react:
+      profiles: ['', docker]
       command: "npm run dev"
       build:
           context: ./front
@@ -12,6 +13,7 @@ services:
       ports:
           - 63281:63281
   symfony:
+      profiles: ['', docker]
       command: "make serve.php"
       environment:
             DATABASE_URL: postgresql://${POSTGRES_USER:-app}:${POSTGRES_PASSWORD:-password}@database:5432/${POSTGRES_DB:-app}
@@ -25,6 +27,7 @@ services:
           - 63280:63280
           - 63290:63290
   database:
+    profiles: ['', local, docker]
     image: postgres:${POSTGRES_VERSION:-15}-alpine
     environment:
       POSTGRES_DB: ${POSTGRES_DB:-app}

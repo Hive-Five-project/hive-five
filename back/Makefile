@@ -53,7 +53,7 @@ db.fixtures:
 	symfony console doctrine:fixtures:load --no-interaction
 
 # Database - Force update the database schema
-db.update-force: db.create db.fixtures
+db.update-force: db.create
 	symfony console doctrine:schema:update --force --complete
 
 # Generate hash-password
@@ -75,11 +75,11 @@ serve.php:
 
 ## Dev - Start Docker services
 serve.docker:
-	docker compose up
+	docker compose --profile=local up
 
 ## Dev - Start Docker services in background
 serve.docker+detached:
-	docker compose up -d
+	docker compose --profile=local up -d
 
 ## Test - Start the whole application for test purposes (debug)
 serve@test:
