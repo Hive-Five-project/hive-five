@@ -1,0 +1,111 @@
+name: Lint
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - front/**
+      - back/**
+  pull_request:
+    types: [ opened, synchronize, reopened, ready_for_review ]
+    paths:
+      - front/**
+      - back/**
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+
+  lint_front:
+    name: 'Lint Front'
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    # Do not run on WIP or Draft PRs
+    if: "!github.event.pull_request || (!contains(github.event.pull_request.labels.*.name, 'WIP') && github.event.pull_request.draft == false)"
+
+    steps:
+
+      - name: 'Checkout'
+        uses: actions/checkout@v3
+
+      - name: 'Install dependencies'
+        run: |
+          cd front
+          make install@integration
+
+      - name: 'ESLint front'
+        run: |
+          cd front
+          make lint.eslint@integration
+
+      - name: 'TypeScript check front'
+        run: |
+          cd front
+          make lint.tsc@integration
+
+  lint_back:
+    name: 'Lint Back'
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    # Do not run on WIP or Draft PRs
+    if: "!github.event.pull_request || (!contains(github.event.pull_request.labels.*.name, 'WIP') && github.event.pull_request.draft == false)"
+
+    steps:
+
+      - name: 'Checkout'
+        uses: actions/checkout@v3
+
+      - name: Set up PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.2'
+          tools: composer:v2
+
+      - name: Install Symfony CLI
+        run: |
+          wget https://get.symfony.com/cli/installer -O - | bash
+          mv /home/runner/.symfony5/bin/symfony /usr/local/bin/symfony
+
+      - name: 'Install dependencies & setup project'
+        run: |
+          cd back
+          make install.composer@integration
+          make install.composer.tools@integration
+
+      - name: 'Lint Yaml'
+        run: |
+          cd back
+          make lint.yaml@integration
+
+      - name: 'Lint Container'
+        run: |
+          cd back
+          make lint.container@integration
+
+      - name: 'Lint PhpStan'
+        run: |
+          cd back
+          make lint.phpstan@integration
+
+      - name: 'Lint PHP CS Fixer'
+        run: |
+          cd back
+          make lint.php-cs-fixer@integration
+
+      - name: 'Lint Doctrine'
+        run: |
+          cd back
+          make lint.doctrine@integration
+
+      - name: 'Lint GraphQL'
+        run: |
+          cd back
+          make lint.graphql@integration
+
+      - name: 'Lint Composer'
+        run: |
+          cd back
+          make lint.composer@integration

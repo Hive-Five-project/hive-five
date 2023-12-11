@@ -13,6 +13,9 @@
 install:
 	npm install
 
+install@integration:
+	npm install --color=always --no-progress --no-audit --no-fund
+
 ## Setup - Update dependencies
 update:
 	npm update
@@ -34,4 +37,12 @@ lint.eslint:
 	npx eslint . --fix --ext ts,tsx --report-unused-disable-directives --max-warnings 0
 
 lint.tsc:
+	npx tsc --noemit
+
+lint@integration: lint.eslint@integration lint.tsc@integration
+
+lint.eslint@integration:
+	npx eslint ./
+
+lint.tsc@integration:
 	npx tsc --noemit

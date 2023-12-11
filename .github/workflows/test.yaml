@@ -1,0 +1,72 @@
+name: Tests
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - back/**
+      - .github/**
+  pull_request:
+    types: [ opened, synchronize, reopened, ready_for_review ]
+    paths:
+      - back/**
+      - .github/**
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+
+  test-back:
+    name: 'Test back'
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    # Do not run on WIP or Draft PRs
+    if: "!github.event.pull_request || (!contains(github.event.pull_request.labels.*.name, 'WIP') && github.event.pull_request.draft == false)"
+    steps:
+
+      - name: 'Checkout'
+        uses: actions/checkout@v3
+
+      - name: 'Set up PHP'
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.2'
+          tools: composer:v2
+
+      - name: 'Install Symfony CLI'
+        run: |
+          wget https://get.symfony.com/cli/installer -O - | bash
+          mv /home/runner/.symfony5/bin/symfony /usr/local/bin/symfony
+
+      - name: 'Install dependencies & setup project'
+        run: |
+          cd back
+          make install.composer@integration
+          make install.composer.tools@integration
+
+      - name: 'Generate SSL Key for JWT'
+        run: |
+          cd back
+          php bin/console lexik:jwt:generate-keypair
+
+      - name: 'Create Database'
+        run: |
+          mkdir -p data
+          touch data/database.sqlite
+
+      - name: 'Update database schema'
+        env:
+          DATABASE_URL: sqlite:///%kernel.project_dir%/var/database.sqlite
+        run: |
+          cd back
+          symfony console doctrine:schema:update --force --complete --env=test
+
+      - name: 'Run tests'
+        env:
+          DATABASE_URL: sqlite:///%kernel.project_dir%/var/database.sqlite
+        run: |
+          cd back
+          make test.phpunit@integration
