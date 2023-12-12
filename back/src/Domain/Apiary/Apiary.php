@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace App\Domain\Apiary;
 
-use App\Domain\User\User;
 use App\Domain\Common\Behavior\TimestampableTrait;
 use App\Domain\Common\Behavior\UlidTrait;
+use App\Domain\User\User;
 use Symfony\Component\DependencyInjection\Attribute\Exclude;
 
 #[Exclude]

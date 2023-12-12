@@ -38,7 +38,7 @@ trait TimestampableTrait
         $this->deletedAt = $deletedAt;
     }
 
-    public function getDeletedAt(): \DateTime
+    public function getDeletedAt(): \DateTime|null
     {
         return $this->deletedAt;
     }

@@ -5,10 +5,9 @@ declare(strict_types=1);
 namespace App\Application\Apiary\Handler;
 
 use App\Application\Apiary\Command\UpdateApiaryCommand;
-use App\Domain\Common\Exception\ForbiddenException;
-use App\Domain\User\Repository\UserRepositoryInterface;
-use App\Domain\Apiary\Repository\ApiaryRepositoryInterface;
 use App\Domain\Apiary\Apiary;
+use App\Domain\Apiary\Repository\ApiaryRepositoryInterface;
+use App\Domain\Common\Exception\ForbiddenException;
 
 class UpdateApiaryCommandHandler
 {
@@ -24,7 +23,7 @@ class UpdateApiaryCommandHandler
         $user = $command->user;
 
         if ($apiary->getUser() !== $user) {
-            throw new ForbiddenException(sprintf("User %s cannot access apiary with %s", $user->getEmail(), $apiary->getUidAsString()));
+            throw new ForbiddenException(sprintf('User %s cannot access apiary with %s', $user->getEmail(), $apiary->getUidAsString()));
         }
 
         $apiary->update(

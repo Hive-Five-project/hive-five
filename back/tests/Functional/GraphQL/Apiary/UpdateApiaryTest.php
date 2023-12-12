@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace App\Tests\Functional\GraphQL\Apiary;
 
-use App\Domain\Apiary\Apiary;
-use App\Infrastructure\Fixtures\Factory\UserFactory;
 use App\Infrastructure\Fixtures\Factory\ApiaryFactory;
 use App\Infrastructure\Test\Functional\Controller\GraphQLTestCase;
 use Zenstruck\Foundry\Test\Factories;
@@ -49,7 +47,7 @@ class UpdateApiaryTest extends GraphQLTestCase
 
         $this->executeGraphQL(compact('uid', 'payload'), $this->getInputContent('testUpdateApiary'));
 
-        $this->assertGraphQLForbiddenResponse("User user@example.com cannot access apiary with 01HE39KXBWVS6N93ZB9WEXJ3RF");
+        $this->assertGraphQLForbiddenResponse('User user@example.com cannot access apiary with 01HE39KXBWVS6N93ZB9WEXJ3RF');
     }
 
     public function provide testInvalidNotOwner(): iterable

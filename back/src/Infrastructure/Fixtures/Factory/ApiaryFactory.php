@@ -15,21 +15,21 @@ use Zenstruck\Foundry\RepositoryProxy;
 /**
  * @extends ModelFactory<Apiary>
  *
- * @method        Proxy<Apiary>|Apiary            create(array|callable $attributes = [])
- * @method static Proxy<Apiary>|Apiary            createOne(array $attributes = [])
- * @method static Proxy<Apiary>|Apiary            find(object|array|mixed $criteria)
- * @method static Proxy<Apiary>|Apiary            findOrCreate(array $attributes)
- * @method static Proxy<Apiary>|Apiary            first(string $sortedField = 'id')
- * @method static Proxy<Apiary>|Apiary            last(string $sortedField = 'id')
- * @method static Proxy<Apiary>|Apiary            random(array $attributes = [])
- * @method static Proxy<Apiary>|Apiary            randomOrCreate(array $attributes = [])
+ * @method        Proxy<Apiary>|Apiary             create(array|callable $attributes = [])
+ * @method static Proxy<Apiary>|Apiary             createOne(array $attributes = [])
+ * @method static Proxy<Apiary>|Apiary             find(object|array|mixed $criteria)
+ * @method static Proxy<Apiary>|Apiary             findOrCreate(array $attributes)
+ * @method static Proxy<Apiary>|Apiary             first(string $sortedField = 'id')
+ * @method static Proxy<Apiary>|Apiary             last(string $sortedField = 'id')
+ * @method static Proxy<Apiary>|Apiary             random(array $attributes = [])
+ * @method static Proxy<Apiary>|Apiary             randomOrCreate(array $attributes = [])
  * @method static ApiaryRepository|RepositoryProxy repository()
- * @method static Apiary[]|Proxy<Apiary>[]        all()
- * @method static Apiary[]|Proxy<Apiary>[]        createMany(int $number, array|callable $attributes = [])
- * @method static Apiary[]|Proxy<Apiary>[]        createSequence(iterable|callable $sequence)
- * @method static Apiary[]|Proxy<Apiary>[]        findBy(array $attributes)
- * @method static Apiary[]|Proxy<Apiary>[]        randomRange(int $min, int $max, array $attributes = [])
- * @method static Apiary[]|Proxy<Apiary>[]        randomSet(int $number, array $attributes = [])
+ * @method static Apiary[]|Proxy<Apiary>[]         all()
+ * @method static Apiary[]|Proxy<Apiary>[]         createMany(int $number, array|callable $attributes = [])
+ * @method static Apiary[]|Proxy<Apiary>[]         createSequence(iterable|callable $sequence)
+ * @method static Apiary[]|Proxy<Apiary>[]         findBy(array $attributes)
+ * @method static Apiary[]|Proxy<Apiary>[]         randomRange(int $min, int $max, array $attributes = [])
+ * @method static Apiary[]|Proxy<Apiary>[]         randomSet(int $number, array $attributes = [])
  */
 final class ApiaryFactory extends ModelFactory
 {

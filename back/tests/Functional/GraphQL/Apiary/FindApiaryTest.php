@@ -77,6 +77,6 @@ class FindApiaryTest extends GraphQLTestCase
             'uid' => ApiaryFactory::ULID_APIARY_ADMIN,
         ], $this->getInputContent('testFindApiary'));
 
-        $this->assertGraphQLForbiddenResponse("User user@example.com cannot access apiary with 01HE39KXBWVS6N93ZB9WEXJ3RF");
+        $this->assertGraphQLForbiddenResponse('User user@example.com cannot access apiary with 01HE39KXBWVS6N93ZB9WEXJ3RF');
     }
 }
