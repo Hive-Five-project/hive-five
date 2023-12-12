@@ -22,12 +22,17 @@ User:
         type: "[String!]"
         resolve: '@=query("User.roles", value)'
 
-      isActive:
-        type: Boolean!
-
       isAdmin:
         type: Boolean!
 
       createdAt:
         type: DateTime!
         description: Date de création
+
+      updatedAt:
+        type: DateTime!
+        description: Date d'update
+
+      deletedAt:
+        type: DateTime!
+        description: Date de suppression

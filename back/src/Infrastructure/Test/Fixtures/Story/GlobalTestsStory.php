@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Infrastructure\Test\Fixtures\Story;
 
+use App\Infrastructure\Fixtures\Factory\ApiaryFactory;
 use App\Infrastructure\Fixtures\Factory\UserFactory;
 use Zenstruck\Foundry\Story;
 
@@ -16,5 +17,6 @@ class GlobalTestsStory extends Story
     public function build(): void
     {
         UserFactory::baseUsers(hashedPassword: false);
+        ApiaryFactory::baseApiary();
     }
 }

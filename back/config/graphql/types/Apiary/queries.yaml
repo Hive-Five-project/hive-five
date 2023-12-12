@@ -1,0 +1,19 @@
+ApiaryQueries:
+  type: object
+  config:
+    fields:
+
+      find:
+        type: 'Apiary!'
+        access: "@=isAuthenticated()"
+        resolve: '@=query("Apiary.find", args["uid"])'
+        description: Récupération d'un rucher à partir d'un uid
+        args:
+          uid:
+            type: ULID!
+
+      listMyApiaries:
+        type: '[Apiary!]!'
+        resolve: '@=query("Apiary.list")'
+        access: "@=isAuthenticated()"
+        description: Liste des ruchers de l'utilisateur

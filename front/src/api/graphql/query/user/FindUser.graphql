@@ -4,7 +4,6 @@ query FindUser($uid: ULID!) {
   User {
     find(uid: $uid) {
       roles
-      isActive
       isAdmin
       createdAt
       ..._User

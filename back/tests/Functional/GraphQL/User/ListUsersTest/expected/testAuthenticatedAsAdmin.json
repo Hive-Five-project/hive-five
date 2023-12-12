@@ -10,7 +10,6 @@
           "roles": [
             "ROLE_ADMIN"
           ],
-          "isActive": true,
           "isAdmin": true,
           "createdAt": "2020-01-01T00:00:00+00:00"
         },
@@ -22,7 +21,6 @@
           "roles": [
             "ROLE_USER"
           ],
-          "isActive": true,
           "isAdmin": false,
           "createdAt": "2020-01-01T00:00:00+00:00"
         },
@@ -34,7 +32,6 @@
           "roles": [
             "ROLE_USER"
           ],
-          "isActive": false,
           "isAdmin": false,
           "createdAt": "2020-01-01T00:00:00+00:00"
         }

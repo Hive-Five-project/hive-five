@@ -1,0 +1,10 @@
+{
+  "data": {
+    "Apiary": {
+      "update": {
+        "name": "new name",
+        "address": "new address"
+      }
+    }
+  }
+}

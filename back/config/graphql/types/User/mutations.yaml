@@ -24,6 +24,16 @@ UserMutations:
           payload:
             type: UserPayload!
 
+      delete:
+        type: ULID!
+        resolve: "@=mutation('User.delete', args['uid'])"
+        access: "@=isGranted('ROLE_ADMIN')"
+        description: Supprimer un utilisateur
+        args:
+          uid:
+            type: ULID!
+            description: 'An user uid'
+
       updateMyProfile:
         type: User
         resolve: "@=mutation('User.updateMyProfile', args)"

@@ -47,4 +47,9 @@ class UserRepository extends ServiceEntityRepository implements UserRepositoryIn
     {
         $this->getEntityManager()->persist($user);
     }
+
+    public function delete(User $user): void
+    {
+        $user->delete();
+    }
 }

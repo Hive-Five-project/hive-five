@@ -73,7 +73,6 @@ final class UserFactory extends ModelFactory
                 self::nameExtract($lastname),
                 self::faker()->safeEmailDomain(),
             ),
-            'active' => self::faker()->boolean(),
             'admin' => self::faker()->boolean(),
             'createdAt' => $createdAt = self::faker()->dateTimeBetween('-90 days'),
             'updatedAt' => self::faker()->dateTimeBetween($createdAt->format(\DateTime::RFC3339)),
@@ -99,7 +98,6 @@ final class UserFactory extends ModelFactory
             'password' => $password,
             'email' => self::EMAIL_ADMIN,
             'admin' => true,
-            'active' => true,
             'createdAt' => new \DateTime('2020-01-01 00:00:00'),
         ]);
 
@@ -110,7 +108,6 @@ final class UserFactory extends ModelFactory
             'password' => $password,
             'email' => self::EMAIL_USER,
             'admin' => false,
-            'active' => true,
             'createdAt' => new \DateTime('2020-01-01 00:00:00'),
         ]);
 
@@ -121,7 +118,7 @@ final class UserFactory extends ModelFactory
             'password' => $password,
             'email' => self::EMAIL_INACTIVE_USER,
             'admin' => false,
-            'active' => false,
+            'deletedAt' => new \DateTime('2020-01-02 00:00:00'),
             'createdAt' => new \DateTime('2020-01-01 00:00:00'),
         ]);
     }

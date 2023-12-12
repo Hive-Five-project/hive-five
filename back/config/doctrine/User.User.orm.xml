@@ -20,11 +20,7 @@
         <field name="firstname" />
         <field name="lastname" />
 
-        <field name="active" type="boolean">
-            <options>
-                <option name="default">1</option>
-            </options>
-        </field>
+        <one-to-many field="apiaries" target-entity="App\Domain\Apiary\Apiary" mapped-by="user" />
 
         <field name="admin" type="boolean">
             <options>
@@ -38,5 +34,6 @@
         <field name="updatedAt" type="datetime">
             <gedmo:timestampable on="update" />
         </field>
+        <field name="deletedAt" type="datetime" nullable="true" />
     </entity>
 </doctrine-mapping>

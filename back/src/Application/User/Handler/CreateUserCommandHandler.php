@@ -26,7 +26,6 @@ class CreateUserCommandHandler
             $this->passwordHasher->hash($payload->password ?? self::randomPassword()),
             $payload->firstname,
             $payload->lastname,
-            $payload->active,
             $payload->admin,
         );
 

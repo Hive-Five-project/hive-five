@@ -6,7 +6,6 @@ mutation($uid: ULID!, $payload: UserPayload!) {
       firstname
       lastname
       roles
-      isActive
       isAdmin
       createdAt
     }

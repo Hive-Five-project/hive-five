@@ -4,8 +4,11 @@ declare(strict_types=1);
 
 namespace App\Domain\User;
 
+use App\Domain\Apiary\Apiary;
 use App\Domain\Common\Behavior\TimestampableTrait;
 use App\Domain\Common\Behavior\UlidTrait;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Symfony\Component\DependencyInjection\Attribute\Exclude;
 
 #[Exclude]
@@ -20,15 +23,16 @@ class User
     private string $firstname;
     private string $lastname;
 
-    private bool $active;
     private bool $admin;
+
+    /** @var Collection<int, Apiary> */
+    private Collection $apiaries;
 
     public function __construct(
         string $email,
         string $password,
         string $firstname,
         string $lastname,
-        bool $active = true,
         bool $admin = false,
     ) {
         $this->initIdentity();
@@ -37,8 +41,8 @@ class User
         $this->password = $password;
         $this->firstname = $firstname;
         $this->lastname = $lastname;
-        $this->active = $active;
         $this->admin = $admin;
+        $this->apiaries = new ArrayCollection();
     }
 
     /**
@@ -48,13 +52,11 @@ class User
         string $email,
         string $firstname,
         string $lastname,
-        bool $active,
         bool $admin,
     ): void {
         $this->email = $email;
         $this->firstname = $firstname;
         $this->lastname = $lastname;
-        $this->active = $active;
         $this->admin = $admin;
     }
 
@@ -96,13 +98,21 @@ class User
         return $this->lastname;
     }
 
-    public function isActive(): bool
+    /**
+     * @return Collection<int, Apiary>
+     */
+    public function getApiaries(): Collection
     {
-        return $this->active;
+        return $this->apiaries;
     }
 
     public function isAdmin(): bool
     {
         return $this->admin;
+    }
+
+    public function addApiary(Apiary $apiary): void
+    {
+        $this->apiaries->add($apiary);
     }
 }

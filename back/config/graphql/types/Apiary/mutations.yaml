@@ -1,0 +1,25 @@
+ApiaryMutations:
+  type: object
+  config:
+    fields:
+
+      create:
+        type: Apiary
+        resolve: "@=mutation('Apiary.create', args)"
+        access: "@=isAuthenticated()"
+        description: Ajouter un nouveau rucher
+        args:
+          payload:
+            type: ApiaryPayload!
+
+      update:
+        type: Apiary
+        resolve: "@=mutation('Apiary.update', args['uid'], args)"
+        access: "@=isAuthenticated()"
+        description: Modifier un rucher
+        args:
+          uid:
+            type: ULID!
+            description: 'A apiary uid'
+          payload:
+            type: ApiaryPayload!

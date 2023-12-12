@@ -12,7 +12,6 @@ export interface User {
   firstname: string
   lastname: string
   isAdmin: boolean
-  isActive: boolean
   createdAt: string
 }
 

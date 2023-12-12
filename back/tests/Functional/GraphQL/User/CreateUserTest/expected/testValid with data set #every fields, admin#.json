@@ -8,7 +8,6 @@
         "roles": [
           "ROLE_ADMIN"
         ],
-        "isActive": true,
         "isAdmin": true
       }
     }

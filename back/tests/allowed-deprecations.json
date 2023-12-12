@@ -1,15 +1,5 @@
 [
     {
-        "location": "App\\Kernel::boot",
-        "message": "Since symfony/dependency-injection 6.3: Relying on the \"@required\" annotation on method \"App\\Infrastructure\\Bridge\\GraphQL\\Mutation\\AbstractMutation::setContainer()\" is deprecated, use the \"Symfony\\Contracts\\Service\\Attribute\\Required\" attribute instead.",
-        "count": 1
-    },
-    {
-        "location": "App\\Kernel::boot",
-        "message": "Since symfony/dependency-injection 6.3: Relying on the \"@required\" annotation on method \"App\\Infrastructure\\Bridge\\GraphQL\\Resolver\\AbstractResolver::setContainer()\" is deprecated, use the \"Symfony\\Contracts\\Service\\Attribute\\Required\" attribute instead.",
-        "count": 1
-    },
-    {
         "location": "App\\Infrastructure\\Test\\Listener\\UpdateExpectationsGuardListener",
         "message": "The \"App\\Infrastructure\\Test\\Listener\\UpdateExpectationsGuardListener\" class implements \"PHPUnit\\Framework\\TestListener\" that is deprecated.",
         "count": 1
@@ -30,7 +20,7 @@
         "count": 1
     },
     {
-        "location": "App\\Tests\\Functional\\GraphQL\\User\\CreateUserTest::_resetDatabase",
+        "location": "App\\Tests\\Functional\\GraphQL\\Apiary\\CreateApiaryTest::_resetDatabase",
         "message": "Since doctrine/doctrine-bundle 2.2: The \"Doctrine\\Bundle\\DoctrineBundle\\Command\\Proxy\\RunSqlDoctrineCommand\" (doctrine:query:sql) is deprecated, use dbal:run-sql command instead.",
         "count": 1
     },
@@ -40,7 +30,7 @@
         "count": 1
     },
     {
-        "location": "Symfony\\Component\\DependencyInjection\\Argument\\LazyClosure@anonymous\u0000/Volumes/workspace/hivefive/back/var/cache/test/ContainerR79ADEN/getPasswordHasherInterfaceService.php:20$45f",
+        "location": "Symfony\\Component\\DependencyInjection\\Argument\\LazyClosure@anonymous\u0000/Volumes/workspace/hivefive/back/var/cache/test/ContainerDUa4HDD/getPasswordHasherInterfaceService.php:20$483",
         "message": "The \"Symfony\\Component\\DependencyInjection\\Argument\\LazyClosure\" class is considered internal. It may change without further notice. You should not use it from \"Symfony\\Component\\DependencyInjection\\Argument\\LazyClosure@anonymous\".",
         "count": 1
     }

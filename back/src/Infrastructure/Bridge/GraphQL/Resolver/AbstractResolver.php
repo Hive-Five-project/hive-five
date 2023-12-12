@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace App\Infrastructure\Bridge\GraphQL\Resolver;
 
+use App\Domain\Common\Exception\ForbiddenException;
 use App\Domain\Common\Exception\NotFoundException;
+use App\Infrastructure\Bridge\GraphQL\Error\ForbiddenError;
 use App\Infrastructure\Bridge\GraphQL\Error\NotFoundError;
 use App\Infrastructure\Bridge\GraphQL\SecurityTrait;
 use App\Infrastructure\Bridge\Symfony\DependencyInjection\ServiceLocatorTrait;
@@ -34,6 +36,8 @@ abstract class AbstractResolver implements QueryInterface, ServiceSubscriberInte
             return $callable();
         } catch (NotFoundException $ex) {
             throw new NotFoundError($ex->getMessage());
+        } catch (ForbiddenException $ex) {
+            throw new ForbiddenError($ex->getMessage(), $ex);
         }
     }
 

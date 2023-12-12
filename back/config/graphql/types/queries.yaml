@@ -6,3 +6,7 @@ Query:
       User:
         type: UserQueries!
         resolve: "@=query('NamespacedQuery')"
+
+      Apiary:
+        type: ApiaryQueries!
+        resolve: "@=query('NamespacedQuery')"

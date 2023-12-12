@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Infrastructure\User\GraphQL\Mutation;
 
 use App\Application\User\Command\CreateUserCommand;
+use App\Application\User\Command\DeleteUserCommand;
 use App\Application\User\Command\ForgotPasswordCommand;
 use App\Application\User\Command\ResetPasswordCommand;
 use App\Application\User\Command\UpdateMyProfileCommand;
@@ -44,6 +45,14 @@ class UserMutation extends AbstractMutation implements AliasedInterface
         $user = $this->handle(new UpdateUserCommand($uid, $payload));
 
         return $user;
+    }
+
+    public function delete(Ulid $uid): Ulid
+    {
+        /** @var Ulid $userDeletedUid */
+        $userDeletedUid = $this->handle(new DeleteUserCommand($uid));
+
+        return $userDeletedUid;
     }
 
     public function updateMyProfile(Argument $args): User
@@ -87,6 +96,7 @@ class UserMutation extends AbstractMutation implements AliasedInterface
         return [
             'create' => 'User.create',
             'update' => 'User.update',
+            'delete' => 'User.delete',
             'updateMyProfile' => 'User.updateMyProfile',
             'forgotPassword' => 'User.forgotPassword',
             'resetPassword' => 'User.resetPassword',
