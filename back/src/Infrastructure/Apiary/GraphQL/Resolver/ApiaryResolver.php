@@ -6,6 +6,7 @@ namespace App\Infrastructure\Apiary\GraphQL\Resolver;
 
 use App\Domain\Apiary\Apiary;
 use App\Domain\Apiary\Repository\ApiaryRepositoryInterface;
+use App\Domain\Common\Exception\ForbiddenException;
 use App\Infrastructure\Bridge\GraphQL\Resolver\AbstractResolver;
 use Overblog\GraphQLBundle\Definition\Resolver\AliasedInterface;
 use Symfony\Component\Uid\Ulid;
