@@ -9,6 +9,7 @@ services:
 
 ###> symfony/mailer ###
   mailer:
+    profiles: ['', docker, local]
     image: schickling/mailcatcher
     ports: ["1025", "62551:1080"]
 ###< symfony/mailer ###

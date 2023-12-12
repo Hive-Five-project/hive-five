@@ -13,6 +13,9 @@
 install:
 	npm install
 
+install@integration:
+	npm install --color=always --no-progress --no-audit --no-fund
+
 ## Setup - Update dependencies
 update:
 	npm update
@@ -20,7 +23,7 @@ update:
 ## Serve - Serve the whole app
 serve: export APP_RUNTIME_ENV ?= development
 serve:
-	npx vite
+	npx vite --host=127.0.0.1 --port=63281
 
 ## Build - Build
 build: export APP_RUNTIME_ENV ?= development
@@ -34,4 +37,12 @@ lint.eslint:
 	npx eslint . --fix --ext ts,tsx --report-unused-disable-directives --max-warnings 0
 
 lint.tsc:
+	npx tsc --noemit
+
+lint@integration: lint.eslint@integration lint.tsc@integration
+
+lint.eslint@integration:
+	npx eslint ./
+
+lint.tsc@integration:
 	npx tsc --noemit
