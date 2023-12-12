@@ -2,11 +2,14 @@ Mutation:
   type: object
   config:
     fields:
-
       User:
         type: UserMutations!
         resolve: "@=mutation('NamespacedMutation')"
 
       Apiary:
         type: ApiaryMutations!
+        resolve: "@=mutation('NamespacedMutation')"
+
+      Beehive:
+        type: BeehiveMutations!
         resolve: "@=mutation('NamespacedMutation')"

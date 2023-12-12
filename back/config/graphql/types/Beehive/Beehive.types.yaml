@@ -1,0 +1,32 @@
+Beehive:
+  type: object
+  config:
+    description: 'A beehive'
+    fields:
+      uid:
+        type: ULID!
+
+      name:
+        type: String!
+
+      bee:
+        type: BeeTypeEnum!
+
+      age:
+        type: String!
+
+      apiary:
+        type: Apiary!
+        description: 'Apiary where the beehive is located'
+
+      createdAt:
+        type: DateTime!
+        description: 'Date de création'
+
+      updatedAt:
+        type: DateTime!
+        description: 'Date de modification'
+
+      deleteAt:
+        type: DateTime!
+        description: 'Date de suppression'

@@ -115,4 +115,9 @@ class User
     {
         $this->apiaries->add($apiary);
     }
+
+    public function deleteApiary(Apiary $apiary): bool
+    {
+        return $this->apiaries->removeElement($apiary);
+    }
 }

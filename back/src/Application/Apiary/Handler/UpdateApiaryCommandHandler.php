@@ -23,7 +23,7 @@ class UpdateApiaryCommandHandler
         $user = $command->user;
 
         if ($apiary->getUser() !== $user) {
-            throw new ForbiddenException(sprintf('User %s cannot access apiary with %s', $user->getEmail(), $apiary->getUidAsString()));
+            throw new ForbiddenException(sprintf('User %s cannot access apiary %s', $user->getEmail(), $apiary->getUidAsString()));
         }
 
         $apiary->update(

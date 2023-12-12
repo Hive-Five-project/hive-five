@@ -23,3 +23,13 @@ ApiaryMutations:
             description: 'A apiary uid'
           payload:
             type: ApiaryPayload!
+
+      delete:
+        type: ULID!
+        resolve: "@=mutation('Apiary.delete', args['uid'])"
+        access: "@=isAuthenticated()"
+        description: Supprimer un rucher
+        args:
+          uid:
+            type: ULID!
+            description: 'A apiary uid'

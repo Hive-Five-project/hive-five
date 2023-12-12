@@ -1,0 +1,13 @@
+query($uid: ULID!) {
+  Beehive{
+    listBeehivesFromApiary(apiaryUid: $uid) {
+      uid
+      name
+      bee
+      age
+      apiary {
+        uid
+      }
+    }
+  }
+}

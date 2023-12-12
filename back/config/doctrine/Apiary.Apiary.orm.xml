@@ -21,6 +21,8 @@
             <join-column nullable="false" on-delete="CASCADE" />
         </many-to-one>
 
+        <one-to-many field="beehives" target-entity="App\Domain\Beehive\Beehive" mapped-by="apiary" />
+
         <field name="createdAt" type="datetime">
             <gedmo:timestampable on="create" />
         </field>

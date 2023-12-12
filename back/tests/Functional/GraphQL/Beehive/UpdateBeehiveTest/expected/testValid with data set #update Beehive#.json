@@ -1,0 +1,14 @@
+{
+  "data": {
+    "Beehive": {
+      "update": {
+        "name": "new name",
+        "bee": "Black",
+        "age": "3",
+        "apiary": {
+          "uid": "01H5KQW6EBYNGSWRE09ANVREXY"
+        }
+      }
+    }
+  }
+}

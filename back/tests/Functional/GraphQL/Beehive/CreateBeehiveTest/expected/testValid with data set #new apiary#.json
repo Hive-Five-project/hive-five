@@ -1,0 +1,14 @@
+{
+  "data": {
+    "Beehive": {
+      "create": {
+        "name": "new beehive",
+        "bee": "Buckfast",
+        "age": "2",
+        "apiary": {
+          "uid": "01H5KQW6EBYNGSWRE09ANVREXX"
+        }
+      }
+    }
+  }
+}

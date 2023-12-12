@@ -27,4 +27,6 @@ interface ApiaryRepositoryInterface
     public function listMyApiaries(User $user): array;
 
     public function save(Apiary $apiary): void;
+
+    public function delete(Apiary $apiary): void;
 }

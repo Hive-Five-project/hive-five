@@ -2,11 +2,14 @@ Query:
   type: object
   config:
     fields:
-
       User:
         type: UserQueries!
         resolve: "@=query('NamespacedQuery')"
 
       Apiary:
         type: ApiaryQueries!
+        resolve: "@=query('NamespacedQuery')"
+
+      Beehive:
+        type: BeehiveQueries!
         resolve: "@=query('NamespacedQuery')"

@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Infrastructure\Apiary\GraphQL\Mutation;
 
 use App\Application\Apiary\Command\CreateApiaryCommand;
+use App\Application\Apiary\Command\DeleteApiaryCommand;
 use App\Application\Apiary\Command\UpdateApiaryCommand;
 use App\Application\Apiary\Payload\ApiaryPayload;
 use App\Domain\Apiary\Apiary;
@@ -40,11 +41,22 @@ class ApiaryMutation extends AbstractMutation implements AliasedInterface
         return $apiary;
     }
 
+    public function delete(Ulid $uid): Ulid
+    {
+        $currentUser = $this->getDomainUser();
+
+        /** @var Apiary $deletedApiary */
+        $deletedApiary = $this->handle(new DeleteApiaryCommand($uid, $currentUser));
+
+        return $deletedApiary->getUid();
+    }
+
     public static function getAliases(): array
     {
         return [
             'create' => 'Apiary.create',
             'update' => 'Apiary.update',
+            'delete' => 'Apiary.delete',
         ];
     }
 }

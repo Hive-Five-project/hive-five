@@ -1,0 +1,40 @@
+{
+  "errors": [
+    {
+      "message": "Invalid payload",
+      "locations": [
+        {
+          "line": 3,
+          "column": 5
+        }
+      ],
+      "path": [
+        "Beehive",
+        "create"
+      ],
+      "code": "INVALID_PAYLOAD",
+      "api_problem": {
+        "type": "https:\/\/symfony.com\/errors\/validation",
+        "title": "Validation Failed",
+        "detail": "payload.age: Cette valeur doit être de type int.",
+        "violations": [
+          {
+            "propertyPath": "payload.age",
+            "title": "Cette valeur doit être de type int.",
+            "template": "This value should be of type {{ type }}.",
+            "parameters": {
+              "{{ value }}": "\"2\"",
+              "{{ type }}": "int"
+            },
+            "type": "urn:uuid:ba785a8c-82cb-4283-967c-3cf342181b40"
+          }
+        ]
+      }
+    }
+  ],
+  "data": {
+    "Beehive": {
+      "create": null
+    }
+  }
+}

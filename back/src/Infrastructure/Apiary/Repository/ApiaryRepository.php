@@ -42,4 +42,9 @@ class ApiaryRepository extends ServiceEntityRepository implements ApiaryReposito
     {
         $this->getEntityManager()->persist($apiary);
     }
+
+    public function delete(Apiary $apiary): void
+    {
+        $this->getEntityManager()->persist($apiary);
+    }
 }

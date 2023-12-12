@@ -32,7 +32,7 @@ class ApiaryResolver extends AbstractResolver implements AliasedInterface
             function () use ($uid) {
                 $apiary = $this->apiaryRepository->getOneByUid($uid);
                 if ($apiary->getUser() !== $this->getDomainUser()) {
-                    throw new ForbiddenException(sprintf('User %s cannot access apiary with %s', $this->getDomainUser()->getEmail(), $apiary->getUidAsString()));
+                    throw new ForbiddenException(sprintf('User %s cannot access apiary %s', $this->getDomainUser()->getEmail(), $apiary->getUidAsString()));
                 }
 
                 return $apiary;

@@ -1,0 +1,66 @@
+{
+  "errors": [
+    {
+      "message": "Invalid payload",
+      "locations": [
+        {
+          "line": 3,
+          "column": 5
+        }
+      ],
+      "path": [
+        "Beehive",
+        "update"
+      ],
+      "code": "INVALID_PAYLOAD",
+      "api_problem": {
+        "type": "https:\/\/symfony.com\/errors\/validation",
+        "title": "Validation Failed",
+        "detail": "payload.name: Cette valeur ne doit pas être vide.\npayload.bee: Cette valeur ne doit pas être vide.\npayload.age: Cette valeur ne doit pas être vide.\npayload.apiary: Cette valeur ne doit pas être vide.",
+        "violations": [
+          {
+            "propertyPath": "payload.name",
+            "title": "Cette valeur ne doit pas être vide.",
+            "template": "This value should not be blank.",
+            "parameters": {
+              "{{ value }}": "null"
+            },
+            "type": "urn:uuid:c1051bb4-d103-4f74-8988-acbcafc7fdc3"
+          },
+          {
+            "propertyPath": "payload.bee",
+            "title": "Cette valeur ne doit pas être vide.",
+            "template": "This value should not be blank.",
+            "parameters": {
+              "{{ value }}": "null"
+            },
+            "type": "urn:uuid:c1051bb4-d103-4f74-8988-acbcafc7fdc3"
+          },
+          {
+            "propertyPath": "payload.age",
+            "title": "Cette valeur ne doit pas être vide.",
+            "template": "This value should not be blank.",
+            "parameters": {
+              "{{ value }}": "null"
+            },
+            "type": "urn:uuid:c1051bb4-d103-4f74-8988-acbcafc7fdc3"
+          },
+          {
+            "propertyPath": "payload.apiary",
+            "title": "Cette valeur ne doit pas être vide.",
+            "template": "This value should not be blank.",
+            "parameters": {
+              "{{ value }}": "null"
+            },
+            "type": "urn:uuid:c1051bb4-d103-4f74-8988-acbcafc7fdc3"
+          }
+        ]
+      }
+    }
+  ],
+  "data": {
+    "Beehive": {
+      "update": null
+    }
+  }
+}

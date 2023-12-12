@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace App\Tests\Functional\GraphQL\Apiary;
 
-use App\Infrastructure\Fixtures\Factory\ApiaryFactory;
 use App\Infrastructure\Test\Functional\Controller\GraphQLTestCase;
+use App\Tests\Functional\GraphQL\Apiary\FindApiaryTest\fixtures\FindApiaryStory;
 use Zenstruck\Foundry\Test\Factories;
 use Zenstruck\Foundry\Test\ResetDatabase;
 
@@ -16,8 +16,10 @@ class FindApiaryTest extends GraphQLTestCase
 
     public function testUnauthenticated(): void
     {
+        FindApiaryStory::load();
+
         $this->executeGraphQL([
-            'uid' => ApiaryFactory::ULID_APIARY,
+            'uid' => FindApiaryStory::ULID_APIARY,
         ], $this->getInputContent('testFindApiary'));
 
         $this->assertGraphQLAccessDenied();
@@ -25,10 +27,12 @@ class FindApiaryTest extends GraphQLTestCase
 
     public function testFoundAsAdmin(): void
     {
+        FindApiaryStory::load();
+
         $this->loginAsAdmin();
 
         $this->executeGraphQL([
-            'uid' => ApiaryFactory::ULID_APIARY_ADMIN,
+            'uid' => FindApiaryStory::ULID_APIARY_ADMIN,
         ], $this->getInputContent('testFindApiary'));
 
         $this->assertValidGraphQLResponse();
@@ -37,10 +41,12 @@ class FindApiaryTest extends GraphQLTestCase
 
     public function testFoundAsUser(): void
     {
+        FindApiaryStory::load();
+
         $this->loginAsUser();
 
         $this->executeGraphQL([
-            'uid' => ApiaryFactory::ULID_APIARY,
+            'uid' => FindApiaryStory::ULID_APIARY,
         ], $this->getInputContent('testFindApiary'));
 
         $this->assertValidGraphQLResponse();
@@ -49,6 +55,8 @@ class FindApiaryTest extends GraphQLTestCase
 
     public function testNotFoundAsAdmin(): void
     {
+        FindApiaryStory::load();
+
         $this->loginAsAdmin();
 
         $this->executeGraphQL([
@@ -60,6 +68,8 @@ class FindApiaryTest extends GraphQLTestCase
 
     public function testNotFoundAsUser(): void
     {
+        FindApiaryStory::load();
+
         $this->loginAsUser();
 
         $this->executeGraphQL([
@@ -71,12 +81,14 @@ class FindApiaryTest extends GraphQLTestCase
 
     public function testForbiddenNotOwner(): void
     {
+        FindApiaryStory::load();
+
         $this->loginAsUser();
 
         $this->executeGraphQL([
-            'uid' => ApiaryFactory::ULID_APIARY_ADMIN,
+            'uid' => FindApiaryStory::ULID_APIARY_ADMIN,
         ], $this->getInputContent('testFindApiary'));
 
-        $this->assertGraphQLForbiddenResponse('User user@example.com cannot access apiary with 01HE39KXBWVS6N93ZB9WEXJ3RF');
+        $this->assertGraphQLForbiddenResponse('User user@example.com cannot access apiary 01HE39KXBWVS6N93ZB9WEXJ3RF');
     }
 }
