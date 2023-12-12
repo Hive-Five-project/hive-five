@@ -1,0 +1,23 @@
+{
+  "errors": [
+    {
+      "message": "User user@example.com cannot update a Riser and associate it in a unknown beehive 01HFHMVC7VAXWV38B00Q03EXFE",
+      "locations": [
+        {
+          "line": 3,
+          "column": 5
+        }
+      ],
+      "path": [
+        "Riser",
+        "update"
+      ],
+      "code": "FORBIDDEN"
+    }
+  ],
+  "data": {
+    "Riser": {
+      "update": null
+    }
+  }
+}

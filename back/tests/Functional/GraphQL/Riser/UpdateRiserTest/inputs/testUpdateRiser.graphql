@@ -1,0 +1,10 @@
+mutation($uid: ULID!, $payload: RiserPayload!) {
+  Riser {
+    update(uid: $uid, payload: $payload) {
+      name
+      beehive {
+        uid
+      }
+    }
+  }
+}

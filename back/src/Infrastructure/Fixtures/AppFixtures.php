@@ -6,6 +6,7 @@ namespace App\Infrastructure\Fixtures;
 
 use App\Infrastructure\Fixtures\Factory\ApiaryFactory;
 use App\Infrastructure\Fixtures\Factory\BeehiveFactory;
+use App\Infrastructure\Fixtures\Factory\RiserFactory;
 use App\Infrastructure\Fixtures\Factory\UserFactory;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
@@ -21,10 +22,13 @@ class AppFixtures extends Fixture
         ]);
 
         /* Apiaries */
-        ApiaryFactory::createMany(20);
+        ApiaryFactory::createMany(15);
 
         /* Beehives */
-        BeehiveFactory::createMany(30);
+        BeehiveFactory::createMany(20);
+
+        /* Risers */
+        RiserFactory::createMany(30);
 
         $manager->flush();
     }

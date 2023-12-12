@@ -1,0 +1,12 @@
+{
+  "data": {
+    "Riser": {
+      "update": {
+        "name": "new name for riser",
+        "beehive": {
+          "uid": "01HFHMVJ1RC69F49VNNEWTGKCJ"
+        }
+      }
+    }
+  }
+}

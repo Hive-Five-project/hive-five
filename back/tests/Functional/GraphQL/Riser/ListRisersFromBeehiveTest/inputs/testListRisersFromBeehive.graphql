@@ -1,0 +1,11 @@
+query($uid: ULID!) {
+  Riser{
+    listRisersFromBeehive(beehiveUid: $uid) {
+      uid
+      name
+      beehive {
+        uid
+      }
+    }
+  }
+}

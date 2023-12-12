@@ -13,3 +13,7 @@ Mutation:
       Beehive:
         type: BeehiveMutations!
         resolve: "@=mutation('NamespacedMutation')"
+
+      Riser:
+        type: RiserMutations!
+        resolve: "@=mutation('NamespacedMutation')"

@@ -7,6 +7,9 @@ namespace App\Domain\Beehive;
 use App\Domain\Apiary\Apiary;
 use App\Domain\Common\Behavior\TimestampableTrait;
 use App\Domain\Common\Behavior\UlidTrait;
+use App\Domain\Riser\Riser;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Symfony\Component\DependencyInjection\Attribute\Exclude;
 
 #[Exclude]
@@ -19,6 +22,9 @@ class Beehive
     private BeeType $bee;
     private int $age;
     private Apiary $apiary;
+
+    /** @var Collection<int, Riser> */
+    private Collection $risers;
 
     public function __construct(
         string $name,
@@ -34,11 +40,10 @@ class Beehive
         $this->apiary = $apiary;
 
         $apiary->addBeehive($this);
+
+        $this->risers = new ArrayCollection();
     }
 
-    /**
-     * As an admin, update service from the service administration page.
-     */
     public function update(
         string $name,
         BeeType $bee,
@@ -72,5 +77,23 @@ class Beehive
     public function getApiary(): Apiary
     {
         return $this->apiary;
+    }
+
+    /**
+     * @return Collection<int, Riser>
+     */
+    public function getRisers(): Collection
+    {
+        return $this->risers;
+    }
+
+    public function addRiser(Riser $riser): void
+    {
+        $this->risers->add($riser);
+    }
+
+    public function deleteRiser(Riser $riser): bool
+    {
+        return $this->risers->removeElement($riser);
     }
 }

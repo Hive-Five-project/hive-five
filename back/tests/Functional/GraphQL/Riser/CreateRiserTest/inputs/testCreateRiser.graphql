@@ -1,0 +1,10 @@
+mutation($payload: RiserPayload!) {
+  Riser {
+    create(payload: $payload) {
+      name
+      beehive {
+        uid
+      }
+    }
+  }
+}
