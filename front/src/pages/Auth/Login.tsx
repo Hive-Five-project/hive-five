@@ -11,7 +11,7 @@ import { route } from '@app/router/generator';
 import ForgotPassword from '@app/pages/Auth/ForgotPassword';
 import Admin from '@app/pages/Admin/Admin';
 import User from '@app/pages/User/User';
-import { Button, TextField } from '@mui/material';
+import { Button, PasswordInput, TextInput } from '@mantine/core';
 
 interface LoginRedirectState {
   target?: string | null
@@ -79,42 +79,33 @@ const Login = declareRoute(function Page() {
   return <div>
     <form id="login" onSubmit={onSubmit}>
       <h2>{trans('pages.login.documentTitle')}</h2>
-
-      <TextField
+      <TextInput
         id="username"
         label="Identifiant"
         type="email"
         value={username}
         onChange={(e) => setUsername(e.target.value)}
         required
-        InputProps={{
-          autoFocus: true,
-          autoComplete: 'username',
-          placeholder: 'Votre email',
-        }}
+        autoFocus
+        autoComplete="username"
+        placeholder="Votre email"
         error={error}
       />
-
-      <TextField
+      <PasswordInput
         id="password"
         label="Mot de passe"
-        type="password"
         value={password}
         onChange={(e) => setPassword(e.target.value)}
-        required={true}
-        InputProps={{
-          autoComplete: 'current-password',
-        }}
+        required
+        autoComplete="current-password"
         error={Boolean(authenticationErrorMessage)}
       />
-
       <div>
         <a href={'/'}>
           {'Retour à l\'accueil'}
         </a>
 
         <Button
-          color="primary"
           type="submit"
           disabled={loading}
         >
@@ -122,9 +113,6 @@ const Login = declareRoute(function Page() {
         </Button>
       </div>
     </form>
-
-    <hr />
-
     <div>
       <Link to={route(ForgotPassword)}>Mot de passe oublié ?</Link>
     </div>
