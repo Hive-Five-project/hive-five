@@ -7,6 +7,10 @@ import ErrorBoundary from '@app/components/ErrorBoundary';
 import * as AuthContext from '@app/hooks/useAuthContext';
 import * as UseFetch from 'use-http';
 import AppConfig from '@app/AppConfig.ts';
+import { theme } from '@app/theme';
+import { MantineProvider } from '@mantine/core';
+import '@mantine/core/styles.css';
+import '@mantine/dates/styles.css';
 
 export default function App() {
   return (
@@ -17,9 +21,11 @@ export default function App() {
         <AuthContext.Provider>
           <BrowserRouter>
             <ErrorBoundary>
-              <Routes>
-                {renderRoutes(routes)}
-              </Routes>
+              <MantineProvider theme={theme}>
+                <Routes>
+                  {renderRoutes(routes)}
+                </Routes>
+              </MantineProvider>
             </ErrorBoundary>
           </BrowserRouter>
         </AuthContext.Provider>
