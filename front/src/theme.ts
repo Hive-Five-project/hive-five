@@ -1,19 +1,8 @@
-import { createTheme } from '@mui/material';
+import { createTheme } from '@mantine/core';
 
 export const theme = createTheme({
-  palette: {
-    primary: {
-      main: '#471069',
-    },
-    background: {
-      default: '#c5c0c9',
-    },
-  },
-  components: {
-    MuiButton: {
-      defaultProps: {
-        variant: 'contained',
-      },
-    },
+  primaryColor: 'green',
+  colors: {
+    green: ['#76A18C', '#689881', '#598E74', '#488366', '#367757', '#2D6349', '#244F3A', '#1A3829', '#132A1F', '#0D1C15'],
   },
 });
