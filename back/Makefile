@@ -72,13 +72,16 @@ db.hash-password:
 # Development #
 ###############
 
+serve.reset:
+	symfony server:stop && echo "Symfony server stopped" || echo "Symfony server not running"
+
 ## Dev - Start the whole application for development purposes
 serve:
 	# https://www.npmjs.com/package/concurrently
 	npx concurrently "make serve.docker" "make serve.php" --names="Docker,Symfony" --prefix=name --kill-others --kill-others-on-fail
 
 ## Dev - Start Symfony web server
-serve.php:
+serve.php: serve.reset
 	symfony server:start --port=63280
 
 ## Dev - Start Docker services
@@ -96,7 +99,7 @@ serve@test:
 
 serve.php@test: export APP_ENV = test
 serve.php@test: export APP_DEBUG = 1
-serve.php@test:
+serve.php@test: serve.reset
 	symfony server:start --port=63290
 
 ## Stop Symfony web server
