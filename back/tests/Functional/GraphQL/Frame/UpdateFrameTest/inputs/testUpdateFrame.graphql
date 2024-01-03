@@ -1,0 +1,8 @@
+mutation($uid: ULID!, $payload: FramePayload!) {
+  Frame {
+    update(uid: $uid, payload: $payload) {
+      label
+      type
+    }
+  }
+}

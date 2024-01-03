@@ -1,0 +1,16 @@
+{
+  "data": {
+    "Beehive": {
+      "find": {
+        "uid": "01HF7XBCB9Q9T8DZN9F48SFPE2",
+        "frames": [
+          {
+            "uid": "01HFHKAZ3VXSB93EAFBXQ528WJ",
+            "label": "Frame for Admin",
+            "type": "Beehive"
+          }
+        ]
+      }
+    }
+  }
+}

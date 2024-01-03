@@ -42,6 +42,7 @@ class BeehiveMutation extends AbstractMutation implements AliasedInterface
         return $beehive;
     }
 
+    // todo : delete beehive. When beehive is deleted, free all frames + risers in it.
     public static function getAliases(): array
     {
         return [

@@ -1,0 +1,35 @@
+FrameMutations:
+  type: object
+  config:
+    fields:
+
+      create:
+        type: Frame
+        resolve: "@=mutation('Frame.create', args)"
+        access: "@=isAuthenticated()"
+        description: Créer un cadre
+        args:
+          payload:
+            type: FramePayload!
+
+      update:
+        type: Frame
+        resolve: "@=mutation('Frame.update', args['uid'], args)"
+        access: "@=isAuthenticated()"
+        description: Modifier un cadre
+        args:
+          uid:
+            type: ULID!
+            description: UID du cadre à modifier
+          payload:
+            type: FramePayload!
+
+      delete:
+        type: ULID!
+        resolve: "@=mutation('Frame.delete', args['uid'])"
+        access: "@=isAuthenticated()"
+        description: Supprimer un cadre
+        args:
+          uid:
+            type: ULID!
+            description: UID du cadre à supprimer
