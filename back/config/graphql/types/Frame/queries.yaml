@@ -1,0 +1,19 @@
+FrameQueries:
+  type: object
+  config:
+    fields:
+
+      find:
+        type: 'Frame!'
+        access: "@=isAuthenticated()"
+        resolve: '@=query("Frame.find", args["uid"])'
+        description: Récupération d'un cadre à partir d'un uid
+        args:
+          uid:
+            type: ULID!
+
+      listFrameType:
+        type: '[FrameTypeEnum!]!'
+        resolve: '@=query("Frame.listFrameType")'
+        access: "@=isAuthenticated()"
+        description: Liste des types de cadres qui existent en base

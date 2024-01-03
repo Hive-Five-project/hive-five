@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Tests\Functional\GraphQL\Apiary\DeleteApiaryTest\fixtures;
 
+use App\Domain\Beehive\BeeType;
 use App\Infrastructure\Fixtures\Factory\ApiaryFactory;
 use App\Infrastructure\Fixtures\Factory\BeehiveFactory;
 use App\Infrastructure\Fixtures\Factory\UserFactory;
@@ -38,6 +39,8 @@ class DeleteApiaryStory extends Story
 
         BeehiveFactory::new()->create([
             'name' => 'Custom beehive 1',
+            'bee' => BeeType::Buckfast,
+            'age' => 1,
             'apiary' => ApiaryFactory::find(['uid' => self::ULID_APIARY_WITH_BEES]),
         ])->save();
     }

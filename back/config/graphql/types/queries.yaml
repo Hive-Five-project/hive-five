@@ -17,3 +17,7 @@ Query:
       Riser:
         type: RiserQueries!
         resolve: "@=query('NamespacedQuery')"
+
+      Frame:
+        type: FrameQueries!
+        resolve: "@=query('NamespacedQuery')"

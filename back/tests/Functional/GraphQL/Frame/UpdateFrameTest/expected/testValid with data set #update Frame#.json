@@ -1,0 +1,10 @@
+{
+  "data": {
+    "Frame": {
+      "update": {
+        "label": "new label",
+        "type": "Beehive"
+      }
+    }
+  }
+}

@@ -36,6 +36,10 @@ class UpdateRiserTest extends GraphQLTestCase
             [
                 'name' => 'new name for riser',
                 'beehive' => UpdateRiserStory::NEW_ULID_BEEHIVE,
+                'frames' => [
+                    UpdateRiserStory::ULID_FRAME_1,
+                    UpdateRiserStory::ULID_FRAME_2,
+                ],
             ],
         ];
     }
@@ -74,6 +78,33 @@ class UpdateRiserTest extends GraphQLTestCase
     }
 
     /**
+     * @dataProvider provide testInvalidFrameAlreadyInUse
+     */
+    public function testInvalidFrameAlreadyInUse(string $uid, array $payload): void
+    {
+        UpdateRiserStory::load();
+
+        $this->loginAsUser();
+
+        $this->executeGraphQL(compact('uid', 'payload'), $this->getInputContent('testUpdateRiser'));
+        $this->assertGraphQLForbiddenResponse('Frames is already used by another riser');
+    }
+
+    public function provide testInvalidFrameAlreadyInUse(): iterable
+    {
+        yield 'update riser' => [
+            UpdateRiserStory::ULID_RISER,
+            [
+                'name' => 'new name for riser',
+                'beehive' => UpdateRiserStory::ULID_BEEHIVE,
+                'frames' => [
+                    UpdateRiserStory::ULID_FRAME_1_OTHER,
+                ],
+            ],
+        ];
+    }
+
+    /**
      * @dataProvider provide testInvalid
      */
     public function testInvalid(string $uid, array $payload): void
@@ -94,6 +125,8 @@ class UpdateRiserTest extends GraphQLTestCase
             UpdateRiserStory::ULID_RISER,
             [
                 'name' => null,
+                'beehive' => null,
+                'frames' => null,
             ],
         ];
 
@@ -104,6 +137,17 @@ class UpdateRiserTest extends GraphQLTestCase
             UpdateRiserStory::ULID_RISER,
             [
                 'name' => $wayTooLongValue,
+            ],
+        ];
+
+        yield 'Wrong Frame Type' => [
+            UpdateRiserStory::ULID_RISER,
+            [
+                'name' => 'new name for riser',
+                'beehive' => UpdateRiserStory::ULID_BEEHIVE,
+                'frames' => [
+                    UpdateRiserStory::ULID_FRAME_BEEHIVE,
+                ],
             ],
         ];
     }
