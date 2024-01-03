@@ -16,7 +16,7 @@
       "api_problem": {
         "type": "https:\/\/symfony.com\/errors\/validation",
         "title": "Validation Failed",
-        "detail": "payload.name: Cette valeur ne doit pas être vide.\npayload.bee: Cette valeur ne doit pas être vide.\npayload.age: Cette valeur ne doit pas être vide.\npayload.apiary: Cette valeur ne doit pas être vide.",
+        "detail": "payload.name: Cette valeur ne doit pas être vide.\npayload.bee: Cette valeur ne doit pas être vide.\npayload.age: Cette valeur ne doit pas être vide.\npayload.apiary: Cette valeur ne doit pas être vide.\npayload.frames: Cette valeur ne doit pas être nulle.",
         "violations": [
           {
             "propertyPath": "payload.name",
@@ -53,6 +53,15 @@
               "{{ value }}": "null"
             },
             "type": "urn:uuid:c1051bb4-d103-4f74-8988-acbcafc7fdc3"
+          },
+          {
+            "propertyPath": "payload.frames",
+            "title": "Cette valeur ne doit pas être nulle.",
+            "template": "This value should not be null.",
+            "parameters": {
+              "{{ value }}": "null"
+            },
+            "type": "urn:uuid:ad32d13f-c3d4-423b-909a-857b961eb720"
           }
         ]
       }

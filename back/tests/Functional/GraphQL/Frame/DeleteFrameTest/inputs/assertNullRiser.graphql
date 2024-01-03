@@ -1,0 +1,10 @@
+query($uid: ULID!) {
+  Riser {
+    find(uid: $uid) {
+      uid
+      frames {
+        uid
+      }
+    }
+  }
+}

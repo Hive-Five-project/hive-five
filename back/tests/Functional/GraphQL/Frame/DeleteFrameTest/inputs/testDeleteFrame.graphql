@@ -1,0 +1,5 @@
+mutation($uid: ULID!) {
+  Frame {
+    delete(uid: $uid)
+  }
+}

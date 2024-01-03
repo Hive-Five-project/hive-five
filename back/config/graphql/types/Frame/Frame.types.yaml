@@ -1,0 +1,25 @@
+Frame:
+  type: object
+  config:
+    description: 'A Frame for Beehive or Riser'
+    fields:
+      uid:
+        type: ULID!
+
+      label:
+        type: String!
+
+      type:
+        type: FrameTypeEnum!
+
+      createdAt:
+        type: DateTime!
+        description: 'Date de création'
+
+      updatedAt:
+        type: DateTime!
+        description: 'Date de modification'
+
+      deleteAt:
+        type: DateTime!
+        description: 'Date de suppression'

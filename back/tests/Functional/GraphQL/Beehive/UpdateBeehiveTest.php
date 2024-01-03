@@ -22,7 +22,7 @@ class UpdateBeehiveTest extends GraphQLTestCase
     {
         UpdateBeehiveStory::load();
 
-        $this->loginAsAdmin();
+        $this->loginAsUser();
 
         $this->executeGraphQL(compact('uid', 'payload'), $this->getInputContent('testUpdateBeehive'));
 
@@ -33,12 +33,16 @@ class UpdateBeehiveTest extends GraphQLTestCase
     public function provide testValid(): iterable
     {
         yield 'update Beehive' => [
-            UpdateBeehiveStory::ULID_BEEHIVE,
+            UpdateBeehiveStory::ULID_BEEHIVE_USER,
             [
                 'name' => 'new name',
                 'bee' => BeeType::Black,
                 'age' => 3,
-                'apiary' => UpdateBeehiveStory::NEW_ULID_APIARY,
+                'apiary' => UpdateBeehiveStory::NEW_ULID_APIARY_USER,
+                'frames' => [
+                    UpdateBeehiveStory::ULID_FRAME_1_USER,
+                    UpdateBeehiveStory::ULID_FRAME_2_USER,
+                ],
             ],
         ];
     }
@@ -50,12 +54,12 @@ class UpdateBeehiveTest extends GraphQLTestCase
     {
         UpdateBeehiveStory::load();
 
-        $this->loginAsAdmin();
+        $this->loginAsUser();
 
         // As user Admin, I can't update a Beehive that is not mine
         $this->executeGraphQL(compact('uid', 'payload'), $this->getInputContent('testUpdateBeehive'));
 
-        $this->assertGraphQLForbiddenResponse('User admin@example.com cannot update beehive in this apiary 01HF9FR25AJ6W71ZC627CR0PH8');
+        $this->assertGraphQLForbiddenResponse('User user@example.com cannot update beehive in this apiary 01H5KQW6EBYNGSWRE09ANVREXX');
     }
 
     public function provide testInvalidNotOwner(): iterable
@@ -66,7 +70,39 @@ class UpdateBeehiveTest extends GraphQLTestCase
                 'name' => 'new name',
                 'bee' => BeeType::Black,
                 'age' => 3,
-                'apiary' => UpdateBeehiveStory::ULID_APIARY_USER,
+                'apiary' => UpdateBeehiveStory::ULID_APIARY_ADMIN,
+                'frames' => [
+                    UpdateBeehiveStory::ULID_FRAME_1_ADMIN,
+                ],
+            ],
+        ];
+    }
+
+    /**
+     * @dataProvider provide testInvalidFrameAlreadyInUse
+     */
+    public function testInvalidFrameAlreadyInUse(string $uid, array $payload): void
+    {
+        UpdateBeehiveStory::load();
+
+        $this->loginAsUser();
+
+        $this->executeGraphQL(compact('uid', 'payload'), $this->getInputContent('testUpdateBeehive'));
+        $this->assertGraphQLForbiddenResponse('Frames is already used by another beehive');
+    }
+
+    public function provide testInvalidFrameAlreadyInUse(): iterable
+    {
+        yield 'update Beehive' => [
+            UpdateBeehiveStory::ULID_BEEHIVE_USER,
+            [
+                'name' => 'new name',
+                'bee' => BeeType::Black,
+                'age' => 3,
+                'apiary' => UpdateBeehiveStory::NEW_ULID_APIARY_USER,
+                'frames' => [
+                    UpdateBeehiveStory::ULID_FRAME_1_ADMIN,
+                ],
             ],
         ];
     }
@@ -78,7 +114,7 @@ class UpdateBeehiveTest extends GraphQLTestCase
     {
         UpdateBeehiveStory::load();
 
-        $this->loginAsAdmin();
+        $this->loginAsUser();
 
         $this->executeGraphQL(compact('uid', 'payload'), $this->getInputContent('testUpdateBeehive'));
 
@@ -89,12 +125,13 @@ class UpdateBeehiveTest extends GraphQLTestCase
     public function provide testInvalid(): iterable
     {
         yield 'empty fields' => [
-            UpdateBeehiveStory::ULID_BEEHIVE,
+            UpdateBeehiveStory::ULID_BEEHIVE_USER,
             [
                 'name' => null,
                 'bee' => null,
                 'age' => null,
                 'apiary' => null,
+                'frames' => null,
             ],
         ];
 
@@ -102,12 +139,24 @@ class UpdateBeehiveTest extends GraphQLTestCase
         $wayTooLongValue = "way-too-lo{$o}ng-value";
 
         yield 'too long' => [
-            UpdateBeehiveStory::ULID_APIARY,
+            UpdateBeehiveStory::ULID_BEEHIVE_USER,
             [
                 'name' => $wayTooLongValue,
                 'bee' => BeeType::Black,
                 'age' => 1,
-                'apiary' => UpdateBeehiveStory::NEW_ULID_APIARY,
+                'apiary' => UpdateBeehiveStory::NEW_ULID_APIARY_USER,
+                'frames' => [],
+            ],
+        ];
+
+        yield 'Wrong Frame Type' => [
+            UpdateBeehiveStory::ULID_BEEHIVE_USER,
+            [
+                'name' => 'new name',
+                'bee' => BeeType::Black,
+                'age' => 1,
+                'apiary' => UpdateBeehiveStory::NEW_ULID_APIARY_USER,
+                'frames' => [UpdateBeehiveStory::ULID_FRAME_RISER],
             ],
         ];
     }

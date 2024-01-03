@@ -28,8 +28,8 @@ class DeleteApiaryCommandHandler
             throw new ForbiddenException(sprintf('Apiary %s has hives, cannot delete', $apiary->getUidAsString()));
         }
 
-        $apiary->delete();
         $this->apiaryRepository->delete($apiary);
+        $apiary->delete(); // Soft delete
 
         return $apiary;
     }
