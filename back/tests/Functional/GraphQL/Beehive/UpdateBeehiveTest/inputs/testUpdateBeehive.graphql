@@ -7,6 +7,11 @@ mutation($uid: ULID!, $payload: BeehivePayload!) {
       apiary {
         uid
       }
+      frames {
+        uid
+        label
+        type
+      }
     }
   }
 }
