@@ -33,9 +33,10 @@ if grep -q ^DATABASE_URL= .env; then
 fi
 
 mkdir -p var
-setfacl -R -m u:www-data:rwX -m u:"$(whoami)":rwX var
-setfacl -dR -m u:www-data:rwX -m u:"$(whoami)":rwX var
+chmod -R u+rwX var
+chown -R www-data:$(whoami) var
 
 make db.install
-
+make install.jwt
+ps ax | grep 'php-fpm: master' | awk -F ' ' '{print $1}' | xargs kill -9 2>/dev/null || true
 exec docker-php-entrypoint "$@"

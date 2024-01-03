@@ -9,3 +9,5 @@ RUN npm install
 COPY --link . ./
 
 EXPOSE 63281
+
+CMD ["npm", "run", "dev"]

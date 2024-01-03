@@ -8,6 +8,7 @@ WORKDIR /app/backend
 RUN apt update
 
 RUN apt-get update && apt-get install -y \
+    dos2unix \
     gnupg \
     g++ \
     procps \
@@ -50,6 +51,7 @@ ENV PATH="${PATH}:/root/.composer/vendor/bin"
 
 COPY --from=composer_upstream --link /usr/bin/composer /usr/bin/composer
 COPY --link --chmod=755 docker-entrypoint.sh /usr/local/bin/docker-entrypoint
+RUN dos2unix /usr/local/bin/docker-entrypoint
 
 ENTRYPOINT ["docker-entrypoint"]
 
