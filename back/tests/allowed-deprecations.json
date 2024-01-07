@@ -28,10 +28,5 @@
         "location": "Symfony\\Bridge\\Monolog\\Logger",
         "message": "The \"Monolog\\Logger\" class is considered final. It may change without further notice as of its next major version. You should not extend it from \"Symfony\\Bridge\\Monolog\\Logger\".",
         "count": 1
-    },
-    {
-        "location": "Symfony\\Component\\DependencyInjection\\Argument\\LazyClosure@anonymous\u0000/Volumes/workspace/hivefive/back/var/cache/test/ContainerJirGz4m/getPasswordHasherInterfaceService.php:20$495",
-        "message": "The \"Symfony\\Component\\DependencyInjection\\Argument\\LazyClosure\" class is considered internal. It may change without further notice. You should not use it from \"Symfony\\Component\\DependencyInjection\\Argument\\LazyClosure@anonymous\".",
-        "count": 1
     }
 ]
