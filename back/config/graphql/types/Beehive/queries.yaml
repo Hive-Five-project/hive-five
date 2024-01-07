@@ -26,3 +26,12 @@ BeehiveQueries:
         resolve: '@=query("Beehive.listBeeType")'
         access: "@=isAuthenticated()"
         description: Liste des types d'abeilles qui existent en base
+
+      listFrames:
+        type: '[Frame!]!'
+        resolve: '@=query("Beehive.listFrames", args["beehiveUid"])'
+        access: "@=isAuthenticated()"
+        description: Liste des cadres qui existent pour une ruche donnée
+        args:
+          beehiveUid:
+            type: ULID!

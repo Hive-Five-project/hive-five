@@ -71,6 +71,7 @@ classDiagram
     Frame : -UUID uid
     Frame : -string label
     Frame : -FrameType type
+    Frame : -User user
     Frame : -DateTime createdAt
     Frame : -DateTime updatedAt
     Frame : -DateTime deletedAt
@@ -81,10 +82,10 @@ classDiagram
         Beehive
     }
     
-    User <|-- Apiary: has
-    Apiary <|-- Beehive: has
-    Beehive <|-- Riser: has
-    Riser <|-- Frame: has
+    User --|> Apiary: has
+    Apiary --|> Beehive: has
+    Beehive --|> Riser: has
+    Riser --|> Frame: has
 ```
 
 ## Setup

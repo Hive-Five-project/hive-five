@@ -10,7 +10,7 @@ use App\Domain\Riser\Riser;
 use Symfony\Component\Uid\Ulid;
 
 /**
- * @method Beehive[] findAll()
+ * @method Riser[] findAll()
  */
 interface RiserRepositoryInterface
 {

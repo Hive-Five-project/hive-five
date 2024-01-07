@@ -1,0 +1,9 @@
+query($uid: ULID!) {
+  Beehive{
+    listFrames(beehiveUid: $uid) {
+      uid
+      label
+      type
+    }
+  }
+}

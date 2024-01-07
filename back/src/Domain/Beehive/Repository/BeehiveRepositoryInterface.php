@@ -8,6 +8,7 @@ use App\Domain\Apiary\Apiary;
 use App\Domain\Beehive\Beehive;
 use App\Domain\Beehive\BeeType;
 use App\Domain\Common\Exception\NotFoundException;
+use App\Domain\Frame\Frame;
 use Symfony\Component\Uid\Ulid;
 
 /**
@@ -28,6 +29,11 @@ interface BeehiveRepositoryInterface
     public function listBeehiveByApiary(Apiary $apiary): array;
 
     public function save(Beehive $beehive): void;
+
+    /**
+     * @return Frame[]
+     */
+    public function listFrames(Beehive $beehive): array;
 
     /**
      * @return BeeType[]
