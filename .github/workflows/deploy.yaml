@@ -1,0 +1,40 @@
+name: Deploy
+on:
+    workflow_run:
+        workflows: ["Tests"]
+        branches: [main]
+        types: 
+            - completed
+
+jobs:
+    frontend:
+        name: Deploy Frontend
+        environment:
+          name: production
+          url: https://hivefive.online
+        if: ${{ github.event.workflow_run.conclusion == 'success' }}
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v2
+            - name: Dependencies 👨🏻‍💻
+              run: |
+                    cd front
+                    npm install
+                    rm .env
+                    mv .env.prod .env
+            - name: Build 🏗️
+              run: |
+                    cd frontend
+                    npm run build
+            - name: Setup SSH 🔑
+              run: |
+                    mkdir -p ~/.ssh/
+                    echo "${{ secrets.SSH_PRIV_KEY }}" > ~/.ssh/id_rsa
+                    echo "${{ secrets.SSH_PUB_KEY }}" > ~/.ssh/id_rsa.pub
+                    chmod 600 ~/.ssh/id_rsa
+                    chmod 600 ~/.ssh/id_rsa.pub
+                    ssh-keyscan -H 95.111.228.177 >> ~/.ssh/known_hosts
+            - name: Deploy 🚀
+              run: |
+                    cd frontend
+                    scp -r -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null dist/* hivefive@95.111.228.177:/var/www/hivefive/client/
