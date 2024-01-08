@@ -19,6 +19,10 @@ Beehive:
         type: Apiary!
         description: 'Apiary where the beehive is located'
 
+      frames:
+        type: '[Frame!]!'
+        description: 'Frames of the beehive'
+
       createdAt:
         type: DateTime!
         description: 'Date de création'

@@ -64,7 +64,7 @@ class ListFramesTest extends GraphQLTestCase
         ], $this->getInputContent('testListFrames'));
 
         $this->assertGraphQLForbiddenResponse(
-            'User user@example.com cannot access beehive\'s frames with 01HF7XBCB9Q9T8DZN9F48SFPE2'
+            'User user@example.com cannot access beehive with 01HF7XBCB9Q9T8DZN9F48SFPE2'
         );
     }
 }

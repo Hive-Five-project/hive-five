@@ -44,11 +44,6 @@ class BeehiveRepository extends ServiceEntityRepository implements BeehiveReposi
         return BeeType::cases();
     }
 
-    public function listFrames(Beehive $beehive): array
-    {
-        return $beehive->getFrames()->toArray();
-    }
-
     public function save(Beehive $beehive): void
     {
         $this->getEntityManager()->persist($beehive);

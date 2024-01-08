@@ -56,26 +56,12 @@ class BeehiveResolver extends AbstractResolver implements AliasedInterface
         return $this->beehiveRepository->listBeeTypes();
     }
 
-    public function listFrames(Ulid $beehiveUid): array
-    {
-        return $this->withGraphQLErrorHandler(
-            function () use ($beehiveUid) {
-                $beehive = $this->beehiveRepository->getOneByUid($beehiveUid);
-                if ($beehive->getApiary()->getUser() !== $this->getDomainUser()) {
-                    throw new ForbiddenException(sprintf('User %s cannot access beehive\'s frames with %s', $this->getDomainUser()->getEmail(), $beehive->getUidAsString()));
-                }
-
-                return $this->beehiveRepository->listFrames($beehive);
-            });
-    }
-
     public static function getAliases(): array
     {
         return [
             'listBeehivesFromApiary' => 'Beehive.list',
             'find' => 'Beehive.find',
             'listBeeType' => 'Beehive.listBeeType',
-            'listFrames' => 'Beehive.listFrames',
         ];
     }
 }

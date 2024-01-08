@@ -1,9 +1,12 @@
 query($uid: ULID!) {
   Beehive{
-    listFrames(beehiveUid: $uid) {
+    find(uid: $uid) {
       uid
-      label
-      type
+      frames {
+        uid
+        label
+        type
+      }
     }
   }
 }
