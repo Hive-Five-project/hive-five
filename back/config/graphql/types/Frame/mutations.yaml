@@ -25,7 +25,7 @@ FrameMutations:
             type: FramePayload!
 
       delete:
-        type: Frame
+        type: ULID!
         resolve: "@=mutation('Frame.delete', args['uid'])"
         access: "@=isAuthenticated()"
         description: Supprimer un cadre

@@ -25,4 +25,6 @@ interface FrameRepositoryInterface
     public function listFrameTypes(): array;
 
     public function save(Frame $frame): void;
+
+    public function delete(Frame $frame): void;
 }

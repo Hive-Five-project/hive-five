@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace App\Application\Frame\Payload;
 
-use App\Domain\Frame\Frame;
 use App\Domain\Frame\FrameType;
 use App\Infrastructure\Bridge\GraphQL\Type\Input\StringInputType;
 use Overblog\GraphQLBundle\Annotation as GQL;

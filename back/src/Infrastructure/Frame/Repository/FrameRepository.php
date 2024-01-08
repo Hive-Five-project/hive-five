@@ -42,4 +42,9 @@ class FrameRepository extends ServiceEntityRepository implements FrameRepository
     {
         $this->getEntityManager()->persist($frame);
     }
+
+    public function delete(Frame $frame): void
+    {
+        $this->getEntityManager()->remove($frame);
+    }
 }
