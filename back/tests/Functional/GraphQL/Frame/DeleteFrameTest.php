@@ -6,6 +6,7 @@ namespace App\Tests\Functional\GraphQL\Frame;
 
 use App\Infrastructure\Test\Functional\Controller\GraphQLTestCase;
 use App\Tests\Functional\GraphQL\Frame\DeleteFrameTest\fixtures\DeleteFrameStory;
+use Symfony\Component\HttpFoundation\Response;
 use Zenstruck\Foundry\Test\Factories;
 use Zenstruck\Foundry\Test\ResetDatabase;
 
@@ -15,26 +16,54 @@ class DeleteFrameTest extends GraphQLTestCase
     use Factories;
 
     /**
-     * @dataProvider provide testValid
+     * @dataProvider provide testValidForBeehive
      */
-    public function testValid(string $uid): void
+    public function testValidForBeehive(string $frameUid, string $beehiveUid): void
     {
         DeleteFrameStory::load();
 
         $this->loginAsUser();
 
-        $this->executeGraphQL(compact('uid'), $this->getInputContent('testDeleteFrame'));
+        $this->executeGraphQL(['uid' => $frameUid], $this->getInputContent('testDeleteFrame'));
 
         $this->assertValidGraphQLResponse();
         $this->assertJsonResponseMatchesExpectations();
 
-        // todo : assert if frame is set to null in hive or riser after added to them and deleted.
+        $result = $this->executeGraphQL(['uid' => $beehiveUid], $this->getInputContent('assertNullBeehive'));
+        $this->assertBeehiveEmptyPostDeletion($result);
     }
 
-    public function provide testValid(): iterable
+    public function provide testValidForBeehive(): iterable
     {
         yield 'delete Frame' => [
-            DeleteFrameStory::ULID_FRAME,
+            DeleteFrameStory::ULID_FRAME_BEEHIVE,
+            DeleteFrameStory::ULID_BEEHIVE,
+        ];
+    }
+
+    /**
+     * @dataProvider provide testValidForRiser
+     */
+    public function testValidForRiser(string $frameUid, string $riserUid): void
+    {
+        DeleteFrameStory::load();
+
+        $this->loginAsUser();
+
+        $this->executeGraphQL(['uid' => $frameUid], $this->getInputContent('testDeleteFrame'));
+
+        $this->assertValidGraphQLResponse();
+        $this->assertJsonResponseMatchesExpectations();
+
+        $result = $this->executeGraphQL(['uid' => $riserUid], $this->getInputContent('assertNullRiser'));
+        $this->assertRiserEmptyPostDeletion($result);
+    }
+
+    public function provide testValidForRiser(): iterable
+    {
+        yield 'delete Frame' => [
+            DeleteFrameStory::ULID_FRAME_RISER,
+            DeleteFrameStory::ULID_RISER,
         ];
     }
 
@@ -57,5 +86,15 @@ class DeleteFrameTest extends GraphQLTestCase
         yield 'not owner' => [
             DeleteFrameStory::ULID_FRAME_ADMIN,
         ];
+    }
+
+    private function assertBeehiveEmptyPostDeletion(Response $response): void
+    {
+        self::assertEquals('{"data":{"Beehive":{"find":{"uid":"01HKN2NV6TBX52GBQA7Q8M5PXD","frames":[]}}}}', $response->getContent());
+    }
+
+    private function assertRiserEmptyPostDeletion(Response $response): void
+    {
+        self::assertEquals('{"data":{"Riser":{"find":{"uid":"01HKNN32PW4VFC97WG8KG2S48S","frames":[]}}}}', $response->getContent());
     }
 }

@@ -54,6 +54,7 @@ class Beehive
         BeeType $bee,
         int $age,
         Apiary $apiary,
+        array $frames,
     ): void {
         $this->name = $name;
         $this->bee = $bee;
@@ -62,6 +63,8 @@ class Beehive
         $this->apiary->deleteBeehive($this);
         $this->apiary = $apiary;
         $apiary->addBeehive($this);
+
+        $this->frames = new ArrayCollection($frames);
     }
 
     public function getName(): string
@@ -112,6 +115,9 @@ class Beehive
 
     public function addFrame(Frame $frame): void
     {
+        if ($this->frames->contains($frame)) {
+            return;
+        }
         $this->frames->add($frame);
     }
 

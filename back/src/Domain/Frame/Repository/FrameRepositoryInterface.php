@@ -20,6 +20,13 @@ interface FrameRepositoryInterface
     public function getOneByUid(Ulid $uid): Frame;
 
     /**
+     * @param Ulid[] $uids
+     *
+     * @return Frame[]
+     */
+    public function findByUids(array $uids): array;
+
+    /**
      * @return FrameType[]
      */
     public function listFrameTypes(): array;

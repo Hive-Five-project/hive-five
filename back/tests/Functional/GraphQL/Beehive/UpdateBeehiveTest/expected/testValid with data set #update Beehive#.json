@@ -7,7 +7,19 @@
         "age": "3",
         "apiary": {
           "uid": "01H5KQW6EBYNGSWRE09ANVREXY"
-        }
+        },
+        "frames": [
+          {
+            "uid": "01HKME78E7CD3422JTYJ8JFSM9",
+            "label": "Frame 1 for user",
+            "type": "Beehive"
+          },
+          {
+            "uid": "01HKME7XPAC7X57SDXTEXBHGBX",
+            "label": "Frame 2 for user",
+            "type": "Beehive"
+          }
+        ]
       }
     }
   }

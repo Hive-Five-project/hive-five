@@ -1,11 +1,7 @@
 query($uid: ULID!) {
-  Riser {
+  Beehive {
     find(uid: $uid) {
       uid
-      name
-      beehive {
-        uid
-      }
       frames {
         uid
       }

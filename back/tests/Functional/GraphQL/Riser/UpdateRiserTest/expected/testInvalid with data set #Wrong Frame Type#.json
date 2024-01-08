@@ -1,0 +1,39 @@
+{
+  "errors": [
+    {
+      "message": "Invalid payload",
+      "locations": [
+        {
+          "line": 3,
+          "column": 5
+        }
+      ],
+      "path": [
+        "Riser",
+        "update"
+      ],
+      "code": "INVALID_PAYLOAD",
+      "api_problem": {
+        "type": "https:\/\/symfony.com\/errors\/validation",
+        "title": "Validation Failed",
+        "detail": "payload.frames[0]: The frame object type is not valid.",
+        "violations": [
+          {
+            "propertyPath": "payload.frames[0]",
+            "title": "The frame object type is not valid.",
+            "template": "The frame {{ value }} type is not valid.",
+            "parameters": {
+              "{{ value }}": "object"
+            },
+            "type": "urn:uuid:4168218e-0e09-4a54-b9d0-fdaf1061357d"
+          }
+        ]
+      }
+    }
+  ],
+  "data": {
+    "Riser": {
+      "update": null
+    }
+  }
+}

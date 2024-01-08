@@ -33,6 +33,21 @@ class FrameRepository extends ServiceEntityRepository implements FrameRepository
         return $frame;
     }
 
+    public function findByUids(array $uids): array
+    {
+        $qb = $this->createQueryBuilder('frame')
+            ->andWhere('frame.uid IN (:uids)')
+            ->setParameter('uids', array_map(fn (Ulid $uid) => $uid->toRfc4122(), $uids))
+        ;
+
+        /**
+         * @var Frame[] $results
+         */
+        $results = $qb->getQuery()->getResult();
+
+        return $results;
+    }
+
     public function listFrameTypes(): array
     {
         return FrameType::cases();

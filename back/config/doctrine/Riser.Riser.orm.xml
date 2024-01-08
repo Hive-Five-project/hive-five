@@ -15,6 +15,7 @@
         </lifecycle-callbacks>
 
         <field name="name" />
+        <many-to-many field="frames" target-entity="App\Domain\Frame\Frame" />
 
         <many-to-one field="beehive" target-entity="App\Domain\Beehive\Beehive" inversed-by="risers">
             <join-column on-delete="CASCADE" />

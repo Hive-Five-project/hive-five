@@ -2,10 +2,6 @@ query($uid: ULID!) {
   Riser {
     find(uid: $uid) {
       uid
-      name
-      beehive {
-        uid
-      }
       frames {
         uid
       }
