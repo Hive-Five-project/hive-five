@@ -23,6 +23,8 @@ services:
       working_dir: /app/backend
       volumes:
           - ./back:/app/backend
+          - /app/backend/var
+          - /app/backend/vendor
       ports:
           - 63280:63280
           - 63290:63290

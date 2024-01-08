@@ -29,13 +29,13 @@ This command will install the git hooks on your local repository.
 As we use Docker, you can start the app with the following command:
 
 ```bash
-docker compose up -d
+docker compose up --profile docker -d
 ```
 
 This command will start the following containers:
 | Container | Description | Port (Host side) |
 | --- | --- | --- |
-| symfony | The Symfony app (GraphQL) with dev tools (profiler, mailer, etc.) | 63280 |
+| symfony | The Symfony app (GraphQL) with dev tools (profiler, etc.) | 63280 |
 | react | The React app (dev) | 63281 |
 | postgres | The PostgreSQL database | 62529 |
 | mailer | The mailer container | 62551 |
