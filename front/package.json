@@ -45,6 +45,7 @@
     "postcss": "^8.4.32",
     "postcss-preset-mantine": "^1.12.2",
     "postcss-simple-vars": "^7.0.1",
+    "sass": "^1.69.6",
     "typescript": "^5.0.2",
     "vite": "^4.4.5",
     "vite-plugin-graphql-loader": "^2.0.0"

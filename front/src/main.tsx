@@ -6,7 +6,7 @@ import * as Translations from '@app/translations';
 Translations.init();
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
-    <React.StrictMode>
-      <App />
-    </React.StrictMode>,
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>,
 )

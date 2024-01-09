@@ -73,5 +73,7 @@ module.exports = {
     "@typescript-eslint/no-unused-vars": [
       "error"
     ],
+
+    "indent": ["warn", 2]
   },
 }

@@ -11,6 +11,7 @@ import { theme } from '@app/theme';
 import { MantineProvider } from '@mantine/core';
 import '@mantine/core/styles.css';
 import '@mantine/dates/styles.css';
+import '@app/styles/global.scss';
 
 export default function App() {
   return (

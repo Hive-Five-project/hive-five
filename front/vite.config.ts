@@ -24,4 +24,11 @@ export default defineConfig({
   build: {
     target: 'esnext',
   },
+  css: {
+    preprocessorOptions: {
+      scss: {
+        additionalData: `@import "./src/_mantine";`,
+      },
+    },
+  },
 })
