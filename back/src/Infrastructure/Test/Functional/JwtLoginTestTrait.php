@@ -63,7 +63,7 @@ trait JwtLoginTestTrait
 
         static::getKernelBrowser()->request(
             Request::METHOD_POST,
-            '/login',
+            '/api/login',
             [],
             [],
             ['CONTENT_TYPE' => 'application/json'],

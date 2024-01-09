@@ -21,7 +21,7 @@
 					}
 				},
 				"url": {
-					"raw": "{{host}}/login",
+					"raw": "{{host}}/api/login",
 					"host": [
 						"{{host}}"
 					],
@@ -87,7 +87,7 @@
 					}
 				},
 				"url": {
-					"raw": "{{host}}/login",
+					"raw": "{{host}}/api/login",
 					"host": [
 						"{{host}}"
 					],

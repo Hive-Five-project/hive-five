@@ -20,7 +20,7 @@ class LogTest extends ControllerTestCase
         // Login
         static::getKernelBrowser()->request(
             Request::METHOD_POST,
-            '/login',
+            '/api/login',
             [],
             [],
             ['CONTENT_TYPE' => 'application/json'],
@@ -51,7 +51,7 @@ JSON
 
         static::getKernelBrowser()->request(
             Request::METHOD_GET,
-            '/logout'
+            '/api/logout'
         );
 
         // Logout
