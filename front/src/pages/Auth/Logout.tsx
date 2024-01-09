@@ -13,7 +13,7 @@ const LOGOUT_REDIRECT_DELAY = 1000;
 function useLogout() {
   const navigate = useNavigate();
   const { postLogout } = useAuthContext();
-  const { loading, error, post, response } = useFetch('/logout', {
+  const { loading, error, post, response } = useFetch('/api/logout', {
     cachePolicy: CachePolicies.NETWORK_ONLY,
   });
   const [erroneousResponse, setAsErroneousResponse] = useState<boolean>(false);

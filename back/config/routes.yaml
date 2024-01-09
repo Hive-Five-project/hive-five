@@ -10,5 +10,5 @@ front_reset_password:
   schemes: '%app_front_scheme%'
 
 login:
-  path: /login
+  path: /api/login
   methods: POST
