@@ -13,6 +13,10 @@ Riser:
         type: Beehive
         description: 'La Ruche sur laquelle la hausse est installée.'
 
+      frames:
+        type: '[Frame!]!'
+        description: 'Frames of the riser'
+
       createdAt:
         type: DateTime!
         description: 'Date de création'

@@ -6,7 +6,12 @@
         "name": "Riser for user User",
         "beehive": {
           "uid": "01HF7X9YVA5GHKGDEPSPQG7187"
-        }
+        },
+        "frames": [
+          {
+            "uid": "01HKNMN0TQ2JARMNPWWNE7FA68"
+          }
+        ]
       }
     }
   }

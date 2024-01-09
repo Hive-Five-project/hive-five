@@ -1,0 +1,8 @@
+mutation($payload: FramePayload!) {
+  Frame {
+    create(payload: $payload) {
+      label
+      type
+    }
+  }
+}

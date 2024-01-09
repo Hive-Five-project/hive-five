@@ -6,6 +6,9 @@ query($uid: ULID!) {
       beehive {
         uid
       }
+      frames {
+        uid
+      }
     }
   }
 }

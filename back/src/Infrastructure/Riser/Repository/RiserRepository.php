@@ -33,6 +33,18 @@ class RiserRepository extends ServiceEntityRepository implements RiserRepository
         return $riser;
     }
 
+    public function isFrameAlreadyRelated(array $frames): bool
+    {
+        $qb = $this->createQueryBuilder('riser');
+
+        $qb->add('select', 'riser')
+            ->add('from', 'App\Domain\Riser\Riser riser')
+            ->add('where', $qb->expr()->isMemberOf(':frames', 'riser.frames'))
+            ->setParameter('frames', $frames);
+
+        return $qb->getQuery()->getOneOrNullResult() !== null;
+    }
+
     public function listRisersFromBeehive(Beehive $beehive): array
     {
         return $this->findBy(['beehive' => $beehive]);

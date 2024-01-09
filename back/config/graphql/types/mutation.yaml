@@ -17,3 +17,7 @@ Mutation:
       Riser:
         type: RiserMutations!
         resolve: "@=mutation('NamespacedMutation')"
+
+      Frame:
+        type: FrameMutations!
+        resolve: "@=mutation('NamespacedMutation')"

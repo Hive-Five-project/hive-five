@@ -5,11 +5,13 @@ declare(strict_types=1);
 namespace App\Application\Beehive\Payload;
 
 use App\Domain\Apiary\Apiary;
-use App\Domain\Beehive\Beehive;
 use App\Domain\Beehive\BeeType;
+use App\Domain\Frame\Frame;
+use App\Domain\Frame\FrameType;
 use App\Infrastructure\Bridge\GraphQL\Type\Input\IntInputType;
 use App\Infrastructure\Bridge\GraphQL\Type\Input\StringInputType;
 use App\Infrastructure\Bridge\Symfony\Validator\Constraint\EntityReferenceExists;
+use App\Infrastructure\Bridge\Symfony\Validator\Constraint\FrameTypeMatch;
 use Overblog\GraphQLBundle\Annotation as GQL;
 use Symfony\Component\Uid\Ulid;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -71,4 +73,26 @@ final class BeehivePayload
         ),
     ])]
     public $apiary;
+
+    /** @var Ulid[]|null */
+    #[GQL\Field(type: '[ULIDInput]')]
+    #[GQL\Description('Mandatory')]
+    #[Assert\Sequentially([
+        new Assert\NotNull(),
+        new Assert\Type('array'),
+    ])]
+    #[Assert\All([
+        new Assert\Type(Ulid::class),
+        new Assert\NotBlank(),
+        new EntityReferenceExists(
+            Frame::class,
+            identityField: 'uid',
+            message: 'The frame {{ value }} does not exist.',
+        ),
+        new FrameTypeMatch(
+            frameType: FrameType::Beehive,
+            message: 'The frame {{ value }} type is not valid.',
+        ),
+    ])]
+    public $frames = [];
 }

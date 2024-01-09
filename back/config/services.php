@@ -2,7 +2,6 @@
 
 declare(strict_types=1);
 
-use App\Domain\User\Security\PasswordHasherInterface;
 use App\Infrastructure\Bridge\GraphQL\ExpressionLanguage\TranslateExpressionFunction;
 use App\Infrastructure\Common\Serializer\SkippingInvalidUidNormalizer;
 use App\Infrastructure\Security\User\Identity;
@@ -61,12 +60,6 @@ return static function (ContainerConfigurator $sc) {
         ->set('identity_password_hasher', SymfonyPasswordHasherInterface::class)
         ->factory([service(PasswordHasherFactoryInterface::class), 'getPasswordHasher'])
         ->args([Identity::class])
-        /*
-         * Create our own PasswordHasherInterface adapter from Symfony's PasswordHasherInterface.
-         * @see https://symfony.com/blog/new-in-symfony-6-3-dependency-injection-improvements#generating-adapters-for-functional-interfaces
-         */
-        ->set(PasswordHasherInterface::class, PasswordHasherInterface::class)
-        ->fromCallable([service('identity_password_hasher'), 'hash'])
     ;
 
     // Command buses:

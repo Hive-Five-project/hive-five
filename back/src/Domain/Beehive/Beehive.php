@@ -7,6 +7,7 @@ namespace App\Domain\Beehive;
 use App\Domain\Apiary\Apiary;
 use App\Domain\Common\Behavior\TimestampableTrait;
 use App\Domain\Common\Behavior\UlidTrait;
+use App\Domain\Frame\Frame;
 use App\Domain\Riser\Riser;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -26,6 +27,9 @@ class Beehive
     /** @var Collection<int, Riser> */
     private Collection $risers;
 
+    /** @var Collection<int, Frame> */
+    private Collection $frames;
+
     public function __construct(
         string $name,
         BeeType $bee,
@@ -42,6 +46,7 @@ class Beehive
         $apiary->addBeehive($this);
 
         $this->risers = new ArrayCollection();
+        $this->frames = new ArrayCollection();
     }
 
     public function update(
@@ -49,6 +54,7 @@ class Beehive
         BeeType $bee,
         int $age,
         Apiary $apiary,
+        array $frames,
     ): void {
         $this->name = $name;
         $this->bee = $bee;
@@ -57,6 +63,8 @@ class Beehive
         $this->apiary->deleteBeehive($this);
         $this->apiary = $apiary;
         $apiary->addBeehive($this);
+
+        $this->frames = new ArrayCollection($frames);
     }
 
     public function getName(): string
@@ -95,5 +103,26 @@ class Beehive
     public function deleteRiser(Riser $riser): bool
     {
         return $this->risers->removeElement($riser);
+    }
+
+    /**
+     * @return Collection<int, Frame>
+     */
+    public function getFrames(): Collection
+    {
+        return $this->frames;
+    }
+
+    public function addFrame(Frame $frame): void
+    {
+        if ($this->frames->contains($frame)) {
+            return;
+        }
+        $this->frames->add($frame);
+    }
+
+    public function deleteFrame(Frame $frame): bool
+    {
+        return $this->frames->removeElement($frame);
     }
 }
