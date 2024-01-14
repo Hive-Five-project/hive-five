@@ -6,6 +6,10 @@ on:
         types: 
             - completed
 
+env:
+    REMOTE_HOST: "95.111.228.177"
+    REMOTE_USER: "hivefive"
+
 jobs:
     frontend:
         name: Deploy Frontend
@@ -16,6 +20,14 @@ jobs:
         runs-on: ubuntu-latest
         steps:
             - uses: actions/checkout@v2
+            - name: Setup SSH 🔑
+              run: |
+                    mkdir -p ~/.ssh/
+                    echo "${{ secrets.SSH_PRIV_KEY }}" > ~/.ssh/id_rsa
+                    echo "${{ secrets.SSH_PUB_KEY }}" > ~/.ssh/id_rsa.pub
+                    chmod 600 ~/.ssh/id_rsa
+                    chmod 600 ~/.ssh/id_rsa.pub
+                    ssh-keyscan -H ${{ env.REMOTE_HOST }} >> ~/.ssh/known_hosts
             - name: Dependencies 👨🏻‍💻
               run: |
                     cd front
@@ -26,6 +38,16 @@ jobs:
               run: |
                     cd frontend
                     npm run build
+            - name: Deploy 🚀
+              run: |
+                    cd frontend
+                    rsync -avz -e "ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null" dist/* ${{ env.REMOTE_USER }}@${{ env.REMOTE_HOST }}:/var/www/hivefive/client
+    backend:
+        name: Deploy Backend
+        if: ${{ github.event.workflow_run.conclusion == 'success' }}
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v2
             - name: Setup SSH 🔑
               run: |
                     mkdir -p ~/.ssh/
@@ -33,8 +55,22 @@ jobs:
                     echo "${{ secrets.SSH_PUB_KEY }}" > ~/.ssh/id_rsa.pub
                     chmod 600 ~/.ssh/id_rsa
                     chmod 600 ~/.ssh/id_rsa.pub
-                    ssh-keyscan -H 95.111.228.177 >> ~/.ssh/known_hosts
-            - name: Deploy 🚀
+                    ssh-keyscan -H ${{ env.REMOTE_HOST }} >> ~/.ssh/known_hosts
+            - name: Sync 🔄
               run: |
-                    cd frontend
-                    scp -r -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null dist/* hivefive@95.111.228.177:/var/www/hivefive/client/
+                    cd back
+                    rsync -avz -e "ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null" --exclude 'var' --exclude 'vendor' . ${{ env.REMOTE_USER }}@${{ env.REMOTE_HOST }}:/var/www/hivefive/back
+            - name: Server Setup 🏗️
+              run: |
+                    ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null ${{ env.REMOTE_USER }}@${{ env.REMOTE_HOST }} << EOF
+                    cd /var/www/hivefive/back
+                    export APP_ENV=prod
+                    composer install --no-dev --optimize-autoloader --no-interaction --no-scripts --no-progress
+                    echo "JWT_PASSPHRASE=$(openssl rand -base64 32)" >> .env.prod
+                    echo "DATABASE_URL=postgresql://hivefive:${{ secrets.DB_PASSWORD }}@localhost:5432/hivefive" >> .env.prod
+                    composer dump-env prod
+                    php bin/console lexik:jwt:generate-keypair --skip-if-exists
+                    php bin/console cache:clear
+                    chmod -R 777 var
+                    php bin/console doctrine:migrations:migrate -n --allow-no-migration
+                    EOF
