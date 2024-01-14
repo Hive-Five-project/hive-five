@@ -8,6 +8,7 @@ use App\Infrastructure\Fixtures\Factory\ApiaryFactory;
 use App\Infrastructure\Fixtures\Factory\BeehiveFactory;
 use App\Infrastructure\Fixtures\Factory\RiserFactory;
 use App\Infrastructure\Fixtures\Factory\UserFactory;
+use App\Infrastructure\Fixtures\Factory\BuyingFactory;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 
@@ -29,6 +30,9 @@ class AppFixtures extends Fixture
 
         /* Risers */
         RiserFactory::createMany(30);
+
+        /* Buyings */
+        BuyingFactory::createMany(10);
 
         $manager->flush();
     }
