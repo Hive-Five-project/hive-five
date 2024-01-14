@@ -8,7 +8,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-#[Route('/logout', name: 'logout')]
+#[Route('/api/logout', name: 'logout')]
 class LogoutController extends AbstractController
 {
     public function __invoke(): Response

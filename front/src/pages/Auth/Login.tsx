@@ -22,7 +22,7 @@ function useLogin() {
   const navigate = useNavigate();
   const { state } = useLocation();
 
-  const { loading, error, post, response, data } = useFetch('/login', {
+  const { loading, error, post, response, data } = useFetch('/api/login', {
     cachePolicy: CachePolicies.NETWORK_ONLY,
   });
   const [erroneousResponse, , setAsErroneousResponse, resetErroneousResponse] = useBool(false);
