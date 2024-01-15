@@ -36,9 +36,11 @@ jobs:
                     mv .env.prod .env
             - name: Build 🏗️
               run: |
+                    cd front
                     npm run build
             - name: Deploy 🚀
               run: |
+                    cd front
                     rsync -avz -e "ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null" dist/* ${{ env.REMOTE_USER }}@${{ env.REMOTE_HOST }}:/var/www/hivefive/client
     backend:
         name: Deploy Backend
