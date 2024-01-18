@@ -5,7 +5,6 @@ import { route } from '@app/router/generator';
 import Login from '@app/pages/Auth/Login';
 import BlankLayout from '@app/layouts/BlankLayout';
 import ForbiddenError from '@app/errors/ForbiddenError.ts';
-import Profile from '@app/pages/Profile/Profile';
 
 interface Props {
   checkIsAdmin?: boolean

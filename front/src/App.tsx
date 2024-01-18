@@ -7,7 +7,7 @@ import ErrorBoundary from '@app/components/ErrorBoundary';
 import * as AuthContext from '@app/hooks/useAuthContext';
 import * as UseFetch from 'use-http';
 import AppConfig from '@app/AppConfig.ts';
-import { theme } from '@app/theme';
+import { theme, variantColorResolver } from '@app/theme';
 import { MantineProvider } from '@mantine/core';
 import '@mantine/core/styles.css';
 import '@mantine/dates/styles.css';
@@ -22,7 +22,7 @@ export default function App() {
         <AuthContext.Provider>
           <BrowserRouter>
             <ErrorBoundary>
-              <MantineProvider theme={theme}>
+              <MantineProvider theme={{...theme, variantColorResolver}}>
                 <Routes>
                   {renderRoutes(routes)}
                 </Routes>

@@ -1,4 +1,9 @@
-import { createTheme } from '@mantine/core';
+import {
+  createTheme,
+  defaultVariantColorsResolver,
+  VariantColorsResolver,
+  parseThemeColor,
+} from '@mantine/core';
 
 export const theme = createTheme({
   primaryColor: 'green',
@@ -9,3 +14,20 @@ export const theme = createTheme({
   defaultRadius: '10px',
   fontFamily: '\'Inter\', Roboto, -apple-system, Segoe UI, sans-serif',
 });
+
+export const variantColorResolver: VariantColorsResolver = (input) => {
+  const defaultResolvedColors = defaultVariantColorsResolver(input);
+  const parsedColor = parseThemeColor({
+    color: input.color || input.theme.primaryColor,
+    theme: input.theme,
+  });
+
+  if (parsedColor.isThemeColor && parsedColor.color === 'yellow' && input.variant === 'filled') {
+    return {
+      ...defaultResolvedColors,
+      color: 'black',
+    };
+  }
+
+  return defaultResolvedColors;
+}

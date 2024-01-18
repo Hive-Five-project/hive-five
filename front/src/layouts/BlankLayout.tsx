@@ -18,7 +18,6 @@ export default function BlankLayout({ children }: PropsWithChildren) {
         height: 61,
         collapsed: !pinned,
       }}
-      padding="md"
     >
       <AppShell.Header>
         <Group justify="space-between" h="100%" px="10px" py="5px">

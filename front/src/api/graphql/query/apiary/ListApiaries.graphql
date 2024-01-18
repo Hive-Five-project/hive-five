@@ -1,0 +1,11 @@
+#import "@graphql/fragments/apiary/_Apiary.graphql"
+
+query ListApiaries {
+  Apiary {
+    listMyApiaries {
+      updatedAt
+      createdAt
+      ..._Apiary
+    }
+  }
+}

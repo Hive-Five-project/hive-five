@@ -13,6 +13,7 @@ import User from '@app/pages/Admin/User/User';
 import Home from '@app/pages/Home.tsx';
 import ListUsers from '@app/pages/Admin/User/ListUsers/ListUsers.tsx';
 import NeedsAdmin from '@app/guards/NeedsAdmin.tsx';
+import ApiaryList from './pages/Apiary/ApiaryList';
 
 export const AdminPages: RouteDeclaration = {
   path: '/admin',
@@ -22,8 +23,7 @@ export const AdminPages: RouteDeclaration = {
 export const routes: Array<Route> = [
   {
     path: '/',
-    layout: AppLayout,
-    guard: NeedsLogin,
+    layout: BlankLayout,
     component: Home,
   },
   /* Admin pages */
@@ -48,6 +48,11 @@ export const routes: Array<Route> = [
     layout: AppLayout,
     guard: NeedsLogin,
     component: Profile,
+  },
+  {
+    layout: AppLayout,
+    guard: NeedsLogin,
+    component: ApiaryList,
   },
   /* Auth pages */
   {

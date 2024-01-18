@@ -1,0 +1,5 @@
+fragment _Apiary on Apiary {
+  uid
+  address
+  name
+}
