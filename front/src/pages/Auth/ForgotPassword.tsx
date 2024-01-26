@@ -6,7 +6,7 @@ import { route } from '@app/router/generator';
 import Login from '@app/pages/Auth/Login';
 import { useMutation } from '@app/api/apollo/useMutation';
 import ForgotPasswordMutation from '@graphql/mutation/user/ForgotPassword.graphql';
-import { Alert, Button, TextField } from '@mui/material';
+import { Button, TextInput, Alert } from '@mantine/core';
 
 interface MutationResponse {
   User: {
@@ -20,7 +20,7 @@ interface MutationResponse {
 const ForgotPassword = declareRoute(function Page() {
   useDocumentTitle(trans('pages.forgotPassword.documentTitle'));
 
-  const [username, setUsername] = useState<string | null>(null);
+  const [username, setUsername] = useState<string>('');
   const [forgotPassword, forgotPasswordState] = useMutation<MutationResponse>(ForgotPasswordMutation);
 
   const hasError =
@@ -52,21 +52,17 @@ const ForgotPassword = declareRoute(function Page() {
     </Alert>}
 
     <form id="forgot-password" onSubmit={onSubmit}>
-
-      <TextField
+      <TextInput
         id="username"
         label="Identifiant"
         type="email"
         value={username}
         onChange={(e) => setUsername(e.target.value)}
         required
-        InputProps={{
-          autoFocus: true,
-          autoComplete: 'username',
-          placeholder: 'Votre email',
-        }}
+        autoFocus
+        autoComplete="username"
+        placeholder="Votre email"
       />
-
       <div style={
         {
             display: 'flex',
@@ -74,10 +70,14 @@ const ForgotPassword = declareRoute(function Page() {
             gap: '1rem',
         }
       }>
-        <Button href={route(Login)}>Retour à l&apos;identification</Button>
+        <Button
+          component="a"
+          href={route(Login)}
+        >
+          Retour à l&apos;identification
+        </Button>
         <Button
           type="submit"
-          color="primary"
           disabled={forgotPasswordState.loading}
         >
           Envoyer un email
