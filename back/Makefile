@@ -200,4 +200,4 @@ test.update-baseline: test
 
 test.phpunit@integration: export APP_ENV = test
 test.phpunit@integration:
-	symfony php bin/phpunit --colors=always --testdox
+	php bin/phpunit --colors=always --testdox
