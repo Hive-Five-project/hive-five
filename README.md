@@ -13,17 +13,17 @@
 
 Manage your **beekeeping** activities with **HiveFive**. Collect and analyze data about your hives, apiaries, and more. Get **insights** about your apiaries and hives, and share your data with other beekeepers.
 
-- [🐝 Features](#🐝-features)
-  - [📊 Data collection](#📊-data-collection)
-  - [📈 Data analysis](#📈-data-analysis)
-  - [📱 Mobile-friendly](#📱-mobile-friendly)
-- [📁 Root project structure](#📁-root-project-structure)
-- [⚡️ Quick start](#️⚡️-quick-start)
-  - [🐳 Docker-way to quick start](#🐳-docker-way-to-quick-start)
-- [📚 Documentation](#📚-documentation)
-- [⚙️ Settings \& Commands](#️⚙️-settings--commands)
-- [🤝 Build with us!](#🤝-build-with-us)
-- [⚠️ License](#️⚠️-license)
+- [🐝 Features](#-features)
+  - [📊 Data collection](#-data-collection)
+  - [📈 Data analysis](#-data-analysis)
+  - [📱 Mobile-friendly](#-mobile-friendly)
+- [📁 Root project structure](#-root-project-structure)
+- [⚡️ Quick start](#️-quick-start)
+  - [🐳 Docker-way to quick start](#-docker-way-to-quick-start)
+- [📚 Documentation](#-documentation)
+- [⚙️ Settings \& Commands](#️-settings--commands)
+- [🤝 Build with us!](#-build-with-us)
+- [⚠️ License](#️-license)
 
 ## 🐝 Features
 
