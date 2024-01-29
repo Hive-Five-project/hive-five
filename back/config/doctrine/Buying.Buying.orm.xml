@@ -15,18 +15,18 @@
         </lifecycle-callbacks>
 
         <field name="label" />
-        <field name="price" />
+        <field name="price"  type="float"/>
 
-        <many-to-one field="apiary" target-entity="App\Domain\Apiary\Apiary" inversed-by="buyings">
+        <many-to-one field="apiary" target-entity="App\Domain\Apiary\Apiary">
+            <join-column nullable="true" on-delete="CASCADE" />
+        </many-to-one>
+
+        <many-to-one field="user" target-entity="App\Domain\User\User">
             <join-column nullable="false" on-delete="CASCADE" />
         </many-to-one>
 
         <field name="createdAt" type="datetime">
             <gedmo:timestampable on="create" />
         </field>
-        <field name="updatedAt" type="datetime">
-            <gedmo:timestampable on="update" />
-        </field>
-        <field name="deletedAt" type="datetime" nullable="true" />
     </entity>
 </doctrine-mapping>

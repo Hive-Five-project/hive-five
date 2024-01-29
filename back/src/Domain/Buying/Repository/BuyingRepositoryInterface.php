@@ -18,12 +18,6 @@ interface BuyingRepositoryInterface
      */
     public function getOneByUid(Ulid $uid): Buying;
 
-    /*
-      @param Apiary $apiary Modify buying of apiary
-     
-     
-    public function modifyBuying(Apiary $apiary): void;*/
-
     public function save(Buying $buying): void;
 
     public function delete(Buying $buying): void;

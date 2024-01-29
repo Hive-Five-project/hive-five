@@ -39,6 +39,6 @@ class BuyingRepository extends ServiceEntityRepository implements BuyingReposito
 
     public function delete(Buying $buying): void
     {
-        $this->getEntityManager()->persist($buying);
+        $this->getEntityManager()->remove($buying);
     }
 }
