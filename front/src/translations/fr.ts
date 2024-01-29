@@ -10,6 +10,7 @@ export default {
   },
   common: {
     loadingDataError: 'Une erreur s\'est produite lors du chargement des données',
+    loading: 'Chargement...',
     actions: {
       cancel: 'Annuler',
       create: 'Créer',
@@ -40,6 +41,17 @@ export default {
     },
     apiaryList: {
       documentTitle: 'Liste des ruchers',
+      addButtonText: 'Ajouter un rucher',
+    },
+    apiaryForm: {
+      create: {
+        documentTitle: 'Formulaire de création de rucher',
+      },
+      update: {
+        documentTitle: 'Formulaire de modification de rucher',
+      },
+      addApiaryName : 'Nom du rucher',
+      addApiaryAddress : 'Addresse du rucher',
     },
     login: {
       documentTitle: 'Identification',
