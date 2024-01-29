@@ -3,7 +3,7 @@ import { useAuthContext } from '@app/hooks/useAuthContext';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { route } from '@app/router/generator';
 import Login from '@app/pages/Auth/Login';
-import AppLayout from '@app/layouts/AppLayout';
+import BlankLayout from '@app/layouts/BlankLayout';
 import ForbiddenError from '@app/errors/ForbiddenError.ts';
 
 interface Props {
@@ -41,13 +41,13 @@ export default function NeedsLogin({ children, checkIsAdmin = false }: PropsWith
   }, [isAdmin, checkIsAdmin, authenticated, initialized, navigate, pathname]);
 
   if (!authenticated) {
-    return <AppLayout>
+    return <BlankLayout>
       <main role="main">
         <p>
           Vérification de votre authentification…
         </p>
       </main>
-    </AppLayout>;
+    </BlankLayout>;
   }
 
   return <>{children}</>;

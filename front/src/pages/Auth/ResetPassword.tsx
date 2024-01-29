@@ -14,6 +14,7 @@ import { FormErrorsMap } from '@app/components/UI/Form';
 import { MutationResult } from '@apollo/client';
 import { Button, TextInput, Alert } from '@mantine/core';
 import { FormUtils } from '@app/components/UI/Form/index';
+import { RESET_PASSWORD_PATH } from '@app/paths';
 
 interface MutationResponse {
   User: {
@@ -130,6 +131,6 @@ const ResetPassword = declareRoute(function Page() {
       </div>
     </form>
   </div>;
-}, '/reset-password/:token');
+}, RESET_PASSWORD_PATH);
 
 export default ResetPassword;
