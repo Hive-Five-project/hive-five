@@ -54,21 +54,21 @@ export default class ErrorBoundary extends React.Component<Props, State> {
 
     switch (true) {
 
-      case error instanceof NotFoundError:
-        children = <NotFound />;
-        break;
+    case error instanceof NotFoundError:
+      children = <NotFound />;
+      break;
 
-      case error instanceof ForbiddenError:
-        children = <Forbidden />;
-        break;
+    case error instanceof ForbiddenError:
+      children = <Forbidden />;
+      break;
 
-      case Boolean(error):
-        // Unexpected error page
-        children = <FatalError />;
-        break;
+    case Boolean(error):
+      // Unexpected error page
+      children = <FatalError />;
+      break;
 
-      default:
-        children = this.props.children;
+    default:
+      children = this.props.children;
     }
 
     return <context.Provider value={{

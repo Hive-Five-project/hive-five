@@ -10,8 +10,10 @@ import { trans } from '@app/translations';
 import { route } from '@app/router/generator';
 import ForgotPassword from '@app/pages/Auth/ForgotPassword';
 import Admin from '@app/pages/Admin/Admin';
-import User from '@app/pages/User/User';
-import { Button, PasswordInput, TextInput } from '@mantine/core';
+import User from '@app/pages/Admin/User/User';
+import { Button, Container, Space, Stack } from '@mantine/core';
+import { CompactTextInput, CompactPasswordInput } from '@app/components/UI/CompactInput/CompactInput';
+import { LOGIN_PATH } from '@app/paths';
 
 interface LoginRedirectState {
   target?: string | null
@@ -76,47 +78,48 @@ const Login = declareRoute(function Page() {
     }
   }
 
-  return <div>
+  return <Container px="md">
     <form id="login" onSubmit={onSubmit}>
       <h2>{trans('pages.login.documentTitle')}</h2>
-      <TextInput
-        id="username"
-        label="Identifiant"
-        type="email"
-        value={username}
-        onChange={(e) => setUsername(e.target.value)}
-        required
-        autoFocus
-        autoComplete="username"
-        placeholder="Votre email"
-        error={error}
-      />
-      <PasswordInput
-        id="password"
-        label="Mot de passe"
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-        required
-        autoComplete="current-password"
-        error={Boolean(authenticationErrorMessage)}
-      />
-      <div>
-        <a href={'/'}>
-          {'Retour à l\'accueil'}
-        </a>
-
+      <Stack>
+        <CompactTextInput
+          id="username"
+          label="Nom d'utilisateur ou email"
+          type="email"
+          value={username}
+          onChange={(e) => setUsername(e.target.value)}
+          required
+          autoFocus
+          autoComplete="username"
+          error={error ? authenticationErrorMessage : null}
+        />
+        <CompactPasswordInput
+          id="password"
+          label="Mot de passe"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          required
+          autoComplete="current-password"
+          error={error ? authenticationErrorMessage : null}
+        />
         <Button
           type="submit"
-          disabled={loading}
+          loading={loading}
         >
           Se connecter
         </Button>
-      </div>
+      </Stack>
     </form>
-    <div>
-      <Link to={route(ForgotPassword)}>Mot de passe oublié ?</Link>
-    </div>
-  </div>;
-}, '/login');
+    <Space h="md" />
+    <Stack align="center">
+      <div>
+        <Link to={route(ForgotPassword)}>Mot de passe oublié ?</Link>
+      </div>
+      <div>
+        Pas de compte ? <Link to={route(ForgotPassword)}>Demandez-en un</Link>
+      </div>
+    </Stack>
+  </Container>;
+}, LOGIN_PATH);
 
 export default Login;

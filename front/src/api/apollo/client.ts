@@ -50,25 +50,25 @@ function onError({ graphQLErrors, networkError, operation }: ErrorResponse) {
       }
 
       switch (code) {
-        case GraphQLErrorCodes.INVALID_PAYLOAD:
-          if (!api_problem) {
-            break;
-          }
+      case GraphQLErrorCodes.INVALID_PAYLOAD:
+        if (!api_problem) {
+          break;
+        }
 
-          formattedError += ':';
+        formattedError += ':';
           api_problem!.violations.forEach(({ type, propertyPath, title }) => {
             formattedError += `\n    - ✗ violation at path "${propertyPath}": "${title}" (code: "${type}")`;
           });
 
-          // Just display the errors in the console, do not capture it in Sentry:
-          return console.error(formattedError, graphQLErrors);
+        // Just display the errors in the console, do not capture it in Sentry:
+        return console.error(formattedError, graphQLErrors);
 
-        case GraphQLErrorCodes.NOT_FOUND:
-          return notFoundErrorHandler(operation, graphQLError);
+      case GraphQLErrorCodes.NOT_FOUND:
+        return notFoundErrorHandler(operation, graphQLError);
 
-        case GraphQLErrorCodes.FORBIDDEN:
-        case GraphQLErrorCodes.ACCESS_DENIED:
-          return forbiddenErrorHandler(operation, graphQLError);
+      case GraphQLErrorCodes.FORBIDDEN:
+      case GraphQLErrorCodes.ACCESS_DENIED:
+        return forbiddenErrorHandler(operation, graphQLError);
       }
 
       // Capture non-handled errors:

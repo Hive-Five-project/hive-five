@@ -7,6 +7,7 @@ import Login from '@app/pages/Auth/Login';
 import { useMutation } from '@app/api/apollo/useMutation';
 import ForgotPasswordMutation from '@graphql/mutation/user/ForgotPassword.graphql';
 import { Button, TextInput, Alert } from '@mantine/core';
+import { FORGOT_PASSWORD_PATH } from '@app/paths';
 
 interface MutationResponse {
   User: {
@@ -65,9 +66,9 @@ const ForgotPassword = declareRoute(function Page() {
       />
       <div style={
         {
-            display: 'flex',
-            justifyContent: 'flex-end',
-            gap: '1rem',
+          display: 'flex',
+          justifyContent: 'flex-end',
+          gap: '1rem',
         }
       }>
         <Button
@@ -85,6 +86,6 @@ const ForgotPassword = declareRoute(function Page() {
       </div>
     </form>
   </div>;
-}, '/forgot-password');
+}, FORGOT_PASSWORD_PATH);
 
 export default ForgotPassword;

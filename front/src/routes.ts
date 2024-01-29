@@ -8,27 +8,22 @@ import NeedsLogin from '@app/guards/NeedsLogin';
 import BlankLayout from '@app/layouts/BlankLayout';
 import ForgotPassword from '@app/pages/Auth/ForgotPassword';
 import ResetPassword from '@app/pages/Auth/ResetPassword';
-import Profile from '@app/pages/User/Profile/Profile';
-import User from '@app/pages/User/User.tsx';
+import Profile from '@app/pages/Profile/Profile';
+import User from '@app/pages/Admin/User/User';
 import Home from '@app/pages/Home.tsx';
 import ListUsers from '@app/pages/Admin/User/ListUsers/ListUsers.tsx';
 import NeedsAdmin from '@app/guards/NeedsAdmin.tsx';
+import ApiaryList from './pages/Apiary/ApiaryList';
 
 export const AdminPages: RouteDeclaration = {
   path: '/admin',
   relativePath: '/admin',
 };
 
-export const UserPages: RouteDeclaration = {
-  path: '/user',
-  relativePath: '/user',
-};
-
 export const routes: Array<Route> = [
   {
     path: '/',
-    layout: AppLayout,
-    guard: NeedsLogin,
+    layout: BlankLayout,
     component: Home,
   },
   /* Admin pages */
@@ -43,21 +38,21 @@ export const routes: Array<Route> = [
       {
         component: ListUsers,
       },
+      {
+        component: User,
+      },
     ],
   },
   /* Users pages - Admin can also access */
   {
-    path: UserPages.path,
     layout: AppLayout,
     guard: NeedsLogin,
-    routes: [
-      {
-        component: User,
-      },
-      {
-        component: Profile,
-      },
-    ],
+    component: Profile,
+  },
+  {
+    layout: AppLayout,
+    guard: NeedsLogin,
+    component: ApiaryList,
   },
   /* Auth pages */
   {
