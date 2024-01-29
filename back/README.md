@@ -11,6 +11,83 @@ HIVE FIVE back is a Symfony app containing:
 - Symfony CLI
 - Docker
 
+## Model
+```mermaid
+classDiagram
+    class User 
+    User : -UUID uid
+    User : -string email
+    User : -string password
+    User : -string firstName
+    User : -string lastName
+    User : -bool admin
+    User : -Collection<Apiary> apiaries
+    User : -DateTime createdAt
+    User : -DateTime updatedAt
+    User : -DateTime deletedAt
+    
+    class Apiary
+    Apiary : -UUID uid
+    Apiary : -string name
+    Apiary : -string address
+    Apiary : -User user
+    Apiary : -Collection<Beehive> beehives
+    Apiary : -DateTime createdAt
+    Apiary : -DateTime updatedAt
+    Apiary : -DateTime deletedAt
+    
+    class Beehive
+    Beehive : -UUID uid
+    Beehive : -string name
+    Beehive : -BeeType bee
+    Beehive : -int age
+    Beehive : -Apiary apiary
+    Beehive : -Collection<Riser> risers
+    Beehive : -Collection<Frame> frames
+    Beehive : -DateTime createdAt
+    Beehive : -DateTime updatedAt
+    Beehive : -DateTime deletedAt
+    
+    class BeeType{
+        <<enumeration>>
+        Black
+        Italian
+        Caucasian
+        Carnolien
+        Buckfast
+    }
+    
+    class Riser
+    Riser : -UUID uid
+    Riser : -string name
+    Riser : -Beehive beehive
+    Riser : -User user
+    Riser : -Collection<Frame> frames
+    Riser : -DateTime createdAt
+    Riser : -DateTime updatedAt
+    Riser : -DateTime deletedAt
+    
+    class Frame
+    Frame : -UUID uid
+    Frame : -string label
+    Frame : -FrameType type
+    Frame : -User user
+    Frame : -DateTime createdAt
+    Frame : -DateTime updatedAt
+    Frame : -DateTime deletedAt
+    
+    class FrameType{
+        <<enumeration>>
+        Riser
+        Beehive
+    }
+    
+    User --|> Apiary: has
+    Apiary --|> Beehive: has
+    Beehive --|> Riser: has
+    Riser --|> Frame: has
+```
+
 ## Setup
 
 When using Symfony CLI locally, you're done!

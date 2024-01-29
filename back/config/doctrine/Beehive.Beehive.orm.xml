@@ -22,6 +22,8 @@
             <join-column nullable="false" on-delete="CASCADE" />
         </many-to-one>
 
+        <many-to-many field="frames" target-entity="App\Domain\Frame\Frame" />
+
         <one-to-many field="risers" target-entity="App\Domain\Riser\Riser" mapped-by="beehive" />
 
         <field name="createdAt" type="datetime">

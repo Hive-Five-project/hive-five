@@ -34,6 +34,18 @@ class BeehiveRepository extends ServiceEntityRepository implements BeehiveReposi
         return $beehive;
     }
 
+    public function isFrameAlreadyRelated(array $frames): bool
+    {
+        $qb = $this->createQueryBuilder('beehive');
+
+        $qb->add('select', 'beehive')
+            ->add('from', 'App\Domain\Beehive\Beehive beehive')
+            ->add('where', $qb->expr()->isMemberOf(':frames', 'beehive.frames'))
+            ->setParameter('frames', $frames);
+
+        return $qb->getQuery()->getOneOrNullResult() !== null;
+    }
+
     public function listBeehiveByApiary(Apiary $apiary): array
     {
         return $this->findBy(['apiary' => $apiary]);
