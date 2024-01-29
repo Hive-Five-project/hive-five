@@ -39,10 +39,17 @@ export default {
       content: 'Essayez de rafraîchir la page ou bien réessayez plus tard. Si vous avez besoin d\'une aide immédiate, merci de nous contacter.',
     },
     apiaryList: {
-      documentTitle: 'Mes ruchers',
+      documentTitle: 'Liste des ruchers',
     },
     login: {
       documentTitle: 'Identification',
+      errorTitle: 'Une erreur est survenue',
+      authenticationFailed: 'L\'authentification a échoué.',
+      inputEmail: 'Adresse email',
+      inputPassword: 'Mot de passe',
+      forgotPassword: 'Mot de passe oublié ?',
+      noAccount: 'Pas de compte ?',
+      askAccount: 'Demander-en un',
     },
     logout: {
       documentTitle: 'Déconnexion',

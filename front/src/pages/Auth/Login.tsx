@@ -11,7 +11,7 @@ import { route } from '@app/router/generator';
 import ForgotPassword from '@app/pages/Auth/ForgotPassword';
 import Admin from '@app/pages/Admin/Admin';
 import User from '@app/pages/Admin/User/User';
-import { Button, Container, Space, Stack } from '@mantine/core';
+import { Alert, Button, Container, Space, Stack } from '@mantine/core';
 import { CompactTextInput, CompactPasswordInput } from '@app/components/UI/CompactInput/CompactInput';
 import { LOGIN_PATH } from '@app/paths';
 
@@ -56,7 +56,7 @@ function useLogin() {
     login,
     loading,
     error: hasError,
-    authenticationErrorMessage: hasError ? (data?.message ?? 'L\'authentification a échouée.') : null,
+    authenticationErrorMessage: hasError ? (data?.message ?? trans('pages.login.authenticationFailed')) : null,
   };
 }
 
@@ -82,25 +82,32 @@ const Login = declareRoute(function Page() {
     <form id="login" onSubmit={onSubmit}>
       <h2>{trans('pages.login.documentTitle')}</h2>
       <Stack>
+        {error &&
+          <Alert
+            title={trans('pages.login.errorTitle')}
+            variant="outline"
+            color="red"
+          >
+            {authenticationErrorMessage}
+          </Alert>
+        }
         <CompactTextInput
-          id="username"
-          label="Nom d'utilisateur ou email"
+          id="email"
+          label={trans('pages.login.inputEmail')}
           type="email"
           value={username}
           onChange={(e) => setUsername(e.target.value)}
           required
           autoFocus
-          autoComplete="username"
-          error={error ? authenticationErrorMessage : null}
+          autoComplete="email"
         />
         <CompactPasswordInput
           id="password"
-          label="Mot de passe"
+          label={trans('pages.login.inputPassword')}
           value={password}
           onChange={(e) => setPassword(e.target.value)}
           required
           autoComplete="current-password"
-          error={error ? authenticationErrorMessage : null}
         />
         <Button
           type="submit"
@@ -113,10 +120,10 @@ const Login = declareRoute(function Page() {
     <Space h="md" />
     <Stack align="center">
       <div>
-        <Link to={route(ForgotPassword)}>Mot de passe oublié ?</Link>
+        <Link to={route(ForgotPassword)}>{trans('pages.login.forgotPassword')}</Link>
       </div>
       <div>
-        Pas de compte ? <Link to={route(ForgotPassword)}>Demandez-en un</Link>
+        {trans('pages.login.noAccount')} <Link to={route(ForgotPassword)}>{trans('pages.login.askAccount')}</Link>
       </div>
     </Stack>
   </Container>;
