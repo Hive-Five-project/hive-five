@@ -48,6 +48,7 @@ final class BuyingFactory extends ModelFactory
         return [
             'label' => self::faker()->unique()->word(),
             'price' => self::faker()->randomFloat(2, 10, 1000),
+            'date' => self::faker()->dateTime(),
             'apiary' => self::faker()->optional()->randomElement(ApiaryFactory::all()),
             'user' => UserFactory::random(),
         ];

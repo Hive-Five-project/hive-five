@@ -18,12 +18,14 @@ class Buying
 
     private string $label;
     private float $price;
+    private ?\DateTime $date;
     private ?Apiary $apiary;
     private User $user;
 
     public function __construct(
         string $label,
         float $price,
+        ?\DateTime $date,
         ?Apiary $apiary,
         User $user,
     ) {
@@ -31,6 +33,7 @@ class Buying
 
         $this->label = $label;
         $this->price = $price;
+        $this->date = $date;
         $this->apiary = $apiary;
         $this->user = $user;
     }
@@ -38,11 +41,13 @@ class Buying
     public function update(
         string $label,
         float $price,
+        ?\DateTime $date,
         ?Apiary $apiary,
         User $user
     ): void {
         $this->label = $label;
         $this->price = $price;
+        $this->date = $date;
         $this->apiary = $apiary;
         $this->user = $user;
     }
@@ -65,5 +70,10 @@ class Buying
     public function getUser(): User
     {
         return $this->user;
+    }
+
+    public function getDate(): ?\DateTime
+    {
+        return $this->date;
     }
 }
