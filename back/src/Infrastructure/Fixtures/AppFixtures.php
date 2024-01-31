@@ -6,6 +6,7 @@ namespace App\Infrastructure\Fixtures;
 
 use App\Infrastructure\Fixtures\Factory\ApiaryFactory;
 use App\Infrastructure\Fixtures\Factory\BeehiveFactory;
+use App\Infrastructure\Fixtures\Factory\BuyingFactory;
 use App\Infrastructure\Fixtures\Factory\FrameFactory;
 use App\Infrastructure\Fixtures\Factory\RiserFactory;
 use App\Infrastructure\Fixtures\Factory\UserFactory;
@@ -33,6 +34,9 @@ class AppFixtures extends Fixture
 
         /* Risers */
         RiserFactory::createMany(30);
+
+        /* Buyings */
+        BuyingFactory::createMany(10);
 
         $manager->flush();
     }
