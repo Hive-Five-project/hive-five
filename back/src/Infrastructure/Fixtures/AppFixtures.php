@@ -7,6 +7,7 @@ namespace App\Infrastructure\Fixtures;
 use App\Infrastructure\Fixtures\Factory\ApiaryFactory;
 use App\Infrastructure\Fixtures\Factory\BeehiveFactory;
 use App\Infrastructure\Fixtures\Factory\BuyingFactory;
+use App\Infrastructure\Fixtures\Factory\FrameFactory;
 use App\Infrastructure\Fixtures\Factory\RiserFactory;
 use App\Infrastructure\Fixtures\Factory\UserFactory;
 use Doctrine\Bundle\FixturesBundle\Fixture;
@@ -24,6 +25,9 @@ class AppFixtures extends Fixture
 
         /* Apiaries */
         ApiaryFactory::createMany(15);
+
+        /* Frames */
+        FrameFactory::createMany(70);
 
         /* Beehives */
         BeehiveFactory::createMany(20);

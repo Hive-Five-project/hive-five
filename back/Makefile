@@ -197,7 +197,3 @@ test:
 ## Test - Test & update deprecations baseline (see ./docs/res/tests.md)
 test.update-baseline: export UPDATE_DEPRECATIONS_BASELINE = 1
 test.update-baseline: test
-
-test.phpunit@integration: export APP_ENV = test
-test.phpunit@integration:
-	symfony php bin/phpunit --colors=always --testdox

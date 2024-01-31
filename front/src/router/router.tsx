@@ -37,10 +37,6 @@ export function declareAdminRoute(Component: React.FunctionComponent, path: stri
   return declareRoute(Component, path, 'admin');
 }
 
-export function declareUserRoute(Component: React.FunctionComponent, path: string): Page {
-  return declareRoute(Component, path, 'user');
-}
-
 export function renderRoutes(routes: Array<Route> = []) {
   return routes.map((route, i) => {
     // Allow to provide a guard component, e.g: redirect to login on unauthenticated access to a private page

@@ -1,0 +1,37 @@
+.root {
+  position: relative;
+}
+label.label {
+  pointer-events: none;
+  position: absolute;
+  z-index: 1;
+  font-size: 12px;
+  padding-left: 12px;
+  padding-top: 8px;
+  color: var(--mantine-color-gray-6);
+  font-weight: normal;
+  line-height: 18px;
+  transition: all .1s ease-out;
+}
+.has-left-section {
+  label.label {
+    padding-left: 34px;
+  }
+}
+div.input, input.input, .input input {
+  height: 50px;
+  padding-top: 16px;
+  font-size: 16px;
+  background-color: var(--mantine-color-white);
+}
+.no-value {
+  div.input, input.input, .input input {
+    padding-top: 0;
+  }
+  label.label {
+    cursor: text;
+    font-size: 16px;
+    padding-top: 0;
+    line-height: 50px;
+  }
+}

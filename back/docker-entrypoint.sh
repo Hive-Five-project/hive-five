@@ -38,5 +38,6 @@ chown -R www-data:$(whoami) var
 
 make db.install
 make install.jwt
-ps ax | grep 'php-fpm: master' | awk -F ' ' '{print $1}' | xargs kill -9 2>/dev/null || true
+rm -rf /root/.symfony5
+ps ax | grep 'php-fpm' | awk -F ' ' '{print $1}' | xargs kill -9 2>/dev/null || true
 exec docker-php-entrypoint "$@"

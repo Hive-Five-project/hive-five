@@ -1,0 +1,9 @@
+query($uid: ULID!) {
+  Frame {
+    find(uid: $uid) {
+      uid
+      label
+      type
+    }
+  }
+}

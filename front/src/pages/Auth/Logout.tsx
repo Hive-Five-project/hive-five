@@ -7,6 +7,7 @@ import { useAuthContext } from '@app/hooks/useAuthContext';
 import { useDocumentTitle } from '@app/hooks/useDocumentTitle';
 import { trans } from '@app/translations';
 import Login from '@app/pages/Auth/Login';
+import { LOGOUT_PATH } from '@app/paths';
 
 const LOGOUT_REDIRECT_DELAY = 1000;
 
@@ -70,6 +71,6 @@ const Logout = declareRoute(function Page() {
   }
 
   return <div>{'Vous êtes déconnecté. Redirection vers la page d\'accueil…'}</div>;
-}, '/logout');
+}, LOGOUT_PATH);
 
 export default Logout;

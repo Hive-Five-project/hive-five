@@ -42,11 +42,13 @@ class ListRisersStory extends Story
         RiserFactory::new()->create([
             'name' => 'Riser for user User',
             'beehive' => BeehiveFactory::find(['uid' => self::ULID_BEEHIVE]),
+            'user' => UserFactory::find(['uid' => UserFactory::ULID_USER]),
         ])->forceSet('uid', new Ulid(self::ULID_RISER))->save();
 
         RiserFactory::new()->create([
             'name' => 'Riser for user User',
             'beehive' => BeehiveFactory::find(['uid' => self::ULID_BEEHIVE]),
+            'user' => UserFactory::find(['uid' => UserFactory::ULID_USER]),
         ])->forceSet('uid', new Ulid(self::ULID_RISER_2))->save();
 
         /* Another user */

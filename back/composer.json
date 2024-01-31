@@ -1,4 +1,6 @@
 {
+    "name": "hivefive/api",
+    "description": "An API GraphQL for HiveFive",
     "type": "project",
     "license": "proprietary",
     "minimum-stability": "stable",

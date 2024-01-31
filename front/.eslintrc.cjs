@@ -9,7 +9,7 @@ module.exports = {
     'plugin:json/recommended',
     'plugin:react-hooks/recommended',
   ],
-  ignorePatterns: ['dist', '.eslintrc.cjs'],
+  ignorePatterns: ['dist', '.eslintrc.cjs', 'postcss.config.cjs'],
   parser: '@typescript-eslint/parser',
   parserOptions: {
     ecmaVersion: 'latest',
@@ -73,5 +73,7 @@ module.exports = {
     "@typescript-eslint/no-unused-vars": [
       "error"
     ],
+
+    "indent": ["warn", 2]
   },
 }

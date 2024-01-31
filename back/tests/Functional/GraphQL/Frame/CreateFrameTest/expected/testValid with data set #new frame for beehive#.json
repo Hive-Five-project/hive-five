@@ -1,0 +1,10 @@
+{
+  "data": {
+    "Frame": {
+      "create": {
+        "label": "new frame for beehive",
+        "type": "Beehive"
+      }
+    }
+  }
+}

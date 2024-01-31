@@ -38,6 +38,9 @@ export default {
       lead: 'Désolé, le service rencontre un problème, nous travaillons pour le résoudre le plus rapidement possible.',
       content: 'Essayez de rafraîchir la page ou bien réessayez plus tard. Si vous avez besoin d\'une aide immédiate, merci de nous contacter.',
     },
+    apiaryList: {
+      documentTitle: 'Mes ruchers',
+    },
     login: {
       documentTitle: 'Identification',
     },

@@ -12,8 +12,9 @@ import { errorsByPath } from '@app/api/errors';
 import { AppGraphQLError, GraphQLErrorCodes } from '@app/api/errors/GraphQLErrorCodes';
 import { FormErrorsMap } from '@app/components/UI/Form';
 import { MutationResult } from '@apollo/client';
-import { Alert, Button, TextField } from '@mui/material';
+import { Button, TextInput, Alert } from '@mantine/core';
 import { FormUtils } from '@app/components/UI/Form/index';
+import { RESET_PASSWORD_PATH } from '@app/paths';
 
 interface MutationResponse {
   User: {
@@ -29,8 +30,8 @@ const ResetPassword = declareRoute(function Page() {
   useDocumentTitle(trans('pages.resetPassword.documentTitle'));
 
   const { token } = useParams();
-  const [password, setPassword] = useState<string | null>(null);
-  const [passwordConfirm, setPasswordConfirm] = useState<string | null>(null);
+  const [password, setPassword] = useState<string>('');
+  const [passwordConfirm, setPasswordConfirm] = useState<string>('');
   const [resetPassword, resetPasswordState] = useMutation<MutationResponse>(ResetPasswordMutation);
 
   const hasSuccess = resetPasswordState.called && resetPasswordState.data?.User.resetPassword;
@@ -91,8 +92,7 @@ const ResetPassword = declareRoute(function Page() {
     {FormUtils.arrayify(mappedErrors.__root).map((error, i) => <Alert key={i} color="error">{error}</Alert>)}
 
     <form id="forgot-password" onSubmit={onSubmit}>
-
-      <TextField
+      <TextInput
         id="new-password"
         label="Nouveau mot de passe"
         type="password"
@@ -100,13 +100,11 @@ const ResetPassword = declareRoute(function Page() {
         onChange={(e) => setPassword(e.target.value)}
         required
         disabled={hasSuccess}
-        InputProps={{
-          autoFocus: true,
-          autoComplete: 'new-password',
-        }}
+        autoFocus
+        autoComplete="new-password"
         error={!!mappedErrors.newPassword}
       />
-      <TextField
+      <TextInput
         id="new-password-confirm"
         label="Confirmer le nouveau mot de passe"
         type="password"
@@ -114,17 +112,18 @@ const ResetPassword = declareRoute(function Page() {
         onChange={(e) => setPasswordConfirm(e.target.value)}
         required
         disabled={hasSuccess}
-        InputProps={{
-          autoComplete: 'new-password',
-        }}
+        autoComplete="new-password"
         error={!!mappedErrors.newPasswordConfirm}
       />
-
       <div>
-        <Button href={route(Login)}>Retour à l&apos;identification</Button>
+        <Button
+          component="a"
+          href={route(Login)}
+        >
+          Retour à l&apos;identification
+        </Button>
         <Button
           type="submit"
-          color="primary"
           disabled={resetPasswordState.loading || hasSuccess}
         >
           Changer le mot de passe
@@ -132,6 +131,6 @@ const ResetPassword = declareRoute(function Page() {
       </div>
     </form>
   </div>;
-}, '/reset-password/:token');
+}, RESET_PASSWORD_PATH);
 
 export default ResetPassword;
