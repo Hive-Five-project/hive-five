@@ -5,14 +5,14 @@ import { ReactElement, cloneElement } from "react";
 
 interface ApiaryCardProps {
   title?: string
-  link: string
+  path: string
   icon: ReactElement
 }
 
 export default function ListCard(props: ApiaryCardProps) {
   return <Paper
     component={Link}
-    to={props.link}
+    to={props.path}
     px="md"
     bg="green"
     c="white"
