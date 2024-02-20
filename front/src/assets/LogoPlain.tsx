@@ -1,9 +1,10 @@
 interface Props {
   style?: React.CSSProperties
+  className?: string
 }
 
-export default function LogoPlain({ style }: Props) {
-  return <svg viewBox="0 0 549 755" style={style}>
+export default function LogoPlain(props: Props) {
+  return <svg viewBox="0 0 549 755" style={props.style} className={props.className}>
     <image transform="matrix(0.7654 0 0 0.7654 -88 -49)">
     </image>
     <path d="M404,179c-12.5-22.4-70-45.2-105-38c-33.8,7-60.1,63.8-63,110c-1,16,6,23,17,31c31.2,22.7,53.5,15.7,71,4c30-20,35-42,53-55
