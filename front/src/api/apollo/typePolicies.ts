@@ -2,10 +2,14 @@ import { TypePolicies } from '@apollo/client';
 
 export enum Types {
   User = 'User',
+  Apiary = 'Apiary',
 }
 
 export default {
   [Types.User]: {
+    keyFields: ['uid'],
+  },
+  [Types.Apiary]: {
     keyFields: ['uid'],
   },
   Query: {
@@ -16,6 +20,14 @@ export default {
           me: {
             merge: (existing: object, incoming: object) => ({ ...existing, ...incoming }),
           },
+          list: {
+            merge: (incoming: object) => incoming,
+          },
+        },
+      },
+      Apiary: {
+        merge: (existing, incoming) => ({ ...existing, ...incoming }),
+        fields: {
           list: {
             merge: (incoming: object) => incoming,
           },

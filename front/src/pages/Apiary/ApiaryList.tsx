@@ -34,7 +34,11 @@ export default declareRoute(function ApiaryList() {
       <ListCard
         key={apiary.uid}
         title={apiary.name}
+<<<<<<< HEAD
         link={`${APIARY_ROOT_PATH}/${apiary.uid}`}
+=======
+        path={`${APIARY_ROOT_PATH}/${apiary.uid}`}
+>>>>>>> bb86e329af1e40c9175aacf3504b008ffde56f06
         icon={<BeeHiveGroupIcon />}
       />);
   };
