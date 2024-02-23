@@ -7,11 +7,38 @@ on:
       - synchronize
       - edited
 jobs:
+  check-title:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check title
+        id: check-title
+        run: |
+          PR_TITLE="${{ github.event.pull_request.title }}"
+          PR_ID="${{ github.event.pull_request.number }}"
+          REGEX="^\[(FRONT|BACK|DEVOPS|TEST|DOCS|FIX|REFACTOR|STYLE|CHORE|CI|BUILD|PERF|REVERT|WIP)\/{0,1}[A-Z]*\] [a-zA-Z0-9+,;&\/ ]+$"
+          if [[ ! $PR_TITLE =~ $REGEX ]]; then
+            echo "Pull request title is not prefixed with one of the following verbs: FRONT, BACK, DEVOPS, TEST, DOCS, FIX, REFACTOR, STYLE, CHORE, CI, BUILD, PERF, REVERT, WIP"
+            echo " "
+            echo "If you want to merge this pull request, please update the title to match the following format:"
+            echo " "
+            echo "  [<VERB>] <description>"
+            echo " or "
+            echo "  [<VERB>/<SUBJECT>] <description>"
+            echo " "
+            echo "Example:"
+            echo " "
+            echo "  [FRONT] Add new button"
+            exit 1
+          fi
   check-branches:
     runs-on: ubuntu-latest
     steps:
       - name: Check branches
         run: |
+          if [ ${{ github.head_ref }} == "main" ]; then
+            echo "Pull requests from main branch are not allowed."
+            exit 1
+          fi
           if [ ${{ github.head_ref }} != "staging" ] && [ ${{ github.base_ref }} == "main" ]; then
             echo "Merge requests to main branch are only allowed from staging branch."
             exit 1
