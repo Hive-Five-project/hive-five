@@ -40,6 +40,12 @@ export default {
     },
     apiaryList: {
       documentTitle: 'Liste des ruchers',
+      addButtonText: 'Ajouter un rucher',
+    },
+    apiaryForm: {
+      documentTitle: 'Formulaire de création des ruchers',
+      addApiaryName : 'Nom du rucher',
+      addApiaryAddress : 'Addresse du rucher'
     },
     login: {
       documentTitle: 'Identification',

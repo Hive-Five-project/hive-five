@@ -5,22 +5,14 @@ import { ReactElement, cloneElement } from "react";
 
 interface ApiaryCardProps {
   title?: string
-<<<<<<< HEAD
-  link: string
-=======
   path: string
->>>>>>> bb86e329af1e40c9175aacf3504b008ffde56f06
   icon: ReactElement
 }
 
 export default function ListCard(props: ApiaryCardProps) {
   return <Paper
     component={Link}
-<<<<<<< HEAD
-    to={props.link}
-=======
     to={props.path}
->>>>>>> bb86e329af1e40c9175aacf3504b008ffde56f06
     px="md"
     bg="green"
     c="white"

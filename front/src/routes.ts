@@ -14,6 +14,7 @@ import Home from '@app/pages/Home.tsx';
 import ListUsers from '@app/pages/Admin/User/ListUsers/ListUsers.tsx';
 import NeedsAdmin from '@app/guards/NeedsAdmin.tsx';
 import ApiaryList from './pages/Apiary/ApiaryList';
+import ApiaryForm from './pages/Apiary/Forms/ApiaryForm';
 
 export const AdminPages: RouteDeclaration = {
   path: '/admin',
@@ -69,6 +70,10 @@ export const routes: Array<Route> = [
   },
   {
     component: ResetPassword,
+    layout: BlankLayout,
+  },
+  {
+    component: ApiaryForm,
     layout: BlankLayout,
   },
   /* Error pages */
