@@ -12,9 +12,10 @@ import { errorsByPath } from '@app/api/errors';
 import { AppGraphQLError, GraphQLErrorCodes } from '@app/api/errors/GraphQLErrorCodes';
 import { FormErrorsMap } from '@app/components/UI/Form';
 import { MutationResult } from '@apollo/client';
-import { Button, TextInput, Alert } from '@mantine/core';
+import { Button, Alert, Stack, Container } from '@mantine/core';
 import { FormUtils } from '@app/components/UI/Form/index';
 import { RESET_PASSWORD_PATH } from '@app/paths';
+import CompactTextInput from '@app/components/UI/CompactInput/CompactTextInput';
 
 interface MutationResponse {
   User: {
@@ -79,58 +80,55 @@ const ResetPassword = declareRoute(function Page() {
     });
   }
 
-  return <div>
-    <h2>{trans('pages.resetPassword.documentTitle')}</h2>
-
-    {hasSuccess && <Alert color="success">
-      Votre mot de passe a été réinitialisé.
-
-      Vous pouvez à présent <Link to={route(Login)}>vous connecter</Link>.
-    </Alert>}
-
-
-    {FormUtils.arrayify(mappedErrors.__root).map((error, i) => <Alert key={i} color="error">{error}</Alert>)}
-
+  return <Container px="md">
     <form id="forgot-password" onSubmit={onSubmit}>
-      <TextInput
-        id="new-password"
-        label="Nouveau mot de passe"
-        type="password"
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-        required
-        disabled={hasSuccess}
-        autoFocus
-        autoComplete="new-password"
-        error={!!mappedErrors.newPassword}
-      />
-      <TextInput
-        id="new-password-confirm"
-        label="Confirmer le nouveau mot de passe"
-        type="password"
-        value={passwordConfirm}
-        onChange={(e) => setPasswordConfirm(e.target.value)}
-        required
-        disabled={hasSuccess}
-        autoComplete="new-password"
-        error={!!mappedErrors.newPasswordConfirm}
-      />
-      <div>
-        <Button
-          component="a"
-          href={route(Login)}
-        >
-          Retour à l&apos;identification
-        </Button>
+      <h2>{trans('pages.resetPassword.documentTitle')}</h2>
+      <Stack>
+        {hasSuccess && <Alert color="success">
+          Votre mot de passe a été réinitialisé.
+
+          Vous pouvez à présent <Link to={route(Login)}>vous connecter</Link>.
+        </Alert>}
+        {FormUtils.arrayify(mappedErrors.__root).map((error, i) => <Alert key={i} color="error">{error}</Alert>)}
+        <CompactTextInput
+          id="new-password"
+          label={trans('pages.resetPassword.newPassword')}
+          type="password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          required
+          disabled={hasSuccess}
+          autoFocus
+          autoComplete="new-password"
+          error={!!mappedErrors.newPassword}
+        />
+        <CompactTextInput
+          id="new-password-confirm"
+          label={trans('pages.resetPassword.newPasswordConfirm')}
+          type="password"
+          value={passwordConfirm}
+          onChange={(e) => setPasswordConfirm(e.target.value)}
+          required
+          disabled={hasSuccess}
+          autoComplete="new-password"
+          error={!!mappedErrors.newPasswordConfirm}
+        />
         <Button
           type="submit"
           disabled={resetPasswordState.loading || hasSuccess}
         >
-          Changer le mot de passe
+          {trans('pages.resetPassword.changePassword')}
         </Button>
-      </div>
+        <Button
+          component="a"
+          variant="outline"
+          href={route(Login)}
+        >
+          {trans('pages.resetPassword.goBack')}
+        </Button>
+      </Stack>
     </form>
-  </div>;
+  </Container>;
 }, RESET_PASSWORD_PATH);
 
 export default ResetPassword;
