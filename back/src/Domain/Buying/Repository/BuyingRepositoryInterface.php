@@ -6,6 +6,7 @@ namespace App\Domain\Buying\Repository;
 
 use App\Domain\Buying\Buying;
 use App\Domain\Common\Exception\NotFoundException;
+use App\Domain\User\User;
 use Symfony\Component\Uid\Ulid;
 
 /**
@@ -21,4 +22,6 @@ interface BuyingRepositoryInterface
     public function save(Buying $buying): void;
 
     public function delete(Buying $buying): void;
+
+    public function listMyBuyings(User $user): array;
 }

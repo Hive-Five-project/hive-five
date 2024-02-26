@@ -1,0 +1,32 @@
+Buying:
+  type: object
+  config:
+    description: 'A buying transaction'
+
+    fields:
+
+      uid:
+        type: ULID!
+        description: 'Unique identifier for the buying transaction'
+
+      label:
+        type: String!
+        description: 'Label or description of the buying transaction'
+
+      apiary:
+        type: Apiary
+        description: 'Apiary where the buying is located'
+
+      price:
+        type: Float!
+        description: 'The price associated with the buying transaction'
+
+      date:
+        type: DateTime
+        description: 'The date the buying transaction was made'
+
+      createdAt:
+        type: DateTime!
+        description: 'Creation date of the buying transaction'
+
+

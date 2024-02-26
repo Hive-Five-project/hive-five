@@ -1,0 +1,12 @@
+mutation($payload: BuyingPayload!) {
+  Buying {
+    create(payload: $payload) {
+      label
+      price
+      apiary {
+        uid
+      }
+      date
+    }
+  }
+}

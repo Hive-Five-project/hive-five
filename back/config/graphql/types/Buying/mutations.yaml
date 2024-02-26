@@ -1,0 +1,24 @@
+BuyingMutations:
+  type: object
+  config:
+    fields:
+
+      create:
+        type: Buying
+        resolve: "@=mutation('Buying.create', args)"
+        access: "@=isAuthenticated()"
+        description: Ajouter une nouvelle transaction d'achat
+        args:
+          payload:
+            type: BuyingPayload!
+
+
+      delete:
+        type: ULID!
+        resolve: "@=mutation('Buying.delete', args['uid'])"
+        access: "@=isAuthenticated()"
+        description: Supprimer une transaction d'achat
+        args:
+          uid:
+            type: ULID!
+            description: 'Unique identifier for the buying transaction'

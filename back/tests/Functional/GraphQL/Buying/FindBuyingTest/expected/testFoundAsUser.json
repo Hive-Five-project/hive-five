@@ -1,0 +1,16 @@
+{
+  "data": {
+    "Buying": {
+      "find": {
+        "uid": "01H5KQW6EBYNGSWRE09ANVZAER",
+        "label": "Buying for user",
+        "price": 100.00,
+        "apiary": {
+          "uid": "01H5KQW6EBYNGSWRE09ANVREXX",
+          "name": "Custom apiary for User"
+        },
+        "date": null
+      }
+    }
+  }
+}
