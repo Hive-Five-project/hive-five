@@ -1,7 +1,7 @@
 import { APIARY_ADD_PATH, APIARY_LIST_PATH, APIARY_ROOT_PATH } from '@app/paths';
 import { declareRoute } from '@app/router/router';
 import { trans } from '@app/translations';
-import { Container, Title, SimpleGrid, Paper, Box } from '@mantine/core';
+import { Container, Title, SimpleGrid, Paper, Box, Center } from '@mantine/core';
 import { useDocumentTitle } from '@mantine/hooks';
 import { useQuery } from '@apollo/client';
 import ListApiariesQuery from '@graphql/query/apiary/ListApiaries.graphql';
@@ -62,9 +62,11 @@ export default declareRoute(function ApiaryList() {
       bg="var(--mantine-color-yellow-0)"
       ta="center"
     >
-      <Box p={{ base: "sm", xs: "lg" }} className={classes['icon-container']} >
+      <Center>
+      <Box p={{ base: "sm", xs: "lg" }}  >
         <AddApiaryIcon />
       </Box>
+      </Center>
       <Title className={classes.title} py="xs" order={2}>{trans('pages.apiaryList.addButtonText')}</Title>
     </Paper>
   };
