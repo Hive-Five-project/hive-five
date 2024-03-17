@@ -15,7 +15,7 @@ import { MutationResult } from '@apollo/client';
 import { Button, Alert, Stack, Container } from '@mantine/core';
 import { FormUtils } from '@app/components/UI/Form/index';
 import { RESET_PASSWORD_PATH } from '@app/paths';
-import CompactTextInput from '@app/components/UI/CompactInput/CompactTextInput';
+import CompactPasswordInput from '@app/components/UI/CompactInput/CompactPasswordInput';
 
 interface MutationResponse {
   User: {
@@ -38,20 +38,23 @@ const ResetPassword = declareRoute(function Page() {
   const hasSuccess = resetPasswordState.called && resetPasswordState.data?.User.resetPassword;
 
   function extractRootErrors({ error, data } : MutationResult<MutationResponse>) {
-    console.info({ error });
-
     const defaultErrorMessage = 'Une erreur est survenue.';
 
-    if (data?.User?.resetPassword === false) {
+    if ((data?.User?.resetPassword != null) && data.User.resetPassword === false) {
       return defaultErrorMessage;
     }
 
     if (!error) {
       return undefined;
     }
+    
+    const graphQLErrors: AppGraphQLError[] = error.graphQLErrors as AppGraphQLError[];
+    if (graphQLErrors[0]?.code === GraphQLErrorCodes.INVALID_PAYLOAD) {
+      return graphQLErrors[0]?.api_problem?.violations[0].title ?? defaultErrorMessage;
+    }
 
     // if we have a custom error message, display it:
-    if ((error.graphQLErrors as AppGraphQLError[])?.[0]?.code === GraphQLErrorCodes.CUSTOM_USER_ERROR) {
+    if (graphQLErrors[0]?.code === GraphQLErrorCodes.CUSTOM_USER_ERROR) {
       return error.graphQLErrors[0]?.message ?? defaultErrorMessage;
     }
 
@@ -84,16 +87,22 @@ const ResetPassword = declareRoute(function Page() {
     <form id="forgot-password" onSubmit={onSubmit}>
       <h2>{trans('pages.resetPassword.documentTitle')}</h2>
       <Stack>
-        {hasSuccess && <Alert color="success">
+        {hasSuccess && <Alert color="green">
           Votre mot de passe a été réinitialisé.
 
           Vous pouvez à présent <Link to={route(Login)}>vous connecter</Link>.
         </Alert>}
-        {FormUtils.arrayify(mappedErrors.__root).map((error, i) => <Alert key={i} color="error">{error}</Alert>)}
-        <CompactTextInput
+        {FormUtils.arrayify(mappedErrors.__root).map((error, i) =>
+          <Alert
+            key={i}
+            title={error}
+            color="red"
+            variant="outline"
+          ></Alert>,
+        )}
+        <CompactPasswordInput
           id="new-password"
           label={trans('pages.resetPassword.newPassword')}
-          type="password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
           required
@@ -102,10 +111,9 @@ const ResetPassword = declareRoute(function Page() {
           autoComplete="new-password"
           error={!!mappedErrors.newPassword}
         />
-        <CompactTextInput
+        <CompactPasswordInput
           id="new-password-confirm"
           label={trans('pages.resetPassword.newPasswordConfirm')}
-          type="password"
           value={passwordConfirm}
           onChange={(e) => setPasswordConfirm(e.target.value)}
           required
