@@ -13,3 +13,4 @@ export const PROFILE_PATH = '/profile';
 export const APIARY_ROOT_PATH = '/apiary';
 export const APIARY_LIST_PATH = APIARY_ROOT_PATH + '/list';
 export const APIARY_ADD_PATH = APIARY_ROOT_PATH + '/add';
+export const APIARY_UPDATE_PATH = APIARY_ROOT_PATH + '/update/:uid';

@@ -1,8 +1,9 @@
 mutation($payload: ApiaryPayload!) {
   Apiary {
     create(payload: $payload) {
+      uid
       name
-      address  
+      address
     }
   }
 }

@@ -14,7 +14,8 @@ import Home from '@app/pages/Home.tsx';
 import ListUsers from '@app/pages/Admin/User/ListUsers/ListUsers.tsx';
 import NeedsAdmin from '@app/guards/NeedsAdmin.tsx';
 import ApiaryList from './pages/Apiary/ApiaryList';
-import ApiaryForm from './pages/Apiary/Forms/ApiaryForm';
+import ApiaryCreate from './pages/Apiary/Forms/ApiaryCreate.tsx';
+import ApiaryUpdate from '@app/pages/Apiary/Forms/ApiaryUpdate.tsx';
 
 export const AdminPages: RouteDeclaration = {
   path: '/admin',
@@ -73,7 +74,11 @@ export const routes: Array<Route> = [
     layout: BlankLayout,
   },
   {
-    component: ApiaryForm,
+    component: ApiaryCreate,
+    layout: BlankLayout,
+  },
+  {
+    component: ApiaryUpdate,
     layout: BlankLayout,
   },
   /* Error pages */

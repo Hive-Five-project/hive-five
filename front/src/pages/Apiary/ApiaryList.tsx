@@ -1,4 +1,4 @@
-import { APIARY_ADD_PATH, APIARY_LIST_PATH, APIARY_ROOT_PATH } from '@app/paths';
+import { APIARY_LIST_PATH, APIARY_ROOT_PATH } from '@app/paths';
 import { declareRoute } from '@app/router/router';
 import { trans } from '@app/translations';
 import { Container, Title, SimpleGrid, Paper, Box, Center } from '@mantine/core';
@@ -14,7 +14,7 @@ import classes from '@app/styles/List/Card.module.scss';
 import { Link } from 'react-router-dom';
 import AddApiaryIcon from '@app/assets/AddApiaryIcon';
 import { route } from '@app/router/generator';
-import ApiaryForm from './Forms/ApiaryForm';
+import ApiaryCreate from './Forms/ApiaryCreate.tsx';
 
 interface Response {
   Apiary: {
@@ -40,9 +40,9 @@ export default declareRoute(function ApiaryList() {
       <ListCard
         key={apiary.uid}
         title={apiary.name}
-        path={`${APIARY_ROOT_PATH}/${apiary.uid}`}
+        path={`${APIARY_ROOT_PATH}/update/${apiary.uid}`}
         icon={<BeeHiveGroupIcon />}
-      />);
+      />);//todo: should change to a new page.
   };
   const renderButton = () => {
     if (loading) {
@@ -55,7 +55,7 @@ export default declareRoute(function ApiaryList() {
 
     return <Paper
       component={Link}
-      to={route(ApiaryForm)}
+      to={route(ApiaryCreate)}
       px="md"
       className={classes.card}
       c="green"
@@ -63,9 +63,9 @@ export default declareRoute(function ApiaryList() {
       ta="center"
     >
       <Center>
-      <Box p={{ base: "sm", xs: "lg" }}  >
-        <AddApiaryIcon />
-      </Box>
+        <Box p={{ base: "sm", xs: "lg" }}  >
+          <AddApiaryIcon />
+        </Box>
       </Center>
       <Title className={classes.title} py="xs" order={2}>{trans('pages.apiaryList.addButtonText')}</Title>
     </Paper>
