@@ -42,7 +42,7 @@ const Page = declareRoute(function UpdateCategory() {
 
   const { uid } = useParams();
   const notFoundHandler = useNotFoundHandler();
-  const { apiaryCreated = false } = (useLocation().state ?? {}) as RedirectFromCreationState;
+  const { apiaryCreated } = (useLocation().state ?? {}) as RedirectFromCreationState;
 
   const query = useQuery<FindApiaryQueryResponse>(FindApiaryQuery, {
     variables: { uid },

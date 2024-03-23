@@ -16,7 +16,6 @@ export function FormRootErrors({
   ...remainingProps
 }: Props) {
   const errorsArray = FormUtils.arrayify(errors);
-  console.log('errorsArray', errorsArray);
 
   if (errorsArray.length === 0) {
     return null;

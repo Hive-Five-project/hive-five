@@ -48,7 +48,7 @@ const ApiaryCreatePage = declareRoute(function ApiaryCreate() {
     }).then((response) => {
       navigate(route(ApiaryUpdate, { uid: response.data!.Apiary.create.uid }), {
         state: {
-          categoryCreated: true,
+          apiaryCreated: true,
           previousUrl,
         },
       });
