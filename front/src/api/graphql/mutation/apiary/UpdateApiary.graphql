@@ -1,0 +1,9 @@
+mutation($uid: ULID!, $payload: ApiaryPayload!) {
+  Apiary {
+    update(uid: $uid ,payload: $payload) {
+      uid
+      name
+      address
+    }
+  }
+}
