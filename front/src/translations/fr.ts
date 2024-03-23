@@ -11,7 +11,6 @@ export default {
   common: {
     loadingDataError: 'Une erreur s\'est produite lors du chargement des données',
     error: 'Une erreur est survenue',
-    error: 'Une erreur est survenue',
     loading: 'Chargement...',
     actions: {
       cancel: 'Annuler',
