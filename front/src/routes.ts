@@ -14,6 +14,7 @@ import Home from '@app/pages/Home.tsx';
 import ListUsers from '@app/pages/Admin/User/ListUsers/ListUsers.tsx';
 import NeedsAdmin from '@app/guards/NeedsAdmin.tsx';
 import ApiaryList from './pages/Apiary/ApiaryList';
+import ForgotPasswordConfirmation from './pages/Auth/ForgotPasswordConfirmation';
 import ApiaryCreate from './pages/Apiary/Forms/ApiaryCreate.tsx';
 import ApiaryUpdate from '@app/pages/Apiary/Forms/ApiaryUpdate.tsx';
 
@@ -67,6 +68,10 @@ export const routes: Array<Route> = [
   },
   {
     component: ForgotPassword,
+    layout: BlankLayout,
+  },
+  {
+    component: ForgotPasswordConfirmation,
     layout: BlankLayout,
   },
   {

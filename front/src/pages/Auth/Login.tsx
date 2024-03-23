@@ -84,7 +84,7 @@ const Login = declareRoute(function Page() {
       <Stack>
         {error &&
           <Alert
-            title={trans('pages.login.errorTitle')}
+            title={trans('common.error')}
             variant="outline"
             color="red"
           >
@@ -113,7 +113,7 @@ const Login = declareRoute(function Page() {
           type="submit"
           loading={loading}
         >
-          Se connecter
+          {trans('pages.login.connect')}
         </Button>
       </Stack>
     </form>

@@ -13,6 +13,13 @@ export const theme = createTheme({
   },
   defaultRadius: '10px',
   fontFamily: '\'Inter\', Roboto, -apple-system, Segoe UI, sans-serif',
+  components: {
+    Button: {
+      defaultProps: {
+        size: 'lg',
+      },
+    },
+  },
 });
 
 export const variantColorResolver: VariantColorsResolver = (input) => {
