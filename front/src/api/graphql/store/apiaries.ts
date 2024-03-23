@@ -7,7 +7,7 @@ interface ApiaryRef {
 
 interface Store {
   Apiary: {
-    list: ApiaryRef[]
+    listMyApiaries: ApiaryRef[]
   }
 }
 
@@ -35,7 +35,7 @@ export function onCreateApiary(
     Apiary: {
       ...previousData.Apiary,
       // Append the newly created service to the list:
-      list: [...previousData.Apiary.list, apiary],
+      list: [...previousData.Apiary.listMyApiaries, apiary],
     },
   };
 
