@@ -6,6 +6,7 @@ export const USER_PATH = '/user/:id';
 export const LOGIN_PATH = '/login';
 export const LOGOUT_PATH = '/logout';
 export const FORGOT_PASSWORD_PATH = '/forgot-password';
+export const FORGOT_PASSWORD_CONFIRMATION_PATH = '/forgot-password-confirmation';
 export const RESET_PASSWORD_PATH = '/reset-password/:token';
 
 /* --- MAIN --- */

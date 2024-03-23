@@ -12,9 +12,10 @@ import { errorsByPath } from '@app/api/errors';
 import { AppGraphQLError, GraphQLErrorCodes } from '@app/api/errors/GraphQLErrorCodes';
 import { FormErrorsMap } from '@app/components/UI/Form';
 import { MutationResult } from '@apollo/client';
-import { Button, TextInput, Alert } from '@mantine/core';
+import { Button, Alert, Stack, Container } from '@mantine/core';
 import { FormUtils } from '@app/components/UI/Form/index';
 import { RESET_PASSWORD_PATH } from '@app/paths';
+import CompactPasswordInput from '@app/components/UI/CompactInput/CompactPasswordInput';
 
 interface MutationResponse {
   User: {
@@ -37,20 +38,23 @@ const ResetPassword = declareRoute(function Page() {
   const hasSuccess = resetPasswordState.called && resetPasswordState.data?.User.resetPassword;
 
   function extractRootErrors({ error, data } : MutationResult<MutationResponse>) {
-    console.info({ error });
-
     const defaultErrorMessage = 'Une erreur est survenue.';
 
-    if (data?.User?.resetPassword === false) {
+    if ((data?.User?.resetPassword != null) && data.User.resetPassword === false) {
       return defaultErrorMessage;
     }
 
     if (!error) {
       return undefined;
     }
+    
+    const graphQLErrors: AppGraphQLError[] = error.graphQLErrors as AppGraphQLError[];
+    if (graphQLErrors[0]?.code === GraphQLErrorCodes.INVALID_PAYLOAD) {
+      return graphQLErrors[0]?.api_problem?.violations[0].title ?? defaultErrorMessage;
+    }
 
     // if we have a custom error message, display it:
-    if ((error.graphQLErrors as AppGraphQLError[])?.[0]?.code === GraphQLErrorCodes.CUSTOM_USER_ERROR) {
+    if (graphQLErrors[0]?.code === GraphQLErrorCodes.CUSTOM_USER_ERROR) {
       return error.graphQLErrors[0]?.message ?? defaultErrorMessage;
     }
 
@@ -79,58 +83,60 @@ const ResetPassword = declareRoute(function Page() {
     });
   }
 
-  return <div>
-    <h2>{trans('pages.resetPassword.documentTitle')}</h2>
-
-    {hasSuccess && <Alert color="success">
-      Votre mot de passe a été réinitialisé.
-
-      Vous pouvez à présent <Link to={route(Login)}>vous connecter</Link>.
-    </Alert>}
-
-
-    {FormUtils.arrayify(mappedErrors.__root).map((error, i) => <Alert key={i} color="error">{error}</Alert>)}
-
+  return <Container px="md">
     <form id="forgot-password" onSubmit={onSubmit}>
-      <TextInput
-        id="new-password"
-        label="Nouveau mot de passe"
-        type="password"
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-        required
-        disabled={hasSuccess}
-        autoFocus
-        autoComplete="new-password"
-        error={!!mappedErrors.newPassword}
-      />
-      <TextInput
-        id="new-password-confirm"
-        label="Confirmer le nouveau mot de passe"
-        type="password"
-        value={passwordConfirm}
-        onChange={(e) => setPasswordConfirm(e.target.value)}
-        required
-        disabled={hasSuccess}
-        autoComplete="new-password"
-        error={!!mappedErrors.newPasswordConfirm}
-      />
-      <div>
-        <Button
-          component="a"
-          href={route(Login)}
-        >
-          Retour à l&apos;identification
-        </Button>
+      <h2>{trans('pages.resetPassword.documentTitle')}</h2>
+      <Stack>
+        {hasSuccess && <Alert color="green">
+          Votre mot de passe a été réinitialisé.
+
+          Vous pouvez à présent <Link to={route(Login)}>vous connecter</Link>.
+        </Alert>}
+        {FormUtils.arrayify(mappedErrors.__root).map((error, i) =>
+          <Alert
+            key={i}
+            title={error}
+            color="red"
+            variant="outline"
+          ></Alert>,
+        )}
+        <CompactPasswordInput
+          id="new-password"
+          label={trans('pages.resetPassword.newPassword')}
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          required
+          disabled={hasSuccess}
+          autoFocus
+          autoComplete="new-password"
+          error={!!mappedErrors.newPassword}
+        />
+        <CompactPasswordInput
+          id="new-password-confirm"
+          label={trans('pages.resetPassword.newPasswordConfirm')}
+          value={passwordConfirm}
+          onChange={(e) => setPasswordConfirm(e.target.value)}
+          required
+          disabled={hasSuccess}
+          autoComplete="new-password"
+          error={!!mappedErrors.newPasswordConfirm}
+        />
         <Button
           type="submit"
           disabled={resetPasswordState.loading || hasSuccess}
         >
-          Changer le mot de passe
+          {trans('pages.resetPassword.changePassword')}
         </Button>
-      </div>
+        <Button
+          component="a"
+          variant="outline"
+          href={route(Login)}
+        >
+          {trans('pages.resetPassword.goBack')}
+        </Button>
+      </Stack>
     </form>
-  </div>;
+  </Container>;
 }, RESET_PASSWORD_PATH);
 
 export default ResetPassword;

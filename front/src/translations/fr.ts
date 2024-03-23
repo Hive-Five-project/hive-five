@@ -10,11 +10,13 @@ export default {
   },
   common: {
     loadingDataError: 'Une erreur s\'est produite lors du chargement des données',
+    error: 'Une erreur est survenue',
     loading: 'Chargement...',
     actions: {
       cancel: 'Annuler',
       create: 'Créer',
       save: 'Enregister les modifications',
+      send: 'Envoyer',
     },
   },
   pages: {
@@ -55,22 +57,36 @@ export default {
     },
     login: {
       documentTitle: 'Identification',
-      errorTitle: 'Une erreur est survenue',
       authenticationFailed: 'L\'authentification a échoué.',
       inputEmail: 'Adresse email',
       inputPassword: 'Mot de passe',
       forgotPassword: 'Mot de passe oublié ?',
       noAccount: 'Pas de compte ?',
       askAccount: 'Demander-en un',
+      connect: 'Se connecter',
     },
     logout: {
       documentTitle: 'Déconnexion',
     },
     forgotPassword: {
       documentTitle: 'Mot de passe oublié',
+      goBack: 'Retour à la page de connexion',
+      content: "Saisissez votre adresse e-mail. Si elle est lié à un compte Hive Five, vous recevrez un lien de vérification afin de réinitialiser votre mot de passe.",
+    },
+    forgotPasswordConfirmation: {
+      documentTitle: 'Lien de vérification',
+      title: 'Un lien de vérification vous a été envoyé',
+      content: 'Consultez votre boite mail pour accéder au lien de vérification.',
+      noEmail: 'Vous n\'avez pas reçu de mail ?',
+      resendEmail: 'Renvoyer',
+      goBack: 'Retour à la page de connexion',
     },
     resetPassword: {
       documentTitle: 'Réinitialiser votre mot de passe',
+      newPassword: 'Nouveau mot de passe',
+      newPasswordConfirm: 'Confirmer le mot de passe',
+      changePassword: 'Reinitialiser',
+      goBack: 'Retour à la page de connexion',
     },
     public: {
     },

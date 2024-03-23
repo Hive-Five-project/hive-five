@@ -1,4 +1,4 @@
-import { FormEvent, useState } from 'react';
+import { FormEvent, useEffect, useState } from 'react';
 import { declareRoute } from '@app/router/router';
 import { useDocumentTitle } from '@app/hooks/useDocumentTitle';
 import { trans } from '@app/translations';
@@ -6,10 +6,18 @@ import { route } from '@app/router/generator';
 import Login from '@app/pages/Auth/Login';
 import { useMutation } from '@app/api/apollo/useMutation';
 import ForgotPasswordMutation from '@graphql/mutation/user/ForgotPassword.graphql';
-import { Button, TextInput, Alert } from '@mantine/core';
+import {
+  Button,
+  Alert,
+  Container,
+  Stack,
+} from '@mantine/core';
 import { FORGOT_PASSWORD_PATH } from '@app/paths';
+import CompactTextInput from '@app/components/UI/CompactInput/CompactTextInput';
+import { useNavigate } from 'react-router-dom';
+import ForgotPasswordConfirmation from './ForgotPasswordConfirmation';
 
-interface MutationResponse {
+export interface MutationResponse {
   User: {
     forgotPassword: boolean
   }
@@ -21,7 +29,9 @@ interface MutationResponse {
 const ForgotPassword = declareRoute(function Page() {
   useDocumentTitle(trans('pages.forgotPassword.documentTitle'));
 
-  const [username, setUsername] = useState<string>('');
+  const navigate = useNavigate();
+
+  const [email, setEmail] = useState<string>('');
   const [forgotPassword, forgotPasswordState] = useMutation<MutationResponse>(ForgotPasswordMutation);
 
   const hasError =
@@ -31,61 +41,59 @@ const ForgotPassword = declareRoute(function Page() {
   ;
   const hasSuccess = forgotPasswordState.called && forgotPasswordState.data?.User.forgotPassword;
 
+  useEffect(() => {
+    if (hasSuccess) {
+      navigate(route(ForgotPasswordConfirmation), {
+        state: {
+          email,
+        },
+      });
+    }
+  }, [navigate, hasSuccess, email]);
+
   function onSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    void forgotPassword({ variables: { email: username } });
+    void forgotPassword({ variables: { email } });
   }
 
-  return <div style={
-    {
-      width: '100%',
-      height: '100%',
-    }
-  }>
-    <h2>{trans('pages.forgotPassword.documentTitle')}</h2>
-
-    {hasSuccess && <Alert color="success">
-      Un email vous a été envoyé pour réinitialiser votre mot de passe.
-    </Alert>}
-
-    {hasError && <Alert color="error">
-      Une erreur est survenue.
-    </Alert>}
-
+  return <Container px="md">
     <form id="forgot-password" onSubmit={onSubmit}>
-      <TextInput
-        id="username"
-        label="Identifiant"
-        type="email"
-        value={username}
-        onChange={(e) => setUsername(e.target.value)}
-        required
-        autoFocus
-        autoComplete="username"
-        placeholder="Votre email"
-      />
-      <div style={
-        {
-          display: 'flex',
-          justifyContent: 'flex-end',
-          gap: '1rem',
+      <h2>{trans('pages.forgotPassword.documentTitle')}</h2>
+      <Stack>
+        {hasError &&
+          <Alert
+            title={trans('common.error')}
+            variant="outline"
+            color="red"
+          ></Alert>
         }
-      }>
+        <div>{trans('pages.forgotPassword.content')}</div>
+        <CompactTextInput
+          id="email"
+          label={trans('pages.login.inputEmail')}
+          type="email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          required
+          autoFocus
+          autoComplete="email"
+        />
+        <Button
+          type="submit"
+          loading={forgotPasswordState.loading}
+        >
+          {trans('common.actions.send')}
+        </Button>
         <Button
           component="a"
           href={route(Login)}
+          variant="outline"
         >
-          Retour à l&apos;identification
+          {trans('pages.forgotPassword.goBack')}
         </Button>
-        <Button
-          type="submit"
-          disabled={forgotPasswordState.loading}
-        >
-          Envoyer un email
-        </Button>
-      </div>
+      </Stack>
     </form>
-  </div>;
+  </Container>; 
 }, FORGOT_PASSWORD_PATH);
 
 export default ForgotPassword;
