@@ -34,5 +34,5 @@ User:
         description: Date d'update
 
       deletedAt:
-        type: DateTime!
+        type: DateTime
         description: Date de suppression

@@ -1,9 +1,8 @@
 #import "@graphql/fragments/user/_User.graphql"
 
-query FindUser($uid: ULID!) {
+query($uid: ULID!) {
   User {
     find(uid: $uid) {
-      roles
       isAdmin
       createdAt
       ..._User
