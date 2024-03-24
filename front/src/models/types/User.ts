@@ -3,6 +3,8 @@ export interface UserForAdmin {
   email: string
   firstname: string
   lastname: string
-  isActive: boolean
   isAdmin: boolean
+  createdAt: Date
+  updatedAt: Date | null
+  deletedAt: Date | null
 }

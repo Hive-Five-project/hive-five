@@ -91,6 +91,20 @@ export default {
     public: {
     },
     admin: {
+      user: {
+        create: {
+          documentTitle: 'Ajout d\'un utilisateur',
+        },
+        update: {
+          documentTitle: 'Modification d\'un utilisateur',
+        },
+        form: {
+          email: 'Adresse email',
+          firstname: 'Prénom',
+          lastname: 'Nom',
+          isAdmin: 'Administrateur',
+        },
+      },
     },
     form: {
     },

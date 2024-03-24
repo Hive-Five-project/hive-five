@@ -1,6 +1,8 @@
 /* --- ADMIN --- */
 export const ROUTE_LIST_USERS = '/list/users';
 export const USER_PATH = '/user/:id';
+export const CREATE_USER_PATH = '/create/user';
+export const UPDATE_USER_PATH = '/update/user/:id';
 
 /* --- AUTH --- */
 export const LOGIN_PATH = '/login';
