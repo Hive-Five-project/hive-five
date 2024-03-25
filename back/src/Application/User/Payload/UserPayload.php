@@ -31,5 +31,5 @@ final class UserPayload
         new Assert\NotNull(),
         new Assert\Type('bool'),
     ])]
-    public $admin = false;
+    public $isAdmin = false;
 }

@@ -23,10 +23,10 @@ class CreateUserCommandHandler
 
         $user = new User(
             $payload->email,
-            $this->passwordHasher->hash($payload->password ?? self::randomPassword()),
+            $this->passwordHasher->hash($payload->password ?? self::basePassword()),
             $payload->firstname,
             $payload->lastname,
-            $payload->admin,
+            $payload->isAdmin,
         );
 
         $this->userRepository->save($user);
@@ -34,8 +34,8 @@ class CreateUserCommandHandler
         return $user;
     }
 
-    private static function randomPassword(): string
+    private static function basePassword(): string
     {
-        return md5(random_bytes(15));
+        return md5('password');
     }
 }

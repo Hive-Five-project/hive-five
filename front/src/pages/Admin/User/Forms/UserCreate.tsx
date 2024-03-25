@@ -1,4 +1,4 @@
-import { declareRoute } from "@app/router/router";
+import { declareAdminRoute } from "@app/router/router";
 import { trans } from "@app/translations";
 import { Container} from "@mantine/core";
 import { useDocumentTitle } from "@mantine/hooks";
@@ -16,7 +16,6 @@ import { onCreatedUser } from '@graphql/store/users.ts';
 import UserForm, { UserData } from '@app/components/User/UserForm.tsx';
 import UserUpdate from '@app/pages/Admin/User/Forms/UserUpdate.tsx';
 
-
 interface MutationResponse {
   User: {
     create: {
@@ -25,7 +24,7 @@ interface MutationResponse {
   }
 }
 
-const UserCreatePage = declareRoute(function UserCreate() {
+const UserCreatePage = declareAdminRoute(function UserCreate() {
   useDocumentTitle(trans('pages.admin.user.create.documentTitle'));
   const { previousUrl } = usePreviousUrlFromLocation();
 
@@ -45,7 +44,7 @@ const UserCreatePage = declareRoute(function UserCreate() {
     mutate({
       variables: { payload },
     }).then((response) => {
-      navigate(route(UserUpdate, { uid: response.data!.User.create.uid }), {
+      navigate(route(UserUpdate, { id: response.data!.User.create.uid }), {
         state: {
           userCreated: true,
           previousUrl,

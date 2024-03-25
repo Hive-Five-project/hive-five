@@ -98,7 +98,7 @@ export default function UserForm({
       <Button
         type="submit"
       >
-        {isUpdate ? 'Modifier un rucher' : 'Créer un rucher'}
+        {isUpdate ? 'Modifier un utilisateur' : 'Créer un utilisateur'}
       </Button>
     </Stack>
   </form>;

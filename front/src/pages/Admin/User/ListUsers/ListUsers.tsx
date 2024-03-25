@@ -7,8 +7,11 @@ import { trans } from '@app/translations';
 import { useForbiddenHandler } from '@app/components/ErrorBoundary.tsx';
 import { useLocation } from 'react-router-dom';
 import { usePageNumberFromQuery } from '@app/hooks/usePageNumber.ts';
-import { Box } from '@mantine/core';
+import { Box, Button, Group, Title } from '@mantine/core';
 import UsersTable from '@app/pages/Admin/User/ListUsers/UsersTable.tsx';
+import Link from '@app/components/Router/Link.tsx';
+import UserCreate from '@app/pages/Admin/User/Forms/UserCreate.tsx';
+import { route } from '@app/router/generator.ts';
 
 export interface User {
   uid: string
@@ -55,11 +58,18 @@ const Page = declareAdminRoute(function ListUsers() {
   }
 
   const users = data!.User.list;
-  console.log(users);
   const previousUrl = location.pathname + location.search;
 
   return <Box p="md">
-    <UsersTable previousUrl={previousUrl} users={users} currentPage={currentPage} />
+    <Group>
+      <Title order={1}>Users list</Title>
+      <Button>
+        <Link style={{
+          color: 'white',
+        }} to={route(UserCreate)}>Create a new user</Link>
+      </Button>
+      <UsersTable previousUrl={previousUrl} users={users} currentPage={currentPage} />
+    </Group>
   </Box>
 }, ROUTE_LIST_USERS);
 

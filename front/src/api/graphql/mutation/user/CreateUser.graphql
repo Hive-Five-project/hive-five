@@ -1,5 +1,3 @@
-#import "@graphql/fragments/user/_User.graphql"
-
 mutation($payload: UserPayload!) {
   User {
     create(payload: $payload) {
@@ -8,6 +6,9 @@ mutation($payload: UserPayload!) {
       firstname
       lastname
       isAdmin
+      createdAt
+      updatedAt
+      deletedAt
     }
   }
 }

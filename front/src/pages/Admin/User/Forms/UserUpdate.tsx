@@ -39,7 +39,7 @@ interface RedirectFromCreationState {
 const Page = declareAdminRoute(function UpdateUser() {
   useDocumentTitle(trans('pages.apiaryForm.update.documentTitle'));
 
-  const { uid } = useParams();
+  const { id : uid } = useParams();
   const notFoundHandler = useNotFoundHandler();
   const { userCreated } = (useLocation().state ?? {}) as RedirectFromCreationState;
 
