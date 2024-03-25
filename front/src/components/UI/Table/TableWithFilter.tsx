@@ -1,5 +1,5 @@
 import clsx from 'clsx';
-import { SortOrder } from '@app/hooks/useSortHook';
+import { SortOrder } from '@app/hooks/useSortHook.tsx';
 import { Table } from '@mantine/core';
 
 interface Props {

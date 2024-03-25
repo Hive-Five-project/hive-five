@@ -49,9 +49,6 @@ export const routes: Array<Route> = [
       {
         component: UserUpdate,
       },
-      {
-        component: User,
-      },
     ],
   },
   /* Users pages - Admin can also access */
@@ -59,6 +56,11 @@ export const routes: Array<Route> = [
     layout: AppLayout,
     guard: NeedsLogin,
     component: Profile,
+  },
+  {
+    layout: AppLayout,
+    guard: NeedsLogin,
+    component: User,
   },
   {
     layout: AppLayout,

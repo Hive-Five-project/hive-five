@@ -6,7 +6,9 @@ import { UserForAdmin as User } from '@app/models/types/User';
 import { useSortHook } from '@app/hooks/useSortHook.tsx';
 import { compareDates, compareStrings } from '@app/utils/sort.ts';
 import { Pagination as PaginationMantine } from '@mantine/core';
-import TableWithFilter from '@app/components/UI/List/TableWithFilter.tsx';
+import TableWithFilter from '@app/components/UI/Table/TableWithFilter.tsx';
+import { route } from '@app/router/generator.ts';
+import UserUpdate from '@app/pages/Admin/User/Forms/UserUpdate.tsx';
 
 
 interface Props {
@@ -80,8 +82,8 @@ export default function UsersTable({
     perPage,
   );
 
-  const pageUsers = pages[page - 1].map((user) => (
-    <TableUserItem
+  const rows = pages[page - 1].map((user) => (
+    <TableUserRow
       previousUrl={previousUrl}
       key={user.uid}
       user={user}
@@ -104,14 +106,14 @@ export default function UsersTable({
       sortColumn={sortColumn}
       sortOrder={sortOrder}
       sortSettings={sortSettings}
-      rows={pageUsers}
+      rows={rows}
     />
     <PaginationMantine total={pages.length} value={page} onChange={setPage}
     />
   </>;
 }
 
-function TableUserItem({ user, previousUrl }: WithPreviousUrl<{
+function TableUserRow({ user, previousUrl }: WithPreviousUrl<{
   user: User
 }>) {
   return <Table.Tr>
@@ -145,9 +147,9 @@ function TableItemMenu({ uid, previousUrl }: WithPreviousUrl<{ uid: string }>) {
       </Menu.Target>
       <Menu.Dropdown>
         <Menu.Item>
-          {/*<LinkToRedirect to={route(UserUpdate, { uid } )} state={{ previousUrl }}>
+          <Link to={route(UserUpdate, { id: uid })} state={{ previousUrl }}>
             Modifier
-          </LinkToRedirect>*/}
+          </Link>
         </Menu.Item>
         <Menu.Item>
           <Link to="/">Supprimer</Link>

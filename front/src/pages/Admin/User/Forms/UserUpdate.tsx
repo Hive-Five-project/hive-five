@@ -1,4 +1,4 @@
-import { declareRoute } from '@app/router/router.tsx';
+import { declareAdminRoute } from '@app/router/router.tsx';
 import { useDocumentTitle } from '@mantine/hooks';
 import FindUserQuery from '@graphql/query/user/FindUser.graphql';
 import UpdateUserMutation from '@graphql/mutation/user/UpdateUser.graphql';
@@ -18,7 +18,6 @@ import { Container } from '@mantine/core';
 import { UserForAdmin as User } from '@app/models/types/User.ts';
 import UserForm, { UserData } from '@app/components/User/UserForm.tsx';
 
-
 interface MutationResponse {
   User: {
     update: {
@@ -37,7 +36,7 @@ interface RedirectFromCreationState {
   userCreated: boolean
 }
 
-const Page = declareRoute(function UpdateUser() {
+const Page = declareAdminRoute(function UpdateUser() {
   useDocumentTitle(trans('pages.apiaryForm.update.documentTitle'));
 
   const { uid } = useParams();
