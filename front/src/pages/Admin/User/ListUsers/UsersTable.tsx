@@ -1,5 +1,3 @@
-import { toChunks } from '@app/utils/array';
-import { route } from '@app/router/generator';
 import Link from '@app/components/Router/Link';
 import { WithPreviousUrl } from '@app/hooks/usePreviousUrlLocationState';
 import { useCallback, useMemo, useState } from 'react';
@@ -8,8 +6,8 @@ import { UserForAdmin as User } from '@app/models/types/User';
 import { useSortHook } from '@app/hooks/useSortHook.tsx';
 import { compareDates, compareStrings } from '@app/utils/sort.ts';
 import Table from '@app/components/UI/Form/Table.tsx';
-import Pagination from '@app/components/UI/Form/Pagination.tsx';
-import ListUsers from '@app/pages/Admin/User/ListUsers/ListUsers.tsx';
+import { Pagination as PaginationMantine } from '@mantine/core';
+
 
 interface Props {
   users: readonly User[]
@@ -24,6 +22,7 @@ export default function UsersTable({
   previousUrl,
 }: WithPreviousUrl<Props>) {
   const { sortColumn, sortOrder, handleSort } = useSortHook();
+  const [page, setPage] = useState(currentPage);
 
   const sortSettings = {
     'email': true,
@@ -63,8 +62,31 @@ export default function UsersTable({
 
   const sortedUsers = useMemo(() => getSortedUsers(), [getSortedUsers]);
 
-  const pages = toChunks(sortedUsers, perPage);
-  const pageUsers = pages[currentPage - 1] ?? [];
+  function chunk<T>(array: T[], size: number): T[][] {
+    if (!array.length) {
+      return [];
+    }
+    const head = array.slice(0, size);
+    const tail = array.slice(size);
+    return [head, ...chunk(tail, size)];
+  }
+
+  const pages = chunk(
+    Array(sortedUsers.length)
+      .fill(0)
+      .map((_, index) => ({
+        ...sortedUsers[index],
+      })),
+    perPage,
+  );
+
+  const pageUsers = pages[page - 1].map((user) => (
+    <TableItem
+      previousUrl={previousUrl}
+      key={user.uid}
+      user={user}
+    />
+  ));
 
   return <>
     <Table
@@ -82,17 +104,9 @@ export default function UsersTable({
       sortColumn={sortColumn}
       sortOrder={sortOrder}
       sortSettings={sortSettings}
-      rows={pageUsers.map(user => <TableItem
-        previousUrl={previousUrl}
-        key={user.uid}
-        user={user}
-      />)}
+      rows={pageUsers}
     />
-
-    <Pagination
-      current={currentPage} pages={Object.keys(pages).map(pageIdx => route(ListUsers, {}, {
-      page: String(parseInt(pageIdx) + 1),
-    }))}
+    <PaginationMantine total={pages.length} value={page} onChange={setPage}
     />
   </>;
 }
@@ -116,7 +130,7 @@ function TableItem({ user, previousUrl }: WithPreviousUrl<{
 
 function TableItemMenu({ uid, previousUrl }: WithPreviousUrl<{ uid: string }>) {
   const [openedAction, setOpenedAction] = useState(false);
-  console.log(uid, previousUrl);
+
   return (
     <Menu shadow="md" width={200} opened={openedAction} onChange={setOpenedAction}>
       <Menu.Target>
@@ -130,10 +144,10 @@ function TableItemMenu({ uid, previousUrl }: WithPreviousUrl<{ uid: string }>) {
         </Button>
       </Menu.Target>
       <Menu.Dropdown>
-        <Menu.Item>{/*
-          <Link to={route(UserUpdate, { uid: uid })} state={{ previousUrl }}>
+        <Menu.Item>
+          {/*<LinkToRedirect to={route(UserUpdate, { uid } )} state={{ previousUrl }}>
             Modifier
-          </Link>*/}
+          </LinkToRedirect>*/}
         </Menu.Item>
         <Menu.Item>
           <Link to="/">Supprimer</Link>

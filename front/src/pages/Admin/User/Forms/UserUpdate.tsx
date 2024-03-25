@@ -84,11 +84,11 @@ const Page = declareRoute(function UpdateUser() {
 
   return <Container px="md">
     {userCreated && !mutationState.called && <Alert title="Success" variant="success">
-      Rucher créé avec succès.
+      Utilisateur créé avec succès.
     </Alert>}
 
     {mutationState.called && mutationState.data?.User && <Alert title="Success" variant="success">
-      Rucher modifié avec succès.
+      Utilisateur modifié avec succès.
     </Alert>}
 
     <UserForm onSubmit={submit} errors={mappedErrors} initialData={user} />
