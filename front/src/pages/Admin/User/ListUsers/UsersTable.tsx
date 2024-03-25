@@ -1,12 +1,12 @@
 import Link from '@app/components/Router/Link';
 import { WithPreviousUrl } from '@app/hooks/usePreviousUrlLocationState';
 import { useCallback, useMemo, useState } from 'react';
-import { Button, Menu } from '@mantine/core';
+import { Button, Menu, Table } from '@mantine/core';
 import { UserForAdmin as User } from '@app/models/types/User';
 import { useSortHook } from '@app/hooks/useSortHook.tsx';
 import { compareDates, compareStrings } from '@app/utils/sort.ts';
-import Table from '@app/components/UI/Form/Table.tsx';
 import { Pagination as PaginationMantine } from '@mantine/core';
+import TableWithFilter from '@app/components/UI/List/TableWithFilter.tsx';
 
 
 interface Props {
@@ -81,7 +81,7 @@ export default function UsersTable({
   );
 
   const pageUsers = pages[page - 1].map((user) => (
-    <TableItem
+    <TableUserItem
       previousUrl={previousUrl}
       key={user.uid}
       user={user}
@@ -89,7 +89,7 @@ export default function UsersTable({
   ));
 
   return <>
-    <Table
+    <TableWithFilter
       headers={[
         'email',
         'firstname',
@@ -98,7 +98,7 @@ export default function UsersTable({
         'updatedAt',
         'deletedAt',
         'isAdmin',
-        '',
+        'Actions',
       ]}
       onHeaderClick={handleSort}
       sortColumn={sortColumn}
@@ -111,21 +111,21 @@ export default function UsersTable({
   </>;
 }
 
-function TableItem({ user, previousUrl }: WithPreviousUrl<{
+function TableUserItem({ user, previousUrl }: WithPreviousUrl<{
   user: User
 }>) {
-  return <tr>
-    <td>{user.email}</td>
-    <td>{user.firstname}</td>
-    <td>{user.lastname}</td>
-    <td>{new Date(user.createdAt).getDate()}</td>
-    <td>{user.updatedAt ? new Date(user.updatedAt).getDate() : ''}</td>
-    <td>{user.deletedAt ? new Date(user.deletedAt).getDate() : ''}</td>
-    <td>{user.isAdmin ? 'admin' : 'user'}</td>
-    <td className="text-right">
+  return <Table.Tr>
+    <Table.Td>{user.email}</Table.Td>
+    <Table.Td>{user.firstname}</Table.Td>
+    <Table.Td>{user.lastname}</Table.Td>
+    <Table.Td>{new Date(user.createdAt).toDateString()}</Table.Td>
+    <Table.Td>{user.updatedAt ? new Date(user.updatedAt).toDateString() : ''}</Table.Td>
+    <Table.Td>{user.deletedAt ? new Date(user.deletedAt).toDateString() : ''}</Table.Td>
+    <Table.Td>{user.isAdmin ? 'admin' : 'user'}</Table.Td>
+    <Table.Td className="text-right">
       <TableItemMenu uid={user.uid} previousUrl={previousUrl} />
-    </td>
-  </tr>;
+    </Table.Td>
+  </Table.Tr>;
 }
 
 function TableItemMenu({ uid, previousUrl }: WithPreviousUrl<{ uid: string }>) {
