@@ -37,7 +37,7 @@ export default function UserForm({
 
   const isUpdate = initialData !== undefined;
   const { previousUrl } =  usePreviousUrlFromLocation();
-  const [isAdmin, setIsAdmin] = useState<boolean | null>(initialData?.isAdmin ?? null);
+  const [isAdmin, setIsAdmin] = useState<boolean>(initialData?.isAdmin ?? false);
   const [lastname, setLastname] = useState<string | null>(initialData?.lastname ?? null);
   const [firstname, setFirstname] = useState<string | null>(initialData?.firstname ?? null);
   const [email, setEmail] = useState<string | null>(initialData?.email ?? null);
@@ -53,6 +53,7 @@ export default function UserForm({
       isAdmin,
     });
   }
+
 
   return <form className="mb-10 max-w-screen-lg" onSubmit={submit}>
     <Space h={8} />
@@ -70,6 +71,7 @@ export default function UserForm({
         onChange={(e) => setEmail(e.target.value)}
         required
         autoFocus
+        error={errors?.email}
       />
       <CompactTextInput
         id="firstname"
@@ -79,6 +81,7 @@ export default function UserForm({
         onChange={(e) => setFirstname(e.target.value)}
         required
         autoFocus
+        error={errors?.firstname}
       />
       <CompactTextInput
         id="lastname"
@@ -87,12 +90,13 @@ export default function UserForm({
         value={lastname ?? ''}
         onChange={(e) => setLastname(e.target.value)}
         required
-
+        error={errors?.lastname}
       />
       <Switch
-        checked={isAdmin ?? false}
+        checked={isAdmin}
         onChange={(event) => setIsAdmin(event.currentTarget.checked)}
         label={trans('pages.admin.user.form.isAdmin')}
+        error={errors?.isAdmin}
       />
 
       <Button

@@ -9,12 +9,22 @@ import { Pagination as PaginationMantine } from '@mantine/core';
 import TableWithFilter from '@app/components/UI/Table/TableWithFilter.tsx';
 import { route } from '@app/router/generator.ts';
 import UserUpdate from '@app/pages/Admin/User/Forms/UserUpdate.tsx';
+import DeleteModal from '@app/components/UI/Form/DeleteModal.tsx';
+import { useDisclosure } from '@mantine/hooks';
+import { useMutation } from '@app/api/apollo/useMutation.ts';
+import DeleteUserMutation from '@graphql/mutation/user/DeleteUser.graphql';
+import { errorsByPath } from '@app/api/errors';
+import { AppGraphQLError } from '@app/api/errors/GraphQLErrorCodes.ts';
+import { onMutateError } from '@graphql/utils.ts';
+import { onDeleteUser } from '@graphql/store/users.ts';
 
 
 interface Props {
   users: readonly User[]
   currentPage: number
   perPage?: number
+  setErrorDeletion: (error: { __root: string | undefined }) => void,
+  setConfirmDeletion: (confirm: boolean) => void
 }
 
 export default function UsersTable({
@@ -22,6 +32,8 @@ export default function UsersTable({
   currentPage,
   perPage = 10,
   previousUrl,
+  setErrorDeletion,
+  setConfirmDeletion,
 }: WithPreviousUrl<Props>) {
   const { sortColumn, sortOrder, handleSort } = useSortHook();
   const [page, setPage] = useState(currentPage);
@@ -87,12 +99,15 @@ export default function UsersTable({
       previousUrl={previousUrl}
       key={user.uid}
       user={user}
+      setErrorDeletion={setErrorDeletion}
+      setConfirmDeletion={setConfirmDeletion}
     />
   ));
 
   return <>
     <TableWithFilter
       headers={[
+        'uid',
         'email',
         'firstname',
         'lastname',
@@ -113,10 +128,18 @@ export default function UsersTable({
   </>;
 }
 
-function TableUserRow({ user, previousUrl }: WithPreviousUrl<{
-  user: User
+function TableUserRow({
+  user,
+  previousUrl,
+  setErrorDeletion,
+  setConfirmDeletion,
+}: WithPreviousUrl<{
+  user: User,
+  setErrorDeletion: (error: { __root: string | undefined }) => void,
+  setConfirmDeletion: (confirm: boolean) => void,
 }>) {
   return <Table.Tr>
+    <Table.Td>{user.uid}</Table.Td>
     <Table.Td>{user.email}</Table.Td>
     <Table.Td>{user.firstname}</Table.Td>
     <Table.Td>{user.lastname}</Table.Td>
@@ -125,37 +148,92 @@ function TableUserRow({ user, previousUrl }: WithPreviousUrl<{
     <Table.Td>{user.deletedAt ? new Date(user.deletedAt).toDateString() : ''}</Table.Td>
     <Table.Td>{user.isAdmin ? 'admin' : 'user'}</Table.Td>
     <Table.Td className="text-right">
-      <TableItemMenu uid={user.uid} previousUrl={previousUrl} />
+      <TableItemMenu
+        user={user}
+        previousUrl={previousUrl}
+        setErrorDeletion={setErrorDeletion}
+        setConfirmDeletion={setConfirmDeletion}
+      />
     </Table.Td>
   </Table.Tr>;
 }
 
-function TableItemMenu({ uid, previousUrl }: WithPreviousUrl<{ uid: string }>) {
+interface MutationDeleteResponse {
+  User: {
+    delete: string
+  }
+}
+
+function TableItemMenu({
+  user,
+  previousUrl,
+  setConfirmDeletion,
+  setErrorDeletion,
+}: WithPreviousUrl<{
+  user: User,
+  setErrorDeletion: (error: { __root: string | undefined }) => void,
+  setConfirmDeletion: (confirm: boolean) => void,
+}>) {
   const [openedAction, setOpenedAction] = useState(false);
+  const [openedDeleteModale, { open, close }] = useDisclosure(false);
+  const [mutate, mutationState] = useMutation<MutationDeleteResponse>(DeleteUserMutation, {
+    update(cache, { data }){
+      onDeleteUser(cache, data!.User.delete);
+    },
+  });
+
+  const mappedErrors = useMemo(() => {
+    const error = mutationState.error;
+
+    return {
+      __root: error ? 'Une erreur est survenue lors de la soumission du formulaire.' : undefined,
+      ...(error ? errorsByPath(error.graphQLErrors as AppGraphQLError[]) : {}),
+    };
+  }, [mutationState.error]);
+
+  async function submitDeletion() {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+
+    mutate({
+      variables: { uid: user.uid },
+    }).catch(onMutateError);
+  }
 
   return (
-    <Menu shadow="md" width={200} opened={openedAction} onChange={setOpenedAction}>
-      <Menu.Target>
-        <Button
-          component="div"
-          variant="link"
-          size="xs"
-          color="blue"
-        >
-          Actions
-        </Button>
-      </Menu.Target>
-      <Menu.Dropdown>
-        <Menu.Item>
-          <Link to={route(UserUpdate, { id: uid })} state={{ previousUrl }}>
-            Modifier
-          </Link>
-        </Menu.Item>
-        <Menu.Item>
-          <Link to="/">Supprimer</Link>
-        </Menu.Item>
-      </Menu.Dropdown>
-    </Menu>
+    <>
+      <Menu shadow="md" width={200} opened={openedAction} onChange={setOpenedAction}>
+        <Menu.Target>
+          <Button
+            component="div"
+            variant="link"
+            size="xs"
+            color="blue"
+          >
+            Actions
+          </Button>
+        </Menu.Target>
+        <Menu.Dropdown>
+          <Menu.Item>
+            <Link to={route(UserUpdate, { id: user.uid })} state={{ previousUrl }}>
+              Modifier
+            </Link>
+          </Menu.Item>
+          <Menu.Item>
+            <a onClick={() => {
+              open();
+            }}>Supprimer</a>
+          </Menu.Item>
+        </Menu.Dropdown>
+      </Menu>
+      <DeleteModal opened={openedDeleteModale} close={close} user={user} onSubmit={() => {
+        submitDeletion().then(() => {
+          setErrorDeletion(mappedErrors);
+          if(mappedErrors.__root === undefined){
+            setConfirmDeletion(true)
+          }
+        });
+      }}/>
+    </>
   );
 }
 

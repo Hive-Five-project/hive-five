@@ -12,6 +12,9 @@ import UsersTable from '@app/pages/Admin/User/ListUsers/UsersTable.tsx';
 import Link from '@app/components/Router/Link.tsx';
 import UserCreate from '@app/pages/Admin/User/Forms/UserCreate.tsx';
 import { route } from '@app/router/generator.ts';
+import { useState } from 'react';
+import { FormRootErrors } from '@app/pages/Error/FormRootErrors.tsx';
+import Alert from '@app/pages/Error/Alert.tsx';
 
 export interface User {
   uid: string
@@ -34,6 +37,8 @@ const Page = declareAdminRoute(function ListUsers() {
   useDocumentTitle('Users lists');
   const location = useLocation();
   const currentPage = usePageNumberFromQuery();
+  const [errorsDeletion, setErrorsDeletion] = useState<{  __root: string | undefined; }>();
+  const [confirmDelete, setConfirmDelete] = useState<boolean | null>(null);
 
   const forbiddenErrorHandler = useForbiddenHandler()
 
@@ -61,6 +66,8 @@ const Page = declareAdminRoute(function ListUsers() {
   const previousUrl = location.pathname + location.search;
 
   return <Box p="md">
+    {errorsDeletion && <FormRootErrors errors={errorsDeletion?.__root}/>}
+    {confirmDelete && <Alert title="Success" variant="success">User correctly deleted.</Alert>}
     <Group>
       <Title order={1}>Users list</Title>
       <Button>
@@ -68,7 +75,7 @@ const Page = declareAdminRoute(function ListUsers() {
           color: 'white',
         }} to={route(UserCreate)}>Create a new user</Link>
       </Button>
-      <UsersTable previousUrl={previousUrl} users={users} currentPage={currentPage} />
+      <UsersTable previousUrl={previousUrl} users={users} currentPage={currentPage} setErrorDeletion={setErrorsDeletion} setConfirmDeletion={setConfirmDelete}/>
     </Group>
   </Box>
 }, ROUTE_LIST_USERS);
