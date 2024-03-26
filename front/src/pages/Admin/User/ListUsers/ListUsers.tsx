@@ -65,6 +65,7 @@ const Page = declareAdminRoute(function ListUsers() {
 
   async function submitDeletion(uid: string) {
     window.scrollTo({ top: 0, behavior: 'smooth' });
+    setUidDeleted(null);
 
     mutate({
       variables: { uid: uid },
