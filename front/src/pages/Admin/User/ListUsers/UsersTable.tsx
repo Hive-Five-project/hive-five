@@ -1,30 +1,21 @@
 import Link from '@app/components/Router/Link';
 import { WithPreviousUrl } from '@app/hooks/usePreviousUrlLocationState';
 import { useCallback, useMemo, useState } from 'react';
-import { Button, Menu, Table } from '@mantine/core';
+import { Button, Menu, Pagination as PaginationMantine, Table } from '@mantine/core';
 import { UserForAdmin as User } from '@app/models/types/User';
 import { useSortHook } from '@app/hooks/useSortHook.tsx';
 import { compareDates, compareStrings } from '@app/utils/sort.ts';
-import { Pagination as PaginationMantine } from '@mantine/core';
 import TableWithFilter from '@app/components/UI/Table/TableWithFilter.tsx';
 import { route } from '@app/router/generator.ts';
 import UserUpdate from '@app/pages/Admin/User/Forms/UserUpdate.tsx';
 import DeleteModal from '@app/components/UI/Form/DeleteModal.tsx';
 import { useDisclosure } from '@mantine/hooks';
-import { useMutation } from '@app/api/apollo/useMutation.ts';
-import DeleteUserMutation from '@graphql/mutation/user/DeleteUser.graphql';
-import { errorsByPath } from '@app/api/errors';
-import { AppGraphQLError } from '@app/api/errors/GraphQLErrorCodes.ts';
-import { onMutateError } from '@graphql/utils.ts';
-import { onDeleteUser } from '@graphql/store/users.ts';
-
 
 interface Props {
   users: readonly User[]
   currentPage: number
   perPage?: number
-  setErrorDeletion: (error: { __root: string | undefined }) => void,
-  setConfirmDeletion: (confirm: boolean) => void
+  submitDeletion: (uid: string) => Promise<void>
 }
 
 export default function UsersTable({
@@ -32,8 +23,7 @@ export default function UsersTable({
   currentPage,
   perPage = 10,
   previousUrl,
-  setErrorDeletion,
-  setConfirmDeletion,
+  submitDeletion,
 }: WithPreviousUrl<Props>) {
   const { sortColumn, sortOrder, handleSort } = useSortHook();
   const [page, setPage] = useState(currentPage);
@@ -99,8 +89,7 @@ export default function UsersTable({
       previousUrl={previousUrl}
       key={user.uid}
       user={user}
-      setErrorDeletion={setErrorDeletion}
-      setConfirmDeletion={setConfirmDeletion}
+      submitDeletion={submitDeletion}
     />
   ));
 
@@ -123,7 +112,8 @@ export default function UsersTable({
       sortSettings={sortSettings}
       rows={rows}
     />
-    <PaginationMantine total={pages.length} value={page} onChange={setPage}
+    <PaginationMantine
+      total={pages.length} value={page} onChange={setPage}
     />
   </>;
 }
@@ -131,12 +121,10 @@ export default function UsersTable({
 function TableUserRow({
   user,
   previousUrl,
-  setErrorDeletion,
-  setConfirmDeletion,
+  submitDeletion,
 }: WithPreviousUrl<{
   user: User,
-  setErrorDeletion: (error: { __root: string | undefined }) => void,
-  setConfirmDeletion: (confirm: boolean) => void,
+  submitDeletion: (uid: string) => Promise<void>,
 }>) {
   return <Table.Tr>
     <Table.Td>{user.uid}</Table.Td>
@@ -151,53 +139,22 @@ function TableUserRow({
       <TableItemMenu
         user={user}
         previousUrl={previousUrl}
-        setErrorDeletion={setErrorDeletion}
-        setConfirmDeletion={setConfirmDeletion}
+        submitDeletion={submitDeletion}
       />
     </Table.Td>
   </Table.Tr>;
 }
 
-interface MutationDeleteResponse {
-  User: {
-    delete: string
-  }
-}
-
 function TableItemMenu({
   user,
   previousUrl,
-  setConfirmDeletion,
-  setErrorDeletion,
+  submitDeletion,
 }: WithPreviousUrl<{
   user: User,
-  setErrorDeletion: (error: { __root: string | undefined }) => void,
-  setConfirmDeletion: (confirm: boolean) => void,
+  submitDeletion: (uid: string) => Promise<void>,
 }>) {
   const [openedAction, setOpenedAction] = useState(false);
   const [openedDeleteModale, { open, close }] = useDisclosure(false);
-  const [mutate, mutationState] = useMutation<MutationDeleteResponse>(DeleteUserMutation, {
-    update(cache, { data }){
-      onDeleteUser(cache, data!.User.delete);
-    },
-  });
-
-  const mappedErrors = useMemo(() => {
-    const error = mutationState.error;
-
-    return {
-      __root: error ? 'Une erreur est survenue lors de la soumission du formulaire.' : undefined,
-      ...(error ? errorsByPath(error.graphQLErrors as AppGraphQLError[]) : {}),
-    };
-  }, [mutationState.error]);
-
-  async function submitDeletion() {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-
-    mutate({
-      variables: { uid: user.uid },
-    }).catch(onMutateError);
-  }
 
   return (
     <>
@@ -219,20 +176,22 @@ function TableItemMenu({
             </Link>
           </Menu.Item>
           <Menu.Item>
-            <a onClick={() => {
-              open();
-            }}>Supprimer</a>
+            <a
+              onClick={() => {
+                open();
+              }}
+            >Supprimer</a>
           </Menu.Item>
         </Menu.Dropdown>
       </Menu>
-      <DeleteModal opened={openedDeleteModale} close={close} user={user} onSubmit={() => {
-        submitDeletion().then(() => {
-          setErrorDeletion(mappedErrors);
-          if(mappedErrors.__root === undefined){
-            setConfirmDeletion(true)
-          }
-        });
-      }}/>
+      <DeleteModal
+        opened={openedDeleteModale} close={close} user={user} onSubmit={() => {
+        submitDeletion(user.uid).then(() => {
+          close();
+          },
+        );
+      }}
+      />
     </>
   );
 }

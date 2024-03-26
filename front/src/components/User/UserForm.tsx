@@ -59,7 +59,7 @@ export default function UserForm({
     <Space h={8} />
     <a href={previousUrl ?? route(ListUsers)}> Retour à la liste</a>
 
-    <h2>{isUpdate ? trans('pages.admin.user.update.documentTitle') : trans('pages.apiaryForm.create.documentTitle')}</h2>
+    <h2>{isUpdate ? trans('pages.admin.user.update.documentTitle') : trans('pages.admin.user.create.documentTitle')}</h2>
     <FormRootErrors errors={errors?.__root} />
 
     <Stack>
