@@ -45,7 +45,7 @@ interface MutationDeleteResponse {
 }
 
 const Page = declareAdminRoute(function ListUsers() {
-  useDocumentTitle('Users lists');
+  useDocumentTitle(trans('pages.admin.user.list.documentTitle'));
   const location = useLocation();
   const currentPage = usePageNumberFromQuery();
   const [uidDeleted, setUidDeleted] = useState<string | null>(null);
@@ -101,16 +101,16 @@ const Page = declareAdminRoute(function ListUsers() {
   // todo: hard delete on second user deletion with a red warning.
 
   return <Box p="md">
-    {uidDeleted && <Alert title="Success" variant="success">User {uidDeleted} correctly deleted.</Alert>}
+    {uidDeleted && <Alert title="Success" variant="success"> {uidDeleted} : {trans('pages.admin.user.form.success')}</Alert>}
     {mappedErrors.__root && <Alert title="Error" variant="danger">{mappedErrors.__root}</Alert>}
     <Group>
-      <Title order={1}>Users list</Title>
+      <Title order={1}>{trans('pages.admin.user.list.documentTitle')}</Title>
       <Button>
         <Link
           style={{
             color: 'white',
           }} to={route(UserCreate)}
-        >Create a new user</Link>
+        >{trans('pages.admin.user.create.button')}</Link>
       </Button>
       <UsersTable
         previousUrl={previousUrl}

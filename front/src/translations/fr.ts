@@ -92,8 +92,31 @@ export default {
     },
     admin: {
       user: {
+        list: {
+          documentTitle: 'Liste des utilisateurs',
+          table: {
+            header: {
+              uid: 'UID',
+              email: 'Adresse email',
+              firstname: 'Prénom',
+              lastname: 'Nom',
+              createdAt: 'Créé le',
+              updatedAt: 'Modifié le',
+              deletedAt: 'Supprimé le',
+              isAdmin: 'Administrateur',
+              actions: 'Actions',
+            },
+            action: {
+              button: 'Actions',
+              delete: 'Supprimer',
+              update: 'Modifier',
+            },
+          },
+          return: 'Retour à la liste des utilisateurs',
+        },
         create: {
           documentTitle: 'Ajout d\'un utilisateur',
+          button: 'Créer un nouvel utilisateur',
         },
         update: {
           documentTitle: 'Modification d\'un utilisateur',
@@ -103,6 +126,7 @@ export default {
           firstname: 'Prénom',
           lastname: 'Nom',
           isAdmin: 'Administrateur',
+          success: 'Utilisateur créé avec succès.',
         },
       },
     },

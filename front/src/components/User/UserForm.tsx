@@ -57,7 +57,7 @@ export default function UserForm({
 
   return <form className="mb-10 max-w-screen-lg" onSubmit={submit}>
     <Space h={8} />
-    <a href={previousUrl ?? route(ListUsers)}> Retour à la liste</a>
+    <a href={previousUrl ?? route(ListUsers)}>{trans('pages.admin.user.list.return')}</a>
 
     <h2>{isUpdate ? trans('pages.admin.user.update.documentTitle') : trans('pages.admin.user.create.documentTitle')}</h2>
     <FormRootErrors errors={errors?.__root} />
@@ -102,7 +102,9 @@ export default function UserForm({
       <Button
         type="submit"
       >
-        {isUpdate ? 'Modifier un utilisateur' : 'Créer un utilisateur'}
+        {isUpdate ?
+          trans('pages.admin.user.update.documentTitle')
+          : trans('pages.admin.user.create.documentTitle')}
       </Button>
     </Stack>
   </form>;

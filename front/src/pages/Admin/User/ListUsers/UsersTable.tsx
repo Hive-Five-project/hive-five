@@ -10,6 +10,7 @@ import { route } from '@app/router/generator.ts';
 import UserUpdate from '@app/pages/Admin/User/Forms/UserUpdate.tsx';
 import DeleteModal from '@app/components/UI/Form/DeleteModal.tsx';
 import { useDisclosure } from '@mantine/hooks';
+import { trans } from '@app/translations';
 
 interface Props {
   users: readonly User[]
@@ -96,15 +97,15 @@ export default function UsersTable({
   return <>
     <TableWithFilter
       headers={[
-        'uid',
-        'email',
-        'firstname',
-        'lastname',
-        'createdAt',
-        'updatedAt',
-        'deletedAt',
-        'isAdmin',
-        'Actions',
+        trans('pages.admin.user.list.table.header.uid'),
+        trans('pages.admin.user.list.table.header.email'),
+        trans('pages.admin.user.list.table.header.firstname'),
+        trans('pages.admin.user.list.table.header.lastname'),
+        trans('pages.admin.user.list.table.header.createdAt'),
+        trans('pages.admin.user.list.table.header.updatedAt'),
+        trans('pages.admin.user.list.table.header.deletedAt'),
+        trans('pages.admin.user.list.table.header.isAdmin'),
+        trans('pages.admin.user.list.table.header.actions'),
       ]}
       onHeaderClick={handleSort}
       sortColumn={sortColumn}
@@ -166,13 +167,13 @@ function TableItemMenu({
             size="xs"
             color="blue"
           >
-            Actions
+            {trans('pages.admin.user.list.table.action.button')}
           </Button>
         </Menu.Target>
         <Menu.Dropdown>
           <Menu.Item>
             <Link to={route(UserUpdate, { id: user.uid })} state={{ previousUrl }}>
-              Modifier
+              {trans('pages.admin.user.list.table.action.update')}
             </Link>
           </Menu.Item>
           <Menu.Item>
@@ -180,7 +181,7 @@ function TableItemMenu({
               onClick={() => {
                 open();
               }}
-            >Supprimer</a>
+            >{trans('pages.admin.user.list.table.action.delete')}</a>
           </Menu.Item>
         </Menu.Dropdown>
       </Menu>
