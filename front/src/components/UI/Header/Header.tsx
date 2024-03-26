@@ -61,7 +61,7 @@ export default function Header() {
               </Menu.Item>
               {profile?.isAdmin && <Menu.Item>
                 <Link to={route(ListUsers)}>List users</Link>
-                </Menu.Item>
+              </Menu.Item>
               }
               <Menu.Item>
                 <Link to={route(Logout)}>Logout</Link>

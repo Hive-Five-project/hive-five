@@ -40,26 +40,26 @@ export default function UsersTable({
   const getSortedUsers = useCallback(() => {
     return [...users].sort((a, b) => {
       switch (sortColumn) {
-        case 'email':
-          return compareStrings(a.email, b.email, sortOrder);
-        case 'firstname':
-          return compareStrings(a.firstname, b.firstname, sortOrder);
-        case 'lastname':
-          return compareStrings(a.lastname, b.lastname, sortOrder);
-        case 'createdAt':
-          return compareDates(a.createdAt, b.createdAt, sortOrder);
-        case 'updatedAt':
-          if (a.updatedAt !== null && b.updatedAt !== null) {
-            return compareDates(a.updatedAt, b.updatedAt, sortOrder);
-          }
-          return 0;
-        case 'deletedAt':
-          if (a.deletedAt !== null && b.deletedAt !== null) {
-            return compareDates(a.deletedAt, b.deletedAt, sortOrder);
-          }
-          return 0;
-        default:
-          return 0;
+      case 'email':
+        return compareStrings(a.email, b.email, sortOrder);
+      case 'firstname':
+        return compareStrings(a.firstname, b.firstname, sortOrder);
+      case 'lastname':
+        return compareStrings(a.lastname, b.lastname, sortOrder);
+      case 'createdAt':
+        return compareDates(a.createdAt, b.createdAt, sortOrder);
+      case 'updatedAt':
+        if (a.updatedAt !== null && b.updatedAt !== null) {
+          return compareDates(a.updatedAt, b.updatedAt, sortOrder);
+        }
+        return 0;
+      case 'deletedAt':
+        if (a.deletedAt !== null && b.deletedAt !== null) {
+          return compareDates(a.deletedAt, b.deletedAt, sortOrder);
+        }
+        return 0;
+      default:
+        return 0;
       }
     });
   }, [sortColumn, sortOrder, users]);
@@ -123,8 +123,8 @@ function TableUserRow({
   previousUrl,
   submitDeletion,
 }: WithPreviousUrl<{
-  user: User,
-  submitDeletion: (uid: string) => Promise<void>,
+  user: User
+  submitDeletion: (uid: string) => Promise<void>
 }>) {
   return <Table.Tr>
     <Table.Td>{user.uid}</Table.Td>
@@ -150,8 +150,8 @@ function TableItemMenu({
   previousUrl,
   submitDeletion,
 }: WithPreviousUrl<{
-  user: User,
-  submitDeletion: (uid: string) => Promise<void>,
+  user: User
+  submitDeletion: (uid: string) => Promise<void>
 }>) {
   const [openedAction, setOpenedAction] = useState(false);
   const [openedDeleteModale, { open, close }] = useDisclosure(false);
@@ -186,11 +186,11 @@ function TableItemMenu({
       </Menu>
       <DeleteModal
         opened={openedDeleteModale} close={close} user={user} onSubmit={() => {
-        submitDeletion(user.uid).then(() => {
-          close();
+          submitDeletion(user.uid).then(() => {
+            close();
           },
-        );
-      }}
+          );
+        }}
       />
     </>
   );

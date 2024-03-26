@@ -2,10 +2,10 @@ import { Button, Group, Modal } from "@mantine/core";
 import { UserForAdmin as User } from '@app/models/types/User.ts';
 
 interface Props {
-  opened: boolean;
-  close: () => void;
-  user: User;
-  onSubmit: () => void;
+  opened: boolean
+  close: () => void
+  user: User
+  onSubmit: () => void
 }
 
 export default function DeleteModal({

@@ -50,7 +50,7 @@ class CreateUserTest extends GraphQLTestCase
             'password' => 'p@55w04d-cliopioxb0000n322j023u1wd',
             'firstname' => 'John',
             'lastname' => 'Doe',
-            'admin' => true,
+            'isAdmin' => true,
         ]];
 
         yield 'every fields, user' => [[
@@ -58,7 +58,7 @@ class CreateUserTest extends GraphQLTestCase
             'password' => 'p@55w04d-cliopioxf0001n322rny5r5nt',
             'firstname' => 'Jane',
             'lastname' => 'Doe',
-            'admin' => false,
+            'isAdmin' => false,
         ]];
     }
 
@@ -88,7 +88,7 @@ class CreateUserTest extends GraphQLTestCase
             'password' => null,
             'firstname' => null,
             'lastname' => null,
-            'admin' => true,
+            'isAdmin' => true,
         ]];
 
         yield 'existing email' => [[
@@ -96,7 +96,7 @@ class CreateUserTest extends GraphQLTestCase
             'password' => 'p@55w04d-cliopioxb0000n322j023u1wd',
             'firstname' => 'we-dont-care',
             'lastname' => 'we-dont-care',
-            'admin' => true,
+            'isAdmin' => true,
         ]];
 
         $o = str_repeat('o', 256);
@@ -107,7 +107,7 @@ class CreateUserTest extends GraphQLTestCase
             'password' => 'p@55w04d-cliopioxf0001n322rny5r5nt',
             'firstname' => $wayTooLongValue,
             'lastname' => $wayTooLongValue,
-            'admin' => false,
+            'isAdmin' => false,
         ]];
     }
 }
