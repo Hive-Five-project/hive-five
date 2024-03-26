@@ -13,8 +13,11 @@ use App\Application\User\Command\UpdateUserCommand;
 use App\Application\User\Payload\MyProfilePayload;
 use App\Application\User\Payload\ResetPasswordPayload;
 use App\Application\User\Payload\UserPayload;
+use App\Domain\Common\Exception\ForbiddenException;
+use App\Domain\Common\Exception\NotFoundException;
 use App\Domain\User\User;
 use App\Infrastructure\Bridge\GraphQL\Error\CustomUserError;
+use App\Infrastructure\Bridge\GraphQL\Error\ForbiddenError;
 use App\Infrastructure\Bridge\GraphQL\Mutation\AbstractMutation;
 use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Definition\Resolver\AliasedInterface;
@@ -49,8 +52,12 @@ class UserMutation extends AbstractMutation implements AliasedInterface
 
     public function delete(Ulid $uid): Ulid
     {
-        /** @var Ulid $userDeletedUid */
-        $userDeletedUid = $this->handle(new DeleteUserCommand($uid));
+        try {
+            /** @var Ulid $userDeletedUid */
+            $userDeletedUid = $this->handle(new DeleteUserCommand($uid));
+        } catch (ForbiddenError $ex) {
+            throw new CustomUserError($ex->getMessage(), $ex);
+        }
 
         return $userDeletedUid;
     }

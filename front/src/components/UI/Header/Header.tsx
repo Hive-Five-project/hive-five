@@ -1,24 +1,27 @@
 import { AppShell, Avatar, Box, Burger, Drawer, Group, Menu } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
-import { PROFILE_PATH } from '@app/paths';
 import Link from '@app/components/Router/Link';
 import LogoPlain from '@app/assets/LogoPlain';
 import LogoPlainWithText from '@app/assets/LogoPlainWithText';
 import DefaultProfileIcon from '@app/assets/DefaultProfileIcon';
+import { route } from '@app/router/generator';
 import { useAuthContext } from '@app/hooks/useAuthContext.tsx';
 import { useState } from 'react';
+import ListUsers from '@app/pages/Admin/User/ListUsers/ListUsers.tsx';
+import Logout from '@app/pages/Auth/Logout.tsx';
+import Profile from '@app/pages/Profile/Profile.tsx';
 
 export default function Header() {
   const [opened, { toggle }] = useDisclosure();
   const [openedMenu, setOpenedMenu] = useState(false);
 
-  const { authenticated } = useAuthContext();
+  const { profile, authenticated } = useAuthContext();
 
   return (
     <AppShell.Header>
       <Drawer opened={opened} onClose={toggle} padding="md" size="xs">
         <ul>
-          <li><Link to="/logout">Logout</Link></li>
+          <li><Link to={route(Logout)}>Logout</Link></li>
         </ul>
       </Drawer>
       <Group justify="space-between" h="100%" px="10px" py="5px">
@@ -54,10 +57,14 @@ export default function Header() {
             </Menu.Target>
             <Menu.Dropdown>
               <Menu.Item>
-                <Link to={PROFILE_PATH}>Profile</Link>
+                <Link to={route(Profile)}>Profile</Link>
               </Menu.Item>
+              {profile?.isAdmin && <Menu.Item>
+                <Link to={route(ListUsers)}>List users</Link>
+              </Menu.Item>
+              }
               <Menu.Item>
-                <Link to="/logout">Logout</Link>
+                <Link to={route(Logout)}>Logout</Link>
               </Menu.Item>
             </Menu.Dropdown>
           </Menu>

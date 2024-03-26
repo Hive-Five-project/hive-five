@@ -19,7 +19,7 @@ class AppFixtures extends Fixture
     {
         /* Users */
         UserFactory::baseUsers();
-        UserFactory::new()->many(2, 5)->create([
+        UserFactory::new()->many(20, 40)->create([
             'password' => UserFactory::HASHED_PASSWORD,
         ]);
 

@@ -17,6 +17,8 @@ import ApiaryList from './pages/Apiary/ApiaryList';
 import ForgotPasswordConfirmation from './pages/Auth/ForgotPasswordConfirmation';
 import ApiaryCreate from './pages/Apiary/Forms/ApiaryCreate.tsx';
 import ApiaryUpdate from '@app/pages/Apiary/Forms/ApiaryUpdate.tsx';
+import UserCreate from '@app/pages/Admin/User/Forms/UserCreate.tsx';
+import UserUpdate from '@app/pages/Admin/User/Forms/UserUpdate.tsx';
 
 export const AdminPages: RouteDeclaration = {
   path: '/admin',
@@ -42,7 +44,10 @@ export const routes: Array<Route> = [
         component: ListUsers,
       },
       {
-        component: User,
+        component: UserCreate,
+      },
+      {
+        component: UserUpdate,
       },
     ],
   },
@@ -51,6 +56,11 @@ export const routes: Array<Route> = [
     layout: AppLayout,
     guard: NeedsLogin,
     component: Profile,
+  },
+  {
+    layout: AppLayout,
+    guard: NeedsLogin,
+    component: User,
   },
   {
     layout: AppLayout,

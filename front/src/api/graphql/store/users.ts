@@ -42,3 +42,19 @@ export function onCreatedUser(
   // Write the data back to the cache:
   store.writeQuery({ query, data });
 }
+
+export function onDeleteUser(
+  store: ApolloCache<unknown>,
+  userUid: string,
+) {
+  const currentDate = new Date().toISOString();
+
+  store.modify({
+    id: store.identify({ __typename: 'User', uid: userUid }),
+    fields: {
+      deletedAt() {
+        return currentDate;
+      },
+    },
+  });
+}

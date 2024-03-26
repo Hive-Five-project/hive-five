@@ -3,9 +3,10 @@
 query ListUsers {
   User {
     list {
-      roles
       isAdmin
       createdAt
+      updatedAt
+      deletedAt
       ..._User
     }
   }

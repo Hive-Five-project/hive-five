@@ -16,10 +16,10 @@
       "api_problem": {
         "type": "https:\/\/symfony.com\/errors\/validation",
         "title": "Validation Failed",
-        "detail": "payload.admin: Cette valeur ne doit pas être nulle.\npayload.email: Cette valeur ne doit pas être vide.\npayload.firstname: Cette valeur ne doit pas être vide.\npayload.lastname: Cette valeur ne doit pas être vide.",
+        "detail": "payload.isAdmin: Cette valeur ne doit pas être nulle.\npayload.email: Cette valeur ne doit pas être vide.\npayload.firstname: Cette valeur ne doit pas être vide.\npayload.lastname: Cette valeur ne doit pas être vide.",
         "violations": [
           {
-            "propertyPath": "payload.admin",
+            "propertyPath": "payload.isAdmin",
             "title": "Cette valeur ne doit pas être nulle.",
             "template": "This value should not be null.",
             "parameters": {
