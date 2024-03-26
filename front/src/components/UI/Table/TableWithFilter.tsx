@@ -1,6 +1,7 @@
 import clsx from 'clsx';
 import { SortOrder } from '@app/hooks/useSortHook.tsx';
 import { Table } from '@mantine/core';
+import { trans } from '@app/translations';
 
 interface Props {
   headers: string[]
@@ -31,7 +32,7 @@ export default function TableWithFilter({
               key={header}
               onClick={() => sortSettings[header] && onHeaderClick(header)}
             >
-              {header}{' '}
+              {trans('pages.admin.user.list.table.header'.concat('.', header))}{' '}
               {sortSettings[header] && sortColumn === header && (sortOrder === 'asc' ? '▲' : '▼')}
             </Table.Th>
           ))}

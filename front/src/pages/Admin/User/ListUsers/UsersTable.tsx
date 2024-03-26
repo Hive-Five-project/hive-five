@@ -97,15 +97,15 @@ export default function UsersTable({
   return <>
     <TableWithFilter
       headers={[
-        trans('pages.admin.user.list.table.header.uid'),
-        trans('pages.admin.user.list.table.header.email'),
-        trans('pages.admin.user.list.table.header.firstname'),
-        trans('pages.admin.user.list.table.header.lastname'),
-        trans('pages.admin.user.list.table.header.createdAt'),
-        trans('pages.admin.user.list.table.header.updatedAt'),
-        trans('pages.admin.user.list.table.header.deletedAt'),
-        trans('pages.admin.user.list.table.header.isAdmin'),
-        trans('pages.admin.user.list.table.header.actions'),
+        'uid',
+        'email',
+        'firstname',
+        'lastname',
+        'createdAt',
+        'updatedAt',
+        'deletedAt',
+        'isAdmin',
+        'actions',
       ]}
       onHeaderClick={handleSort}
       sortColumn={sortColumn}
