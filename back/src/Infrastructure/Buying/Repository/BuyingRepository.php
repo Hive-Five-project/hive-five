@@ -7,6 +7,7 @@ namespace App\Infrastructure\Buying\Repository;
 use App\Domain\Buying\Buying;
 use App\Domain\Buying\Repository\BuyingRepositoryInterface;
 use App\Domain\Common\Exception\NotFoundException;
+use App\Domain\User\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\Uid\Ulid;
@@ -40,5 +41,10 @@ class BuyingRepository extends ServiceEntityRepository implements BuyingReposito
     public function delete(Buying $buying): void
     {
         $this->getEntityManager()->remove($buying);
+    }
+
+    public function listMyBuyings(User $user): array
+    {
+        return $this->findBy(['user' => $user]);
     }
 }
