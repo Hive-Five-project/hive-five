@@ -85,7 +85,7 @@ export default {
       documentTitle: 'Réinitialiser votre mot de passe',
       newPassword: 'Nouveau mot de passe',
       newPasswordConfirm: 'Confirmer le mot de passe',
-      changePassword: 'Reinitialiser',
+      changePassword: 'Réinitialiser',
       goBack: 'Retour à la page de connexion',
     },
     public: {
