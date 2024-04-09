@@ -47,13 +47,8 @@ const ResetPassword = declareRoute(function Page() {
     if (!error) {
       return undefined;
     }
-    
-    const graphQLErrors: AppGraphQLError[] = error.graphQLErrors as AppGraphQLError[];
-    if (graphQLErrors[0]?.code === GraphQLErrorCodes.INVALID_PAYLOAD) {
-      return graphQLErrors[0]?.api_problem?.violations[0].title ?? defaultErrorMessage;
-    }
 
-    const graphQLErrors = error.graphQLErrors as AppGraphQLError[];
+    const graphQLErrors: AppGraphQLError[] = error.graphQLErrors as AppGraphQLError[];
     if (graphQLErrors[0]?.code === GraphQLErrorCodes.INVALID_PAYLOAD) {
       return graphQLErrors[0]?.api_problem?.violations[0].title ?? defaultErrorMessage;
     }
