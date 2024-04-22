@@ -29,7 +29,7 @@ This command will install the git hooks on your local repository.
 As we use Docker, you can start the app with the following command:
 
 ```bash
-docker compose up --profile docker -d
+docker compose --profile docker up -d
 ```
 
 This command will start the following containers:
