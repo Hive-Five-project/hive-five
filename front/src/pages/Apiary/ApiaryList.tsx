@@ -1,7 +1,7 @@
 import { APIARY_LIST_PATH, APIARY_ROOT_PATH } from '@app/paths';
 import { declareRoute } from '@app/router/router';
 import { trans } from '@app/translations';
-import { Container, Title, SimpleGrid } from '@mantine/core';
+import { Container, Title, SimpleGrid, Paper, Box, Center } from '@mantine/core';
 import { useDocumentTitle } from '@mantine/hooks';
 import { useQuery } from '@apollo/client';
 import ListApiariesQuery from '@graphql/query/apiary/ListApiaries.graphql';
