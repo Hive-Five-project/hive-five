@@ -1,0 +1,11 @@
+#import "@graphql/fragments/beehive/_Beehive.graphql"
+
+query ListBeehivesFromApiary($apiaryUid: ULID!) {
+  Beehive {
+    listBeehivesFromApiary(apiaryUid: $apiaryUid) {
+      updatedAt
+      createdAt
+      ..._Beehive
+    }
+  }
+}

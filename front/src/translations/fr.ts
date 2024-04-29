@@ -16,6 +16,8 @@ export default {
       cancel: 'Annuler',
       delete: 'Supprimer',
       create: 'Créer',
+      edit: 'Modifier',
+      delete: 'Supprimer',
       save: 'Enregister les modifications',
       send: 'Envoyer',
     },
@@ -47,15 +49,34 @@ export default {
       documentTitle: 'Liste des ruchers',
       addButtonText: 'Ajouter un rucher',
     },
+    apiaryHome: {
+      documentTitle: 'Page du rucher',
+      addButtonText: 'Ajouter une ruche',
+      name: 'Nom du rucher :',
+      address: 'Adresse :',
+      createdAt: 'Créé le :',
+      updatedAt: 'Mis à jour le :',
+    },
     apiaryForm: {
       create: {
         documentTitle: 'Formulaire de création de rucher',
+        buttonSubmit: 'Créer un rucher',
+        errorSubmit: 'Une erreur est survenue lors de la création du rucher.',
       },
       update: {
         documentTitle: 'Formulaire de modification de rucher',
+        buttonSubmit: 'Modifier un rucher',
+        errorSubmit: 'Une erreur est survenue lors de la modification du rucher.',
       },
       addApiaryName : 'Nom du rucher',
       addApiaryAddress : 'Addresse du rucher',
+    },
+    beehiveHome: {
+      documentTitle: 'Page de la ruche',
+      name: 'Nom de la ruche :',
+      bees: 'Types d\'abeilles :',
+      createdAt: 'Créé le :',
+      updatedAt: 'Mis à jour le :',
     },
     login: {
       documentTitle: 'Identification',

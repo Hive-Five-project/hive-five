@@ -58,7 +58,7 @@ const Page = declareRoute(function UpdateApiary() {
     const error = mutationState.error;
 
     return {
-      __root: error ? 'Une erreur est survenue lors de la soumission du formulaire.' : undefined,
+      __root: error ? trans('pages.apiaryForm.update.errorSubmit') : undefined,
       ...(error ? errorsByPath(error.graphQLErrors as AppGraphQLError[]) : {}),
     };
   }, [mutationState.error]);
@@ -94,6 +94,6 @@ const Page = declareRoute(function UpdateApiary() {
     <ApiaryForm onSubmit={submit} errors={mappedErrors} initialData={apiary} />
 
   </ Container>;
-}, APIARY_UPDATE_PATH );
+}, APIARY_UPDATE_PATH);
 
 export default Page;

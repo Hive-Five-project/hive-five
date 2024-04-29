@@ -1,10 +1,9 @@
-import { declareRoute } from "@app/router/router";
-import { trans } from "@app/translations";
-import { Container} from "@mantine/core";
-
-import { APIARY_ADD_PATH} from '@app/paths';
-import { useDocumentTitle } from "@mantine/hooks";
-import { useMemo } from "react";
+import { declareRoute } from '@app/router/router';
+import { trans } from '@app/translations';
+import { Container } from '@mantine/core';
+import { APIARY_ADD_PATH } from '@app/paths';
+import { useDocumentTitle } from '@mantine/hooks';
+import { useMemo } from 'react';
 import { useMutation } from '@app/api/apollo/useMutation';
 import CreateApiaryMutation from '@graphql/mutation/apiary/CreateApiary.graphql';
 import { useNavigate } from "react-router-dom";
@@ -30,7 +29,7 @@ const ApiaryCreatePage = declareRoute(function ApiaryCreate() {
   useDocumentTitle(trans('pages.apiaryForm.create.documentTitle'));
   const { previousUrl } = usePreviousUrlFromLocation();
 
-  const navigate=useNavigate()
+  const navigate = useNavigate()
   const [mutate, { error }] = useMutation<MutationResponse>(CreateApiaryMutation, {
     update(cache, { data }) {
       onCreateApiary(cache, data!.Apiary.create);
@@ -38,7 +37,7 @@ const ApiaryCreatePage = declareRoute(function ApiaryCreate() {
   });
 
   const mappedErrors = useMemo(() => ({
-    __root: error ? 'Une erreur est survenue lors de la soumission du formulaire.' : undefined,
+    __root: error ? trans('pages.apiaryForm.create.errorSubmit') : undefined,
     ...(error ? errorsByPath(error.graphQLErrors as AppGraphQLError[]) : {}),
   }), [error]);
 
@@ -55,7 +54,7 @@ const ApiaryCreatePage = declareRoute(function ApiaryCreate() {
     }).catch(onMutateError);
   }
   return <Container px="md">
-    <ApiaryForm onSubmit={submit} errors={mappedErrors}/>
+    <ApiaryForm onSubmit={submit} errors={mappedErrors} />
   </Container>;
 }, APIARY_ADD_PATH);
 
