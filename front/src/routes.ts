@@ -17,6 +17,7 @@ import ApiaryCreate from './pages/Apiary/Forms/ApiaryCreate.tsx';
 import ApiaryUpdate from '@app/pages/Apiary/Forms/ApiaryUpdate.tsx';
 import UserCreate from '@app/pages/Admin/User/Forms/UserCreate.tsx';
 import UserUpdate from '@app/pages/Admin/User/Forms/UserUpdate.tsx';
+import ProfileUpdate from '@app/pages/Profile/Forms/ProfileUpdate.tsx';
 
 export const AdminPages: RouteDeclaration = {
   path: '/admin',
@@ -84,6 +85,10 @@ export const routes: Array<Route> = [
   },
   {
     component: ApiaryUpdate,
+    layout: BlankLayout,
+  },
+  {
+    component: ProfileUpdate,
     layout: BlankLayout,
   },
   /* Error pages */

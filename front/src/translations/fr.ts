@@ -57,6 +57,11 @@ export default {
       addApiaryName : 'Nom du rucher',
       addApiaryAddress : 'Addresse du rucher',
     },
+    profileForm: {
+      update: {
+        documentTitle: 'Formulaire de modification du profile',
+      },
+    },
     login: {
       documentTitle: 'Identification',
       authenticationFailed: 'L\'authentification a échoué.',
@@ -144,6 +149,13 @@ export default {
     form: {
     },
     components: {
+    },
+    profile: {
+      documentTitle: 'Profil',
+      emailLabel: 'Email:',
+      error: 'Une erreur est survenue lors de la soumission du formulaire.',
+      successMessage: 'Profil modifié avec succès.',
+      updateProfile: 'Modifier le profil',
     },
   },
 };
