@@ -11,7 +11,6 @@ import { Beehive } from '@app/models/types/Beehive';
 import { route } from '@app/router/generator';
 import { faTrash, faWrench } from '@fortawesome/free-solid-svg-icons';
 import ApiaryList from '@app/pages/Apiary/ApiaryList.tsx';
-import ApiaryUpdate from '@app/pages/Apiary/Forms/ApiaryUpdate.tsx';
 import ApiaryHome from '@app/pages/Apiary/ApiaryHome.tsx';
 import TopNavigationMenu from '@app/components/UI/TopNavigation/TopNavigationMenu';
 
@@ -50,9 +49,9 @@ const Page = declareRoute(function BeehiveHome() {
       }
       buttons={[
         {
-          text: trans('common.actions.update'),
+          text: trans('common.actions.edit'),
           icon: faWrench,
-          path: route(ApiaryUpdate, { uid }),
+          path: "#", //TODO : Add edit link
         },
         {
           text: trans('common.actions.delete'),

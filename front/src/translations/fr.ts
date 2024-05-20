@@ -14,7 +14,6 @@ export default {
     loading: 'Chargement...',
     actions: {
       cancel: 'Annuler',
-      delete: 'Supprimer',
       create: 'Créer',
       edit: 'Modifier',
       delete: 'Supprimer',
