@@ -82,6 +82,22 @@ export default {
       createdAt: 'Créé le :',
       updatedAt: 'Mis à jour le :',
     },
+    beehiveForm: {
+      create: {
+        documentTitle: 'Ajouter une ruche',
+        buttonSubmit: 'Ajouter la ruche',
+        errorSubmit: 'Une erreur est survenue lors de la création de la ruche.',
+      },
+      update: {
+        documentTitle: 'Modifier une ruche',
+        buttonSubmit: 'Modifier la ruche',
+        errorSubmit: 'Une erreur est survenue lors de la modification de la ruche.',
+      },
+      beehiveName : 'Nom de la ruche',
+      beesType : 'Type d\'abeilles',
+      queenAge:'Age de la reine',
+      updatedAt:'Date du dernier essaimage',
+    },
     login: {
       documentTitle: 'Identification',
       authenticationFailed: 'L\'authentification a échoué.',

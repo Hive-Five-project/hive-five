@@ -21,3 +21,4 @@ export const APIARY_HOME_PATH = APIARY_ROOT_PATH + '/:uid';
 export const APIARY_UPDATE_PATH = APIARY_ROOT_PATH + '/update/:uid';
 export const BEEHIVE_ROOT_PATH = '/beehive';
 export const BEEHIVE_HOME_PATH = BEEHIVE_ROOT_PATH + '/:uid';
+export const BEEHIVE_ADD_PATH = BEEHIVE_ROOT_PATH + '/add';
