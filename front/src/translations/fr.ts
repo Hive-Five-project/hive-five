@@ -14,6 +14,7 @@ export default {
     loading: 'Chargement...',
     actions: {
       cancel: 'Annuler',
+      delete: 'Supprimer',
       create: 'Créer',
       save: 'Enregister les modifications',
       send: 'Envoyer',
@@ -37,6 +38,7 @@ export default {
     fatalError: {
       documentTitle: 'Erreur fatale',
       title: 'Une erreur inattendue s\'est produite',
+      form: 'Une erreur est survenue lors de la soumission du formulaire.',
       subtitle: 'Erreur 500',
       lead: 'Désolé, le service rencontre un problème, nous travaillons pour le résoudre le plus rapidement possible.',
       content: 'Essayez de rafraîchir la page ou bien réessayez plus tard. Si vous avez besoin d\'une aide immédiate, merci de nous contacter.',
@@ -67,6 +69,7 @@ export default {
     },
     logout: {
       documentTitle: 'Déconnexion',
+      disconnect: 'Se déconnecter',
     },
     forgotPassword: {
       documentTitle: 'Mot de passe oublié',
@@ -88,9 +91,55 @@ export default {
       changePassword: 'Réinitialiser',
       goBack: 'Retour à la page de connexion',
     },
+    user: {
+      profile: {
+        documentTitle: 'Mon profil',
+      },
+    },
     public: {
     },
     admin: {
+      user: {
+        list: {
+          documentTitle: 'Liste des utilisateurs',
+          table: {
+            header: {
+              uid: 'UID',
+              email: 'Adresse email',
+              firstname: 'Prénom',
+              lastname: 'Nom',
+              createdAt: 'Créé le',
+              updatedAt: 'Modifié le',
+              deletedAt: 'Supprimé le',
+              isAdmin: 'Administrateur',
+              actions: 'Actions',
+            },
+            action: {
+              button: 'Actions',
+              delete: 'Supprimer',
+              update: 'Modifier',
+            },
+          },
+          return: 'Retour à la liste des utilisateurs',
+        },
+        create: {
+          documentTitle: 'Ajout d\'un utilisateur',
+          button: 'Créer un nouvel utilisateur',
+        },
+        update: {
+          documentTitle: 'Modification d\'un utilisateur',
+        },
+        form: {
+          email: 'Adresse email',
+          firstname: 'Prénom',
+          lastname: 'Nom',
+          isAdmin: 'Administrateur',
+          successCreate: 'Utilisateur créé avec succès.',
+          successUpdate: 'Utilisateur modifié avec succès.',
+          successDelete: 'Utilisateur supprimé avec succès.',
+          warning: 'Attention, vous êtes sur le point de supprimer cet utilisateur :',
+        },
+      },
     },
     form: {
     },

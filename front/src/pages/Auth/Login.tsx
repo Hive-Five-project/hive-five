@@ -9,11 +9,10 @@ import { useDocumentTitle } from '@app/hooks/useDocumentTitle';
 import { trans } from '@app/translations';
 import { route } from '@app/router/generator';
 import ForgotPassword from '@app/pages/Auth/ForgotPassword';
-import Admin from '@app/pages/Admin/Admin';
-import User from '@app/pages/Admin/User/User';
 import { Alert, Button, Container, Space, Stack } from '@mantine/core';
 import { CompactTextInput, CompactPasswordInput } from '@app/components/UI/CompactInput/CompactInput';
 import { LOGIN_PATH } from '@app/paths';
+import Home from '@app/pages/Home.tsx';
 
 interface LoginRedirectState {
   target?: string | null
@@ -46,7 +45,7 @@ function useLogin() {
   useEffect(() => {
     if (profile !== null) {
       // Redirect to home (or previous route before login redirect if any)
-      navigate((state as LoginRedirectState)?.target ?? route(profile.isAdmin ? Admin : User));
+      navigate((state as LoginRedirectState)?.target ?? route(Home));
     }
   }, [navigate, profile, state]);
 

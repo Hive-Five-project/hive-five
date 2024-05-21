@@ -27,7 +27,7 @@ class UpdateUserCommandHandler
             $payload->email,
             $payload->firstname,
             $payload->lastname,
-            $payload->admin,
+            $payload->isAdmin,
         );
 
         // Only change the password if a new one was provided:
