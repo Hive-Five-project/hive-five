@@ -8,13 +8,16 @@ import DefaultProfileIcon from '@app/assets/DefaultProfileIcon';
 import { useAuthContext } from '@app/hooks/useAuthContext.tsx';
 import { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faRightFromBracket, faUser } from '@fortawesome/free-solid-svg-icons';
+import { faRightFromBracket, faUser, faUsers } from '@fortawesome/free-solid-svg-icons';
+import { route } from '@app/router/generator.ts';
+import ListUsers from '@app/pages/Admin/User/ListUsers/ListUsers.tsx';
+import { trans } from '@app/translations';
 
 export default function Header() {
   const [opened, { toggle }] = useDisclosure();
   const [openedMenu, setOpenedMenu] = useState(false);
 
-  const { authenticated } = useAuthContext();
+  const { authenticated, isAdmin } = useAuthContext();
   const { hovered, ref } = useHover();
 
   return (
@@ -69,21 +72,28 @@ export default function Header() {
                 component={Link}
                 to={PROFILE_PATH}
               >
-                Profile
+                {trans('pages.user.profile.documentTitle')}
               </Menu.Item>
+              {isAdmin && <Menu.Item
+                leftSection={<FontAwesomeIcon icon={faUsers} />}
+                component={Link}
+                to={route(ListUsers)}
+                color="green"
+              >
+                {trans('pages.admin.user.list.documentTitle')}
+              </Menu.Item>}
               <Menu.Item
                 leftSection={<FontAwesomeIcon icon={faRightFromBracket} />}
                 component={Link}
                 to="/logout"
                 color="red"
               >
-                Logout
+                {trans('pages.logout.disconnect')}
               </Menu.Item>
             </Menu.Dropdown>
           </Menu>
         }
       </Group>
     </AppShell.Header>
-  )
-  ;
+  );
 }

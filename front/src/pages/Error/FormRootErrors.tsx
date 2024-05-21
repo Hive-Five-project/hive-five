@@ -4,6 +4,7 @@ import Alert from '@app/pages/Error/Alert.tsx';
 
 interface Props extends ComponentProps<'div'>{
   errors?: FormErrors
+  field?: string
   title?: string
 }
 
@@ -12,6 +13,7 @@ interface Props extends ComponentProps<'div'>{
  */
 export function FormRootErrors({
   errors,
+  field,
   title = 'Erreur',
   ...remainingProps
 }: Props) {
@@ -23,6 +25,7 @@ export function FormRootErrors({
 
   return <Alert title={title} variant="danger" {...remainingProps}>
     <p>
+      {field && <strong>{field === '__root' ? '' : field}<br /></strong>}
       {errorsArray.map((error, index) => <span key={index}>
         {error}<br />
       </span>)}
