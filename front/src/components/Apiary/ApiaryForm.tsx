@@ -3,11 +3,13 @@ import { FormErrorsMap } from '@app/components/UI/Form';
 import { route } from '@app/router/generator';
 import { Apiary } from '@app/models/types/Apiary.ts';
 import usePreviousUrlFromLocation from '@app/hooks/usePreviousUrlLocationState.tsx';
-import { Button, Space, Stack } from '@mantine/core';
+import { Button, Stack } from '@mantine/core';
 import { trans } from '@app/translations';
 import ApiaryList from '@app/pages/Apiary/ApiaryList.tsx';
+import ApiaryHome from '@app/pages/Apiary/ApiaryHome.tsx';
 import { FormRootErrors } from '@app/pages/Error/FormRootErrors.tsx';
 import CompactTextInput from '@app/components/UI/CompactInput/CompactTextInput.tsx';
+import TopNavigationMenu from '../UI/TopNavigation/TopNavigationMenu';
 
 export interface ApiaryData {
   name: string | null
@@ -36,6 +38,7 @@ export default function ApiaryForm({
   const isUpdate = initialData !== undefined;
   const { previousUrl } =  usePreviousUrlFromLocation();
 
+  const uid = initialData?.uid ?? null;
   const [name, setName] = useState<string | null>(initialData?.name ?? null);
   const [address, setAddress] = useState<string | null>(initialData?.address ?? null);
 
@@ -50,10 +53,15 @@ export default function ApiaryForm({
   }
 
   return <form className="mb-10 max-w-screen-lg" onSubmit={submit}>
-    <Space h={8} />
-    <a href={previousUrl ?? route(ApiaryList)}> Retour à la liste</a>
+    <TopNavigationMenu
+      previousPath={previousUrl ?? (uid ? route(ApiaryHome, { uid }) : route(ApiaryList))}
+    />
 
-    <h2>{isUpdate ? trans('pages.apiaryForm.update.documentTitle') : trans('pages.apiaryForm.create.documentTitle')}</h2>
+    <h2>
+      {isUpdate
+        ? trans('pages.apiaryForm.update.documentTitle')
+        : trans('pages.apiaryForm.create.documentTitle')}
+    </h2>
     <FormRootErrors errors={errors?.name} />
 
     <Stack>
@@ -78,7 +86,9 @@ export default function ApiaryForm({
       <Button
         type="submit"
       >
-        {isUpdate ? 'Modifier un rucher' : 'Créer un rucher'}
+        {isUpdate
+          ? trans('pages.apiaryForm.update.buttonSubmit')
+          : trans('pages.apiaryForm.create.buttonSubmit')}
       </Button>
     </Stack>
   </form>;

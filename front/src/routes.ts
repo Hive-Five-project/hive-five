@@ -15,6 +15,8 @@ import ApiaryList from './pages/Apiary/ApiaryList';
 import ForgotPasswordConfirmation from './pages/Auth/ForgotPasswordConfirmation';
 import ApiaryCreate from './pages/Apiary/Forms/ApiaryCreate.tsx';
 import ApiaryUpdate from '@app/pages/Apiary/Forms/ApiaryUpdate.tsx';
+import ApiaryHome from './pages/Apiary/ApiaryHome.tsx';
+import BeehiveHome from '@app/pages/Beehive/BeehiveHome.tsx';
 import UserCreate from '@app/pages/Admin/User/Forms/UserCreate.tsx';
 import UserUpdate from '@app/pages/Admin/User/Forms/UserUpdate.tsx';
 
@@ -55,7 +57,29 @@ export const routes: Array<Route> = [
   {
     layout: AppLayout,
     guard: NeedsLogin,
-    component: ApiaryList,
+    routes: [
+      {
+        component: ApiaryList,
+      },
+      {
+        component: ApiaryHome,
+      },
+      {
+        component: ApiaryCreate,
+      },
+      {
+        component: ApiaryUpdate,
+      },
+    ],
+  },
+  {
+    layout: AppLayout,
+    guard: NeedsLogin,
+    routes: [
+      {
+        component: BeehiveHome,
+      },
+    ],
   },
   /* Auth pages */
   {
@@ -76,14 +100,6 @@ export const routes: Array<Route> = [
   },
   {
     component: ResetPassword,
-    layout: BlankLayout,
-  },
-  {
-    component: ApiaryCreate,
-    layout: BlankLayout,
-  },
-  {
-    component: ApiaryUpdate,
     layout: BlankLayout,
   },
   /* Error pages */
