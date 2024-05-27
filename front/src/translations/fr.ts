@@ -78,7 +78,8 @@ export default {
     beehiveHome: {
       documentTitle: 'Page de la ruche',
       name: 'Nom de la ruche :',
-      bees: 'Types d\'abeilles :',
+      bees: 'Type d\'abeilles :',
+      age: 'Age de la reine :',
       createdAt: 'Créé le :',
       updatedAt: 'Mis à jour le :',
     },

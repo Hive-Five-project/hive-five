@@ -1,13 +1,13 @@
 import { ApolloCache } from '@apollo/client';
 import ListBeehivesQuery from '@graphql/query/beehive/ListBeehives.graphql';
 
-interface BeehiveRef {
+interface ApiaryRef {
   uid: string
 }
 
 interface Store {
   Beehive: {
-    listMyBeehives: BeehiveRef[]
+    listMyBeehives: ApiaryRef[]
   }
 }
 
@@ -19,7 +19,7 @@ interface Store {
  */
 export function onCreateBeehive(
   store: ApolloCache<unknown>,
-  beehive: BeehiveRef,
+  beehive: ApiaryRef,
 ) {
   const query = ListBeehivesQuery;
   // Attempt to read the data from the cache:

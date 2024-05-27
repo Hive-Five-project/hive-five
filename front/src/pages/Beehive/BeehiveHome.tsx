@@ -13,6 +13,7 @@ import { faTrash, faWrench } from '@fortawesome/free-solid-svg-icons';
 import ApiaryList from '@app/pages/Apiary/ApiaryList.tsx';
 import ApiaryHome from '@app/pages/Apiary/ApiaryHome.tsx';
 import TopNavigationMenu from '@app/components/UI/TopNavigation/TopNavigationMenu';
+import BeehiveUpdate from './Forms/BeehiveUpdate';
 
 interface FindBeehiveQueryResponse {
   Beehive: {
@@ -51,7 +52,7 @@ const Page = declareRoute(function BeehiveHome() {
         {
           text: trans('common.actions.edit'),
           icon: faWrench,
-          path: "#", //TODO : Add edit link
+          path: route(BeehiveUpdate, { uid }),
         },
         {
           text: trans('common.actions.delete'),
@@ -66,6 +67,8 @@ const Page = declareRoute(function BeehiveHome() {
       <Text pb="xs">{beehive?.name ?? "-"}</Text>
       <Text size="lg" fw={700}>{trans('pages.beehiveHome.bees')}</Text>
       <Text pb="xs">{beehive?.bee ?? "-"}</Text>
+      <Text size="lg" fw={700}>{trans('pages.beehiveHome.age')}</Text>
+      <Text pb="xs">{beehive?.age ?? "-"}</Text>
       <Text size="lg" fw={700}>{trans('pages.beehiveHome.createdAt')}</Text>
       <Text pb="xs">{parseDate(beehive?.createdAt)}</Text>
       <Text size="lg" fw={700}>{trans('pages.beehiveHome.updatedAt')}</Text>

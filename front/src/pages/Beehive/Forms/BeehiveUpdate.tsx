@@ -1,69 +1,66 @@
 import { declareRoute } from '@app/router/router.tsx';
 import { useDocumentTitle } from '@mantine/hooks';
-import FindApiaryQuery from '@graphql/query/apiary/FindApiary.graphql';
-import UpdateApiaryMutation from '@graphql/mutation/apiary/UpdateApiary.graphql';
+import FindBeehiveQuery from '@graphql/query/beehive/FindBeehive.graphql';
+import UpdateBeehiveMutation from '@graphql/mutation/beehive/UpdateBeehive.graphql';
 import { trans } from '@app/translations';
-import { useLocation, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { useNotFoundHandler } from '@app/components/ErrorBoundary.tsx';
-import { Apiary } from '@app/models/types/Apiary.ts';
 import { useQuery } from '@apollo/client';
 import { useMemo } from 'react';
 import { useMutation } from '@app/api/apollo/useMutation.ts';
 import { errorsByPath } from '@app/api/errors';
 import { AppGraphQLError } from '@app/api/errors/GraphQLErrorCodes.ts';
-import ApiaryForm, { ApiaryData } from '@app/components/Apiary/ApiaryForm.tsx';
 import { onMutateError } from '@graphql/utils.ts';
 import UnexpectedError from '@app/errors/UnexpectedError.ts';
 import Alert from '@app/pages/Error/Alert.tsx';
-import { APIARY_UPDATE_PATH } from '@app/paths.ts';
+import { BEEHIVE_UPDATE_PATH } from '@app/paths.ts';
 import { Container } from '@mantine/core';
+import { Beehive } from '@app/models/types/Beehive';
+import BeehiveForm, { BeehiveData } from '@app/components/BeeHive/BeehiveForm';
 
 
 interface MutationResponse {
-  Apiary: {
+  Beehive: {
     update: {
       uid: string
     }
   }
 }
 
-interface FindApiaryQueryResponse {
-  Apiary: {
-    find: Apiary
+interface FindBeehiveQueryResponse {
+  Beehive: {
+    find: Beehive
   }
 }
 
-interface RedirectFromCreationState {
-  apiaryCreated: boolean
-}
 
-const Page = declareRoute(function UpdateCategory() {
-  useDocumentTitle(trans('pages.apiaryForm.update.documentTitle'));
+const BeehiveUpdatePage = declareRoute(function BeehiveUpdate() {
+  useDocumentTitle(trans('pages.beehiveForm.update.documentTitle'));
 
   const { uid } = useParams();
   const notFoundHandler = useNotFoundHandler();
-  const { apiaryCreated } = (useLocation().state ?? {}) as RedirectFromCreationState;
 
-  const query = useQuery<FindApiaryQueryResponse>(FindApiaryQuery, {
+  const query = useQuery<FindBeehiveQueryResponse>(FindBeehiveQuery, {
     variables: { uid },
     context: {
       // On GraphQL Not Found error, show a Not Found page
       onNotFound: notFoundHandler,
     },
   });
+  const beehive = query.data?.Beehive.find;
 
-  const [mutate, mutationState] = useMutation<MutationResponse>(UpdateApiaryMutation);
+  const [mutate, mutationState] = useMutation<MutationResponse>(UpdateBeehiveMutation);
 
   const mappedErrors = useMemo(() => {
     const error = mutationState.error;
 
     return {
-      __root: error ? trans('pages.apiaryForm.update.errorSubmit') : undefined,
+      __root: error ? trans('pages.beehiveForm.update.errorSubmit') : undefined,
       ...(error ? errorsByPath(error.graphQLErrors as AppGraphQLError[]) : {}),
     };
   }, [mutationState.error]);
 
-  async function submit(payload: ApiaryData) {
+  async function submit(payload: BeehiveData) {
     window.scrollTo({ top: 0, behavior: 'smooth' });
 
     mutate({
@@ -80,20 +77,19 @@ const Page = declareRoute(function UpdateCategory() {
     return <p>{trans('common.loading')}</p>;
   }
 
-  const apiary = query.data!.Apiary.find;
+
 
   return <Container px="md">
-    {apiaryCreated && !mutationState.called && <Alert title="Success" variant="success">
-      Rucher créé avec succès.
+    {mutationState.called && mutationState.data?.Beehive && <Alert title="Success" variant="success">
+      Ruche modifiée avec succès.
+    </Alert>}
+    {mutationState.error && <Alert title="Fail" variant="warning">
+      Erreur lors de la modification Resaisissez les données
     </Alert>}
 
-    {mutationState.called && mutationState.data?.Apiary && <Alert title="Success" variant="success">
-      Rucher modifié avec succès.
-    </Alert>}
-
-    <ApiaryForm onSubmit={submit} errors={mappedErrors} initialData={apiary} />
+    <BeehiveForm onSubmit={submit} errors={mappedErrors} initialData={beehive} />
 
   </ Container>;
-}, APIARY_UPDATE_PATH);
+}, BEEHIVE_UPDATE_PATH);
 
-export default Page;
+export default BeehiveUpdatePage;

@@ -1,19 +1,26 @@
 import { FormEvent, useState } from 'react';
 import { FormErrorsMap } from '@app/components/UI/Form';
 import usePreviousUrlFromLocation from '@app/hooks/usePreviousUrlLocationState.tsx';
-import { Button, Space, Stack } from '@mantine/core';
+import { Button, Stack } from '@mantine/core';
 import { trans } from '@app/translations';
 import { FormRootErrors } from '@app/pages/Error/FormRootErrors.tsx';
 import CompactTextInput from '@app/components/UI/CompactInput/CompactTextInput.tsx';
 import { Beehive } from '@app/models/types/Beehive';
-import { Apiary } from '@app/models/types/Apiary';
+import { useParams } from 'react-router-dom';
+import TopNavigationMenu from '../UI/TopNavigation/TopNavigationMenu';
+import ApiaryHome from '@app/pages/Apiary/ApiaryHome';
+import ApiaryList from '@app/pages/Apiary/ApiaryList';
+import { route } from '@app/router/generator';
+import CompactSelect from '../UI/CompactInput/CompactSelect';
+import BeehiveHome from '@app/pages/Beehive/BeehiveHome';
+
 
 
 export interface BeehiveData {
     name: string | null
     bee: string | null
     age: number | null
-    apiary: string | null 
+    apiary: string | null
 }
 
 interface Props {
@@ -35,32 +42,34 @@ export default function BeehiveForm({
     errors = {},
 }: CreateProps | UpdateProps) {
 
+    const { uid } = useParams();
     const isUpdate = initialData !== undefined;
     const { previousUrl } = usePreviousUrlFromLocation();
-   
+    const beeTypes = ['Black', 'Italian', 'Caucasian', 'Carnolien', 'Buckfast'];
     const [name, setName] = useState<string | null>(initialData?.name ?? null);
     const [age, setAge] = useState<number | null>(initialData?.age ?? null);
     const [bee, setBee] = useState<string | null>(initialData?.bee ?? null);
-  
+    const apiary = (initialData?.apiary.uid ?? uid!);
+    
     function submit(event: FormEvent<HTMLFormElement>): void {
         // Prevent default to avoid page reload.
-        event.preventDefault();
-        //console.log(apiary.uid);
-        // onSubmit({
-        //     name,
-        //     age,
-        //     bee,
-        //     apiary,
-        // });
+        event.preventDefault();       
+        onSubmit({
+            name,
+            age: Number(age),
+            bee,
+            apiary,
+        });
     }
 
     return <form className="mb-10 max-w-screen-lg" onSubmit={submit}>
-        {/* <TopNavigationMenu
-            previousPath={
-                uid
-                    ? route(ApiaryHome, { uid: uid })
-                    : route(ApiaryList)
-            } /> */}
+       {
+        !isUpdate ?
+        <TopNavigationMenu
+            previousPath={previousUrl ?? ( uid ? route(ApiaryHome, { uid }) : route(ApiaryList))} />:
+            <TopNavigationMenu
+            previousPath={previousUrl ?? ( uid ? route(BeehiveHome, { uid }) : route(ApiaryList))} />
+            }
 
         <h2>
             {isUpdate
@@ -70,7 +79,7 @@ export default function BeehiveForm({
         <FormRootErrors errors={errors?.name} />
         <Stack>
             <CompactTextInput
-                id="apiaryName"
+                id="beehiveName"
                 label={trans('pages.beehiveForm.beehiveName')}
                 type="text"
                 value={name ?? ''}
@@ -78,25 +87,23 @@ export default function BeehiveForm({
                 required
                 autoFocus
             />
-            <CompactTextInput
-                id="apiaryName"
+            <CompactSelect
+                id="beesType"
                 label={trans('pages.beehiveForm.beesType')}
-                type="enums"
+                type='text'
+                data={beeTypes}
                 value={bee ?? ''}
-                onChange={(e) => setBee(e.target.value)}
+                onChange={setBee}
                 required
-                autoFocus
             />
             <CompactTextInput
-                id="apiaryAddress"
+                id="beehiveAge"
                 label={trans('pages.beehiveForm.queenAge')}
                 type="number"
                 value={age ?? ''}
                 onChange={(e) => setAge(e.target.valueAsNumber)}
                 required
-
             />
-         
             <Button
                 type="submit"
             >
