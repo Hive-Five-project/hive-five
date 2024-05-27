@@ -1,0 +1,12 @@
+fragment _Beehive on Beehive {
+  uid
+  name
+  bee
+  age
+  apiary {
+    uid
+  }
+  frames {
+    uid
+  }
+}

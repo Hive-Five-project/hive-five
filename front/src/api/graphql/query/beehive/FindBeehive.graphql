@@ -1,0 +1,18 @@
+query($uid: ULID!) {
+  Beehive {
+    find(uid: $uid) {
+      uid
+      name
+      bee
+      age
+      apiary {
+        uid
+      }
+      frames {
+        uid
+      }
+      createdAt
+      updatedAt
+    }
+  }
+}

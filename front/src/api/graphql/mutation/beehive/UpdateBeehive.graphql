@@ -1,0 +1,16 @@
+mutation($uid: ULID!, $payload: BeehivePayload!) {
+  Beehive {
+    update(uid: $uid, payload: $payload) {
+      uid
+      name
+      bee
+      age
+      apiary {
+        uid
+      }
+      frames {
+        uid
+      }
+    }
+  }
+}
