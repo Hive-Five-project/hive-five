@@ -9,12 +9,13 @@ on:
 jobs:
   check-title:
     runs-on: ubuntu-latest
+    env:
+      PR_TITLE: ${{ github.event.pull_request.title }}
+      PR_ID: ${{ github.event.pull_request.number }}
     steps:
       - name: Check title
         id: check-title
         run: |
-          PR_TITLE="${{ github.event.pull_request.title }}"
-          PR_ID="${{ github.event.pull_request.number }}"
           REGEX="^\[(FRONT|BACK|DEVOPS|TEST|DOCS|FIX|REFACTOR|STYLE|CHORE|CI|BUILD|PERF|REVERT|WIP)\/{0,1}[A-Z]*\] [a-zA-Z0-9+,;&\/ ]+$"
           if [[ ! $PR_TITLE =~ $REGEX ]]; then
             echo "Pull request title is not prefixed with one of the following verbs: FRONT, BACK, DEVOPS, TEST, DOCS, FIX, REFACTOR, STYLE, CHORE, CI, BUILD, PERF, REVERT, WIP"
@@ -32,14 +33,17 @@ jobs:
           fi
   check-branches:
     runs-on: ubuntu-latest
+    env:
+      PR_HEAD_REF: ${{ github.head_ref }}
+      PR_BASE_REF: ${{ github.base_ref }}
     steps:
       - name: Check branches
         run: |
-          if [ ${{ github.head_ref }} == "main" ]; then
+          if [ "$PR_HEAD_REF" == "main" ]; then
             echo "Pull requests from main branch are not allowed."
             exit 1
           fi
-          if [ ${{ github.head_ref }} != "staging" ] && [ ${{ github.base_ref }} == "main" ]; then
+          if [ "$PR_HEAD_REF" != "staging" ] && [ "$PR_BASE_REF" == "main" ]; then
             echo "Merge requests to main branch are only allowed from staging branch."
             exit 1
           fi
