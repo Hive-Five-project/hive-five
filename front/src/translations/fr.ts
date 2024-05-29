@@ -70,6 +70,11 @@ export default {
       addApiaryName : 'Nom du rucher',
       addApiaryAddress : 'Addresse du rucher',
     },
+    profileForm: {
+      update: {
+        documentTitle: 'Formulaire de modification du profile',
+      },
+    },
     beehiveHome: {
       documentTitle: 'Page de la ruche',
       name: 'Nom de la ruche :',
@@ -164,6 +169,13 @@ export default {
     form: {
     },
     components: {
+    },
+    profile: {
+      documentTitle: 'Profil',
+      emailLabel: 'Email:',
+      error: 'Une erreur est survenue lors de la soumission du formulaire.',
+      successMessage: 'Profil modifié avec succès.',
+      updateProfile: 'Modifier le profil',
     },
   },
 };

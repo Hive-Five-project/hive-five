@@ -13,6 +13,7 @@ export const RESET_PASSWORD_PATH = '/reset-password/:token';
 
 /* --- MAIN --- */
 export const PROFILE_PATH = '/profile';
+export const PROFILE_UPDATE_PATH = PROFILE_PATH + '/update';
 export const APIARY_ROOT_PATH = '/apiary';
 export const APIARY_LIST_PATH = APIARY_ROOT_PATH + '/list';
 export const APIARY_ADD_PATH = APIARY_ROOT_PATH + '/add';
