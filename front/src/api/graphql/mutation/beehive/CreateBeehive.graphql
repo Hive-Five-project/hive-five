@@ -1,0 +1,16 @@
+mutation($payload: BeehivePayload!) {
+  Beehive {
+    create(payload: $payload) {
+      uid
+      name
+      bee
+      age
+      apiary {
+        uid
+      }
+      frames {
+        uid
+      }
+    }
+  }
+}

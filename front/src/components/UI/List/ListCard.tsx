@@ -7,6 +7,7 @@ interface ApiaryCardProps {
   title?: string
   path: string
   icon: ReactElement
+  colorInverted?: boolean
 }
 
 export default function ListCard(props: ApiaryCardProps) {
@@ -14,12 +15,13 @@ export default function ListCard(props: ApiaryCardProps) {
     component={Link}
     to={props.path}
     px="md"
-    bg="green"
-    c="white"
     ta="center"
-    className={classes.card}
+    className={classes.card + ' ' + ((props.colorInverted ?? false) ? classes.inverted : '')}
   >
-    <Box p={{ base: "sm", xs: "lg" }} className={classes['icon-container']}>
+    <Box
+      p={{ base: "sm", xs: "lg" }}
+      className={classes['icon-container']}
+    >
       {cloneElement(props.icon, { className: classes.icon })}
     </Box>
     {props.title &&
