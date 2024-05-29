@@ -19,6 +19,7 @@ import ApiaryHome from './pages/Apiary/ApiaryHome.tsx';
 import BeehiveHome from '@app/pages/Beehive/BeehiveHome.tsx';
 import UserCreate from '@app/pages/Admin/User/Forms/UserCreate.tsx';
 import UserUpdate from '@app/pages/Admin/User/Forms/UserUpdate.tsx';
+import ProfileUpdate from '@app/pages/Profile/Forms/ProfileUpdate.tsx';
 
 export const AdminPages: RouteDeclaration = {
   path: '/admin',
@@ -100,6 +101,18 @@ export const routes: Array<Route> = [
   },
   {
     component: ResetPassword,
+    layout: BlankLayout,
+  },
+  {
+    component: ApiaryCreate,
+    layout: BlankLayout,
+  },
+  {
+    component: ApiaryUpdate,
+    layout: BlankLayout,
+  },
+  {
+    component: ProfileUpdate,
     layout: BlankLayout,
   },
   /* Error pages */
