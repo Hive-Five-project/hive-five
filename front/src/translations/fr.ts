@@ -74,6 +74,7 @@ export default {
       update: {
         documentTitle: 'Formulaire de modification du profile',
       },
+    },
     beehiveHome: {
       documentTitle: 'Page de la ruche',
       name: 'Nom de la ruche :',
