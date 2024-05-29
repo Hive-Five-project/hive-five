@@ -43,7 +43,7 @@ jobs:
             echo "Pull requests from main branch are not allowed."
             exit 1
           fi
-          if [ "$PR_HEAD_REF" != "staging" ] && [ $PR_BASE_REF == "main" ]; then
+          if [ "$PR_HEAD_REF" != "staging" ] && [ "$PR_BASE_REF" == "main" ]; then
             echo "Merge requests to main branch are only allowed from staging branch."
             exit 1
           fi
