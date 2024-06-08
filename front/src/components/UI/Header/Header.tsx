@@ -70,18 +70,13 @@ export default function Header() {
             opened={opened}
             onClick={toggle}
             size="md"
-          />}
-          <Link to="/">
-            <Group gap="xs">
-              <Box hiddenFrom="sm">
-                <LogoPlain style={{ width: 50, height: 50 }} />
-              </Box>
-              <Box visibleFrom="sm">
-                <LogoPlainWithText style={{ height: 50 }} />
-              </Box>
-            </Group>
+          />} <Link to="/">
+
+            <Box >
+              <LogoPlainWithText style={{ height: 50 }} />
+            </Box>
           </Link>
-        </Group>
+      </Group>
 
         {authenticated &&
           <Menu shadow="md" width={150} opened={openedMenu} onChange={setOpenedMenu}  >
@@ -104,16 +99,8 @@ export default function Header() {
                 component={Link}
                 to={PROFILE_PATH}
               >
-                {trans('pages.user.profile.documentTitle')}
+                {trans('navigation.profile')}
               </Menu.Item>
-              {isAdmin && <Menu.Item
-                leftSection={<FontAwesomeIcon icon={faUsers} />}
-                component={Link}
-                to={route(ListUsers)}
-                color="green"
-              >
-                {trans('pages.admin.user.list.documentTitle')}
-              </Menu.Item>}
               <Menu.Item
                 leftSection={<FontAwesomeIcon icon={faRightFromBracket} />}
                 component={Link}
@@ -125,17 +112,17 @@ export default function Header() {
             </Menu.Dropdown>
           </Menu>
         }
-        {!authenticated &&
-          <Button
-            component={Link}
-            to={LOGIN_PATH}
-            size="md"
-            style={{ padding: '10px', marginRight: '10px', marginBottom: '5px' }}
-          >
-            {trans('pages.login.connect')}
-          </Button>}
+        {!authenticated && 
+        <Button
+        component={Link}
+        to={LOGIN_PATH}
+        size="md"
+        style={{padding: '10px',marginRight: '10px',marginBottom: '5px'}}
+        >
+          {trans('pages.login.connect')}
+        </Button>}
       </Group>
     </AppShell.Header>
   )
-    ;
+  ;
 }
