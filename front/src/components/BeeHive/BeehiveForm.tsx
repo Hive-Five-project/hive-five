@@ -13,8 +13,9 @@ import ApiaryList from '@app/pages/Apiary/ApiaryList';
 import { route } from '@app/router/generator';
 import CompactSelect from '../UI/CompactInput/CompactSelect';
 import BeehiveHome from '@app/pages/Beehive/BeehiveHome';
-
-
+import ListBeeTypeQuery from '@graphql/query/beehive/ListBeeType.graphql';
+import { useQuery } from '@apollo/client';
+import { useNotFoundHandler } from '@app/components/ErrorBoundary.tsx';
 
 export interface BeehiveData {
   name: string | null
@@ -23,6 +24,11 @@ export interface BeehiveData {
   apiary: string | null
 }
 
+interface ListBeeTypeResponse {
+  Beehive: {
+    listBeeType: [string]
+  }
+}
 interface Props {
   onSubmit: (payload: BeehiveData) => void
   errors?: FormErrorsMap<keyof BeehiveData>
@@ -42,10 +48,19 @@ export default function BeehiveForm({
   errors = {},
 }: CreateProps | UpdateProps) {
 
+  const notFoundHandler = useNotFoundHandler();
+  const query = useQuery<ListBeeTypeResponse>(ListBeeTypeQuery, {
+    context: {
+      // On GraphQL Not Found error, show a Not Found page
+      onNotFound: notFoundHandler,
+    },
+  });
+
   const { uid } = useParams();
   const isUpdate = initialData !== undefined;
   const { previousUrl } = usePreviousUrlFromLocation();
-  const beeTypes = ['Black', 'Italian', 'Caucasian', 'Carnolien', 'Buckfast'];
+
+  const beeTypes = query.data?.Beehive.listBeeType;
   const [name, setName] = useState<string | null>(initialData?.name ?? null);
   const [age, setAge] = useState<number | null>(initialData?.age ?? null);
   const [bee, setBee] = useState<string | null>(initialData?.bee ?? null);
@@ -63,13 +78,12 @@ export default function BeehiveForm({
   }
 
   return <form className="mb-10 max-w-screen-lg" onSubmit={submit}>
-    {
-      !isUpdate ?
-        <TopNavigationMenu
-          previousPath={previousUrl ?? (uid ? route(ApiaryHome, { uid }) : route(ApiaryList))} /> :
-        <TopNavigationMenu
-          previousPath={previousUrl ?? (uid ? route(BeehiveHome, { uid }) : route(ApiaryList))} />
-    }
+    <TopNavigationMenu
+      previousPath={previousUrl ??
+        (uid
+          ? route(!isUpdate ? ApiaryHome : BeehiveHome, { uid })
+          : route(ApiaryList))}
+    />
 
     <h2>
       {isUpdate
