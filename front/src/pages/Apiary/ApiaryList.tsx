@@ -1,4 +1,4 @@
-import { APIARY_LIST_PATH, APIARY_ROOT_PATH } from '@app/paths';
+import { APIARY_LIST_PATH } from '@app/paths';
 import { declareRoute } from '@app/router/router';
 import { trans } from '@app/translations';
 import { Container, Title, SimpleGrid} from '@mantine/core';

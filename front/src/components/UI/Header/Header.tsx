@@ -1,4 +1,4 @@
-import { AppShell, Avatar, Box, Burger, Divider, Drawer, Group, Menu, NavLink, Overlay, Title, Text, Button } from '@mantine/core';
+import { AppShell, Avatar, Box, Burger, Divider, Drawer, Group, Menu, NavLink, Overlay, Button } from '@mantine/core';
 import { useDisclosure, useHover } from '@mantine/hooks';
 import { ABOUT, APIARY_LIST_PATH, LOGIN_PATH, PROFILE_PATH, SHOPPING_CART } from '@app/paths';
 import Link from '@app/components/Router/Link';
@@ -70,13 +70,18 @@ export default function Header() {
             opened={opened}
             onClick={toggle}
             size="md"
-          />} <Link to="/">
-
-            <Box >
-              <LogoPlainWithText style={{ height: 50 }} />
-            </Box>
+          />}
+          <Link to="/">
+            <Group gap="xs">
+              <Box hiddenFrom="sm">
+                <LogoPlain style={{ width: 50, height: 50 }} />
+              </Box>
+              <Box visibleFrom="sm">
+                <LogoPlainWithText style={{ height: 50 }} />
+              </Box>
+            </Group>
           </Link>
-      </Group>
+        </Group>
 
         {authenticated &&
           <Menu shadow="md" width={150} opened={openedMenu} onChange={setOpenedMenu}  >
@@ -99,30 +104,37 @@ export default function Header() {
                 component={Link}
                 to={PROFILE_PATH}
               >
-                {trans('navigation.profile')}
+                {trans('pages.user.profile.documentTitle')}
               </Menu.Item>
+              {isAdmin && <Menu.Item
+                leftSection={<FontAwesomeIcon icon={faUsers} />}
+                component={Link}
+                to={route(ListUsers)}
+                color="green"
+              >
+                {trans('pages.admin.user.list.documentTitle')}
+              </Menu.Item>}
               <Menu.Item
                 leftSection={<FontAwesomeIcon icon={faRightFromBracket} />}
                 component={Link}
                 to="/logout"
                 color="red"
               >
-                {trans('navigation.logout')}
+                {trans('pages.logout.disconnect')}
               </Menu.Item>
             </Menu.Dropdown>
           </Menu>
         }
-        {!authenticated && 
-        <Button
-        component={Link}
-        to={LOGIN_PATH}
-        size="md"
-        style={{padding: '10px',marginRight: '10px',marginBottom: '5px'}}
-        >
-          {trans('pages.login.connect')}
-        </Button>}
+        {!authenticated &&
+          <Button
+            component={Link}
+            to={LOGIN_PATH}
+            size="md"
+            style={{ padding: '10px', marginRight: '10px', marginBottom: '5px' }}
+          >
+            {trans('pages.login.connect')}
+          </Button>}
       </Group>
     </AppShell.Header>
-  )
-  ;
+  );
 }
