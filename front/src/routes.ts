@@ -19,6 +19,8 @@ import ApiaryHome from './pages/Apiary/ApiaryHome.tsx';
 import BeehiveHome from '@app/pages/Beehive/BeehiveHome.tsx';
 import UserCreate from '@app/pages/Admin/User/Forms/UserCreate.tsx';
 import UserUpdate from '@app/pages/Admin/User/Forms/UserUpdate.tsx';
+import BeehiveCreate from './pages/Beehive/Forms/BeehiveCreate.tsx';
+import BeehiveUpdate from './pages/Beehive/Forms/BeehiveUpdate.tsx';
 import ProfileUpdate from '@app/pages/Profile/Forms/ProfileUpdate.tsx';
 
 export const AdminPages: RouteDeclaration = {
@@ -79,6 +81,12 @@ export const routes: Array<Route> = [
     routes: [
       {
         component: BeehiveHome,
+      },
+      {
+        component: BeehiveCreate,
+      },
+      {
+        component: BeehiveUpdate,
       },
     ],
   },
