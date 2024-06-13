@@ -20,6 +20,7 @@ import { faTrash, faWrench } from '@fortawesome/free-solid-svg-icons';
 import ApiaryUpdate from '@app/pages/Apiary/Forms/ApiaryUpdate.tsx';
 import ApiaryList from '@app/pages/Apiary/ApiaryList.tsx';
 import TopNavigationMenu from '@app/components/UI/TopNavigation/TopNavigationMenu';
+import BeehiveCreate from '../Beehive/Forms/BeehiveCreate';
 
 interface FindApiaryQueryResponse {
   Apiary: {
@@ -89,7 +90,7 @@ const Page = declareRoute(function ApiaryHome() {
 
     return <ListCard
       title={trans('pages.apiaryHome.addButtonText')}
-      path="#" //TODO : Add create beehive link
+      path={route(BeehiveCreate, { uid })}
       icon={<AddIcon />}
       colorInverted
     />;
