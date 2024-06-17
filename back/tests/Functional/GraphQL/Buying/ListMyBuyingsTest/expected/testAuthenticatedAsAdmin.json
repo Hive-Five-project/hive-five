@@ -1,0 +1,14 @@
+{
+  "data": {
+    "Buying": {
+      "listMyBuyings": [
+        {
+          "uid": "01HF7XBCB9Q9T8DZN9F48SFPE2",
+          "label": "Buying for Admin",
+          "price": 110.00,
+          "apiary": null
+        }
+      ]
+    }
+  }
+}

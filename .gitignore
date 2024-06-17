@@ -2,3 +2,4 @@ node_modules
 ###> app/graphql ###
 /schema.graphql
 .idea
+debug.log

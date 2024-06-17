@@ -21,3 +21,7 @@ Mutation:
       Frame:
         type: FrameMutations!
         resolve: "@=mutation('NamespacedMutation')"
+
+      Buying:
+        type: BuyingMutations!
+        resolve: "@=mutation('NamespacedMutation')"

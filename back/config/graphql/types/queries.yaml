@@ -21,3 +21,7 @@ Query:
       Frame:
         type: FrameQueries!
         resolve: "@=query('NamespacedQuery')"
+
+      Buying:
+        type: BuyingQueries!
+        resolve: "@=query('NamespacedQuery')"

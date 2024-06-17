@@ -1,0 +1,12 @@
+{
+  "data": {
+    "Buying": {
+      "create": {
+        "label": "new buying",
+        "price": 199.99,
+        "apiary": null,
+        "date": null
+      }
+    }
+  }
+}
