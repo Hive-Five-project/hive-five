@@ -1,0 +1,20 @@
+BuyingQueries:
+  type: object
+  config:
+    fields:
+
+      find:
+        type: 'Buying!'
+        access: "@=isAuthenticated()"
+        resolve: '@=query("Buying.find", args["uid"])'
+        description: Récupération d'une transaction d'achat à partir d'un uid
+        args:
+          uid:
+            type: ULID!
+
+      listMyBuyings:
+        type: '[Buying!]!'
+        resolve: '@=query("Buying.list")'
+        access: "@=isAuthenticated()"
+        description: Liste des transactions d'achat de l'utilisateur
+

@@ -1,0 +1,5 @@
+mutation($uid: ULID!) {
+  Buying {
+    delete(uid: $uid)
+  }
+}

@@ -1,0 +1,14 @@
+query($uid: ULID!) {
+  Buying {
+    find(uid: $uid) {
+      uid
+      label
+      price
+      apiary {
+        uid
+        name
+      }
+      date
+    }
+  }
+}

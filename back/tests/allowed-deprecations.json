@@ -1,5 +1,10 @@
 [
     {
+        "location": "App\\Kernel::boot",
+        "message": "Since doctrine/doctrine-bundle 2.12: The default value of \"doctrine.orm.controller_resolver.auto_mapping\" will be changed from `true` to `false`. Explicitly configure `true` to keep existing behaviour.",
+        "count": 1
+    },
+    {
         "location": "App\\Infrastructure\\Test\\Listener\\UpdateExpectationsGuardListener",
         "message": "The \"App\\Infrastructure\\Test\\Listener\\UpdateExpectationsGuardListener\" class implements \"PHPUnit\\Framework\\TestListener\" that is deprecated.",
         "count": 1
@@ -20,13 +25,18 @@
         "count": 1
     },
     {
-        "location": "App\\Tests\\Functional\\GraphQL\\Apiary\\CreateApiaryTest::_resetDatabase",
-        "message": "Since doctrine/doctrine-bundle 2.2: The \"Doctrine\\Bundle\\DoctrineBundle\\Command\\Proxy\\RunSqlDoctrineCommand\" (doctrine:query:sql) is deprecated, use dbal:run-sql command instead.",
+        "location": "Symfony\\Bridge\\Monolog\\Logger",
+        "message": "The \"Monolog\\Logger\" class is considered final. It may change without further notice as of its next major version. You should not extend it from \"Symfony\\Bridge\\Monolog\\Logger\".",
         "count": 1
     },
     {
-        "location": "Symfony\\Bridge\\Monolog\\Logger",
-        "message": "The \"Monolog\\Logger\" class is considered final. It may change without further notice as of its next major version. You should not extend it from \"Symfony\\Bridge\\Monolog\\Logger\".",
+        "location": "Symfony\\Bridge\\Twig\\NodeVisitor\\TranslationNodeVisitor",
+        "message": "The \"Symfony\\Bridge\\Twig\\NodeVisitor\\TranslationNodeVisitor\" class extends \"Twig\\NodeVisitor\\AbstractNodeVisitor\" that is deprecated since 3.9 (to be removed in 4.0).",
+        "count": 1
+    },
+    {
+        "location": "Symfony\\Bridge\\Twig\\NodeVisitor\\TranslationDefaultDomainNodeVisitor",
+        "message": "The \"Symfony\\Bridge\\Twig\\NodeVisitor\\TranslationDefaultDomainNodeVisitor\" class extends \"Twig\\NodeVisitor\\AbstractNodeVisitor\" that is deprecated since 3.9 (to be removed in 4.0).",
         "count": 1
     }
 ]

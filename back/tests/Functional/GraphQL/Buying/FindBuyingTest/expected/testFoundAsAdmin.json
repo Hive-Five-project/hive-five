@@ -1,0 +1,16 @@
+{
+  "data": {
+    "Buying": {
+      "find": {
+        "uid": "01HF7XBCB9Q9T8DZN9F48SFPE2",
+        "label": "Buying for Admin",
+        "price": 110.00,
+        "apiary": {
+          "uid": "01HE39KXBWVS6N93ZB9WEXJ3RF",
+          "name": "Custom apiary for Admin"
+        },
+        "date": "2024-04-30T15:11:40+00:00"
+      }
+    }
+  }
+}
