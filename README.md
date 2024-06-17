@@ -31,15 +31,17 @@ Manage your **beekeeping** activities with **HiveFive**. Collect and analyze dat
 
 - **HiveFive** allows you to collect data about your hives and apiaries. You can add as many hives and apiaries as you want, and add data about them. You can also add **inspections** to your hives, and add data about them.
 
--- TODO img/gif
+[![HiveFive - Apiary collection](docs/resources/apiary_list.png)](https://hivefive.online)
 
 ### 📈 Data analysis
 
--- TODO
+(Coming soon)
 
 ### 📱 Mobile-friendly
 
--- TODO
+**HiveFive** is mobile-friendly. You can use it on your phone, tablet, or computer. The interface is responsive and adapts to your device.
+
+[![HiveFive - Mobile-friendly](docs/resources/mobile_friendly.png)](https://hivefive.online)
 
 ## 📁 Root project structure
 
@@ -62,7 +64,24 @@ Manage your **beekeeping** activities with **HiveFive**. Collect and analyze dat
 > [!IMPORTANT]  
 > Make sure that you have `PostgreSQL` and `PHP 8.1+` installed on your system.
 
--- TODO
+1. Clone the repository and go to the project folder:
+
+```bash
+git clone git@github.com:Hive-Five-project/hive-five.git
+cd hive-five
+```
+
+2. Install dependencies for the backend and frontend:
+
+```bash
+make install
+```
+
+3. Start the project:
+
+```bash
+make serve
+```
 
 That's all you need to know to start! 🎉
 
@@ -71,9 +90,24 @@ That's all you need to know to start! 🎉
 If you don't want to install dependencies to your system, you feel free 
 to use our `docker-compose.yml` file to run the project in Docker
 
+> [!IMPORTANT]
+> You need to have `docker` installed on your system.
+
 ```bash
--- TODO
+docker-compose up
 ```
+
+> [!TIP]
+> This spins up 3 main services: `react`, `symfony`, and `database`:
+> - `react` (frontend) is available at `http://127.0.0.1:63281`
+> - `symfony` (backend) is available at `http://127.0.0.1:63280|63290`
+>
+> `symfony` also provides multiples endpoints:
+> - `http://127.0.0.1:62551` - Maildev (SMTP server)
+> - `http://127.0.0.1:63280/graphiql` - GraphiQL (GraphQL IDE)
+> - `http://127.0.0.1:63280/_profiler` - Symfony Profiler
+
+And you're ready to go! 🚀
 
 ## 📚 Documentation
 
@@ -82,13 +116,33 @@ is to read the project [Wiki][repo_wiki_url] and take part in [Issues][repo_issu
 
 ## ⚙️ Settings \& Commands
 
--- TODO Makefile & settings edit
+You'll likely want to customize the project settings for your needs. For this, both the backend and frontend have their own .env files. You can find them in the `back/.env` and `front/.env` files.
+
+Also, you can use the `Makefile` to run the most common commands. Here are some of them:
+```bash	
+make install          # Install dependencies for the backend and frontend
+
+make serve            # Start the project
+
+# in /back
+make test             # Run tests for the backend
+make lint            # Run linters for the backend
+make db.fixtures      # Load fixtures to the database
+make db.reset         # Reset the database
+...
+
+# in /front
+make test             # Run tests for the frontend
+make lint            # Run linters for the frontend
+...
+```
 
 ## 🤝 Build with us!
 
 And now, I invite you to participate in this project! Let's work **together** to
 create the **most useful** and **simple** application for beekeepers.
 
+To get started, please read the [Wiki][repo_wiki_url] and take part in the project:
 - [Issues][repo_issues_url]: ask questions and submit your features.
 - [Pull requests][repo_pull_request_url]: send your improvements to the current.
 
@@ -116,14 +170,5 @@ the [Apache 2.0 License][repo_license_url].
 [repo_pull_request_url]: https://github.com/Hive-Five-project/hive-five/pulls
 [repo_discussions_url]: https://github.com/Hive-Five-project/hive-five/discussions
 [repo_releases_url]: https://github.com/Hive-Five-project/hive-five/releases
-[repo_wiki_url]: https://github.com/Hive-Five-project/hive-five/wiki
+[repo_wiki_url]: https://github.com/Hive-Five-project/hive-five/tree/main/docs
 [repo_wiki_img]: https://img.shields.io/badge/docs-wiki_page-blue?style=for-the-badge&logo=none
-
-<!-- Project img -->
-
-
-
-<!-- Author -->
-
-[author]: https://github.com/koddr
-[author_do_ref_url]: https://m.do.co/c/b41859fa9b6e
