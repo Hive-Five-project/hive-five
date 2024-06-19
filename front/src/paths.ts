@@ -23,3 +23,7 @@ export const BEEHIVE_ROOT_PATH = '/beehive';
 export const BEEHIVE_HOME_PATH = BEEHIVE_ROOT_PATH + '/:uid';
 export const BEEHIVE_ADD_PATH = APIARY_HOME_PATH + '/beehive/add';
 export const BEEHIVE_UPDATE_PATH = BEEHIVE_ROOT_PATH + '/update/:uid';
+
+/* --- SECONDARY --- */
+export const SHOPPING_CART='/cart';
+export const ABOUT='/about';
