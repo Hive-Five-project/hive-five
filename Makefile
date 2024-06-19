@@ -4,6 +4,14 @@
 -include make/help.mk
 -include make/url.mk
 
+install:
+	$(call hive_message_success, Installing the project)
+	npm install
+	$(call hive_message_info, Installing the back)
+	cd back && make install
+	$(call hive_message_info, Installing the front)
+	cd front && make install
+
 ## Dev - Start the whole application for development purposes
 serve:
 	# https://www.npmjs.com/package/concurrently
