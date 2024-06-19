@@ -11,12 +11,13 @@ export default function AppLayout({ children }: PropsWithChildren) {
       header={{
         height: 61,
         collapsed: !pinned,
+        offset: false,
       }}
       padding="md"
     >
       <Header />
 
-      <AppShell.Main>
+      <AppShell.Main style={{ paddingTop: 61 }}>
         {children}
       </AppShell.Main>
 
