@@ -1,4 +1,4 @@
-import { AppShell, Avatar, Box, Burger, Divider, Drawer, Group, Menu, NavLink, Overlay, Button } from '@mantine/core';
+import { AppShell, Avatar, Box, Burger, Drawer, Group, Menu, NavLink, Overlay, Button } from '@mantine/core';
 import { useDisclosure, useHover } from '@mantine/hooks';
 import { ABOUT, APIARY_LIST_PATH, LOGIN_PATH, PROFILE_PATH, SHOPPING_CART } from '@app/paths';
 import Link from '@app/components/Router/Link';
