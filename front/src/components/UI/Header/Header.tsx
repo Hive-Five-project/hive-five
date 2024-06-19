@@ -54,14 +54,6 @@ export default function Header() {
       >
         <Box style={{ display: 'flex', flexDirection: 'column', padding: '10px', gap: '5px' }} >
           {items}
-          <Divider />
-          <NavLink
-            leftSection={<FontAwesomeIcon icon={faRightFromBracket} />}
-            label={trans('navigation.logout')}
-            component={Link}
-            to="/logout"
-            style={{ borderRadius: "var(--mantine-radius-md)", color: 'red' }}
-          />
         </Box>
       </Drawer>
       <Group justify="space-between" h="100%" px="10px" py="5px" >
