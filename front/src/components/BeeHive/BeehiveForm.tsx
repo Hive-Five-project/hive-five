@@ -88,7 +88,7 @@ export default function BeehiveForm({
     <h2>
       {isUpdate
         ? trans('pages.beehiveForm.update.documentTitle')
-        : trans('pages.apiaryForm.create.documentTitle')}
+        : trans('pages.beehiveForm.create.documentTitle')}
     </h2>
     <FormRootErrors errors={errors?.name} />
     <Stack>

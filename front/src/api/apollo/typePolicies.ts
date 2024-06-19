@@ -3,6 +3,7 @@ import { TypePolicies } from '@apollo/client';
 export enum Types {
   User = 'User',
   Apiary = 'Apiary',
+  Beehive = 'Beehive',
 }
 
 export default {
@@ -10,6 +11,9 @@ export default {
     keyFields: ['uid'],
   },
   [Types.Apiary]: {
+    keyFields: ['uid'],
+  },
+  [Types.Beehive]: {
     keyFields: ['uid'],
   },
   Query: {
@@ -29,6 +33,14 @@ export default {
         merge: (existing, incoming) => ({ ...existing, ...incoming }),
         fields: {
           listMyApiaries: {
+            merge: (incoming: object) => incoming,
+          },
+        },
+      },
+      Beehive: {
+        merge: (existing, incoming) => ({ ...existing, ...incoming }),
+        fields: {
+          listBeehivesFromApiary: {
             merge: (incoming: object) => incoming,
           },
         },

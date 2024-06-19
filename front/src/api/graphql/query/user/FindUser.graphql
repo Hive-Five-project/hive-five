@@ -1,6 +1,6 @@
 #import "@graphql/fragments/user/_User.graphql"
 
-query($uid: ULID!) {
+query findUser ($uid: ULID!) {
   User {
     find(uid: $uid) {
       isAdmin

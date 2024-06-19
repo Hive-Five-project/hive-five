@@ -61,7 +61,7 @@ const Page = declareAdminRoute(function ListUsers() {
     update(cache, { data }) {
       onDeleteUser(cache, data!.User.delete);
     },
-  });
+  });//todo: do this only on hard delete
 
   const mappedErrors = useMemo(() => {
     const error = mutationState.error;

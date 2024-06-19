@@ -1,4 +1,4 @@
-query($uid: ULID!) {
+query findBeehive ($uid: ULID!) {
   Beehive {
     find(uid: $uid) {
       uid
