@@ -3,7 +3,7 @@ import { useDocumentTitle } from '@mantine/hooks';
 import FindBeehiveQuery from '@graphql/query/beehive/FindBeehive.graphql';
 import UpdateBeehiveMutation from '@graphql/mutation/beehive/UpdateBeehive.graphql';
 import { trans } from '@app/translations';
-import { useParams } from 'react-router-dom';
+import { useLocation, useParams } from 'react-router-dom';
 import { useNotFoundHandler } from '@app/components/ErrorBoundary.tsx';
 import { useQuery } from '@apollo/client';
 import { useMemo } from 'react';
@@ -33,12 +33,16 @@ interface FindBeehiveQueryResponse {
   }
 }
 
+interface RedirectFromCreationState {
+  beehiveCreated: boolean
+}
 
 const BeehiveUpdatePage = declareRoute(function BeehiveUpdate() {
   useDocumentTitle(trans('pages.beehiveForm.update.documentTitle'));
 
   const { uid } = useParams();
   const notFoundHandler = useNotFoundHandler();
+  const { beehiveCreated } = (useLocation().state ?? {}) as RedirectFromCreationState;
 
   const query = useQuery<FindBeehiveQueryResponse>(FindBeehiveQuery, {
     variables: { uid },
@@ -47,7 +51,6 @@ const BeehiveUpdatePage = declareRoute(function BeehiveUpdate() {
       onNotFound: notFoundHandler,
     },
   });
-  const beehive = query.data?.Beehive.find;
 
   const [mutate, mutationState] = useMutation<MutationResponse>(UpdateBeehiveMutation);
 
@@ -77,14 +80,14 @@ const BeehiveUpdatePage = declareRoute(function BeehiveUpdate() {
     return <p>{trans('common.loading')}</p>;
   }
 
-
+  const beehive = query.data?.Beehive.find;
 
   return <Container px="md">
+    {beehiveCreated && !mutationState.called && <Alert title="Success" variant="success">
+      Ruche créée avec succès.
+    </Alert>}
     {mutationState.called && mutationState.data?.Beehive && <Alert title="Success" variant="success">
       Ruche modifiée avec succès.
-    </Alert>}
-    {mutationState.error && <Alert title="Fail" variant="warning">
-      Erreur lors de la modification Resaisissez les données
     </Alert>}
 
     <BeehiveForm onSubmit={submit} errors={mappedErrors} initialData={beehive} />

@@ -1,4 +1,4 @@
-mutation($uid: ULID!, $payload: UserPayload!) {
+mutation updateUser ($uid: ULID!, $payload: UserPayload!) {
   User {
     update(uid: $uid, payload: $payload) {
       uid

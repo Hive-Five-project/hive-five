@@ -1,6 +1,6 @@
 #import "@graphql/fragments/user/_User.graphql"
 
-mutation($payload: MyProfilePayload!) {
+mutation updateMe ($payload: MyProfilePayload!) {
   User {
     updateMyProfile(payload: $payload) {
       ..._User
