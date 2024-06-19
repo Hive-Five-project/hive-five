@@ -28,7 +28,7 @@ export default {
       Apiary: {
         merge: (existing, incoming) => ({ ...existing, ...incoming }),
         fields: {
-          list: {
+          listMyApiaries: {
             merge: (incoming: object) => incoming,
           },
         },
