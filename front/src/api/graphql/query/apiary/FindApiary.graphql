@@ -1,4 +1,4 @@
-query($uid: ULID!) {
+query findApiary ($uid: ULID!) {
   Apiary {
     find(uid: $uid) {
       uid

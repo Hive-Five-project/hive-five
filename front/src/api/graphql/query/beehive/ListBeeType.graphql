@@ -1,5 +1,5 @@
-query {
+query ListBeeType {
   Beehive {
-    listBeeType 
+    listBeeType
   }
 }

@@ -10,7 +10,11 @@ import { errorsByPath } from '@app/api/errors';
 import { AppGraphQLError } from '@app/api/errors/GraphQLErrorCodes.ts';
 import { onMutateError } from '@graphql/utils.ts';
 import BeehiveForm, { BeehiveData } from '@app/components/BeeHive/BeehiveForm';
-import Alert from '@app/pages/Error/Alert';
+import usePreviousUrlFromLocation from '@app/hooks/usePreviousUrlLocationState.tsx';
+import { useNavigate } from 'react-router-dom';
+import { route } from '@app/router/generator.ts';
+import { onCreateBeehive } from '@graphql/store/beehives.ts';
+import BeehiveUpdate from '@app/pages/Beehive/Forms/BeehiveUpdate.tsx';
 
 
 interface MutationResponse {
@@ -27,34 +31,37 @@ interface MutationResponse {
 
 const BeehiveCreatePage = declareRoute(function BeehiveCreate() {
   useDocumentTitle(trans('pages.beehiveForm.create.documentTitle'));
-  const [mutate, mutationState] = useMutation<MutationResponse>(CreateBeehiveMutation);
+  const { previousUrl } = usePreviousUrlFromLocation();
 
-  const mappedErrors = useMemo(() => {
-    const error = mutationState.error;
+  const navigate = useNavigate();
+  const [mutate, { error }] = useMutation<MutationResponse>(CreateBeehiveMutation, {
+    update(cache, { data }) {
+      onCreateBeehive(cache, data!.Beehive.create);
+    },
+  });
 
-    return {
-      __root: error ? trans('pages.beehiveForm.update.errorSubmit') : undefined,
-      ...(error ? errorsByPath(error.graphQLErrors as AppGraphQLError[]) : {}),
-    };
-  }, [mutationState.error]);
+  const mappedErrors = useMemo(() => ({
+    __root: error ? trans('pages.beehiveForm.create.errorSubmit') : undefined,
+    ...(error ? errorsByPath(error.graphQLErrors as AppGraphQLError[]) : {}),
+  }), [error]);
 
   async function submit(payload: BeehiveData) {
     window.scrollTo({ top: 0, behavior: 'smooth' });
 
     mutate({
       variables: { payload },
+    }).then((response) => {
+      navigate(route(BeehiveUpdate, { uid: response.data!.Beehive.create.uid }), {
+        state: {
+          beehiveCreated: true,
+          previousUrl,
+        },
+      });
     }).catch(onMutateError);
   }
 
   return <Container px="md">
-    {mutationState.called && mutationState.data?.Beehive.create.uid && <Alert title="Success" variant="success">
-      Ruche créée avec succès.
-    </Alert>}
-    {mutationState.error && <Alert title="Fail" variant="warning">
-      Erreur lors de la création
-    </Alert>}
     <BeehiveForm onSubmit={submit} errors={mappedErrors} />
-
   </Container>;
 
 }, BEEHIVE_ADD_PATH);
