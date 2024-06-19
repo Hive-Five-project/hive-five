@@ -1,4 +1,4 @@
-mutation($payload: UserPayload!) {
+mutation createUser ($payload: UserPayload!) {
   User {
     create(payload: $payload) {
       uid
