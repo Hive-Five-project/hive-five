@@ -27,6 +27,15 @@ interface Props {
 
 export default function TopNavigationMenu({ previousPath, buttons }: Props) {
   const [opened, { open, close }] = useDisclosure(false);
+  const buttonBaseStyle = {
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    cursor: "pointer",
+    width: "40px",
+    height: "40px",
+    borderRadius: "50%",
+  };
 
   return (
     <Flex
@@ -36,13 +45,13 @@ export default function TopNavigationMenu({ previousPath, buttons }: Props) {
       align="center"
     >
       <Link to={previousPath}>
-        <Box bg="green" p="sm" c="white" style={{ borderRadius: "50px" }}>
+        <Box bg="green" p="sm" c="white" style={buttonBaseStyle}>
           <FontAwesomeIcon icon={faArrowLeft} />
         </Box>
       </Link>
       {buttons != null && buttons.length > 0
         && <>
-          <Button onClick={open} bg="green" p="sm" c="white" style={{ borderRadius: "50px", cursor: "pointer" }}>
+          <Button onClick={open} bg="green" p="sm" c="white" style={buttonBaseStyle}>
             <FontAwesomeIcon icon={faEllipsisVertical} />
           </Button>
           <Modal opened={opened} onClose={close} withCloseButton={false} centered>
