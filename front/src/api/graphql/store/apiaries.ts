@@ -35,7 +35,7 @@ export function onCreateApiary(
     Apiary: {
       ...previousData.Apiary,
       // Append the newly created service to the list:
-      list: [...previousData.Apiary.listMyApiaries, apiary],
+      listMyApiaries: [...previousData.Apiary.listMyApiaries, apiary],
     },
   };
 
