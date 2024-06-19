@@ -16,7 +16,7 @@ import UnexpectedError from '@app/errors/UnexpectedError.ts';
 import Alert from '@app/pages/Error/Alert.tsx';
 import { PROFILE_UPDATE_PATH } from '@app/paths.ts';
 import { Container } from '@mantine/core';
-import {useAuthContext} from "@app/hooks/useAuthContext.tsx";
+import { useAuthContext } from "@app/hooks/useAuthContext.tsx";
 
 
 interface MutationResponse {
@@ -79,12 +79,12 @@ const Page = declareRoute(function UpdateCategory() {
 
   return <Container px="md">
     {mutationState.called && mutationState.data?.User && <Alert title="Success" variant="success">
-        {trans('pages.profile.successMessage')}
+      {trans('pages.profile.successMessage')}
     </Alert>}
 
     <ProfileForm onSubmit={submit} errors={mappedErrors} initialData={profile_update} />
 
   </Container>;
-}, PROFILE_UPDATE_PATH );
+}, PROFILE_UPDATE_PATH);
 
 export default Page;

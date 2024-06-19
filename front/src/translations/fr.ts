@@ -21,6 +21,16 @@ export default {
       send: 'Envoyer',
     },
   },
+  navigation:{
+    home: 'Accueil',
+    profile: 'Profil',
+    about: 'À propos',
+    cart: 'Mes achats',
+    logout: 'Déconnexion',
+    login: 'Connexion',
+    apiaries: 'Mes ruchers',
+    register: 'Inscription',
+  },
   pages: {
     notFound: {
       documentTitle: 'Page non trouvée',
