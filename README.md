@@ -41,7 +41,7 @@ Manage your **beekeeping** activities with **HiveFive**. Collect and analyze dat
 
 **HiveFive** is mobile-friendly. You can use it on your phone, tablet, or computer. The interface is responsive and adapts to your device.
 
-[![HiveFive - Mobile-friendly](docs/resources/mobile_friendly.png)](https://hivefive.online)
+(To add...)
 
 ## 📁 Root project structure
 
