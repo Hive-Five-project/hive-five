@@ -122,7 +122,7 @@ const Login = declareRoute(function Page() {
         <Link to={route(ForgotPassword)}>{trans('pages.login.forgotPassword')}</Link>
       </div>
       <div>
-        {trans('pages.login.noAccount')} <Link to={route(ForgotPassword)}>{trans('pages.login.askAccount')}</Link>
+        {trans('pages.login.noAccount')} <Link to="mailto:romane.ldru@gmail.com">{trans('pages.login.askAccount')}</Link>
       </div>
     </Stack>
   </Container>;
